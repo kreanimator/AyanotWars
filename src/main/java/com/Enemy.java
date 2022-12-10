@@ -13,7 +13,7 @@ public class Enemy extends Unit {
     private BufferedImage image;
 
     private final Point pos;
-    private int hp = 100;
+    private int hp = 1000;
     private boolean isKilled;
 
     public Enemy(int x, int y) {
@@ -31,8 +31,6 @@ public class Enemy extends Unit {
 
     private void loadImage() {
         try {
-
-//            image = ImageIO.read(new File("/images/enemy.png"));
             File enemyImageFile = new File("src/main/resources/images/enemy.png");
             System.out.println("File IO is OK");
             image = ImageIO.read(enemyImageFile);
@@ -92,7 +90,8 @@ public class Enemy extends Unit {
         g2.setRenderingHint(
                 RenderingHints.KEY_FRACTIONALMETRICS,
                 RenderingHints.VALUE_FRACTIONALMETRICS_ON);
-       g2.fillRect(pos.x * CreateMap.TILE_SIZE, pos.y * CreateMap.TILE_SIZE-10, 50, 5);
+        int x = pos.x * CreateMap.TILE_SIZE;
+       g2.fillRect(x, pos.y * CreateMap.TILE_SIZE-10, 50, 5);
     }
 
     public Point getPos() {
