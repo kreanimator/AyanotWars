@@ -1,6 +1,7 @@
 package com;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -73,8 +74,18 @@ public class Player extends Unit {
                 observer
         );
     }
+    JFrame window = new JFrame("Inventory");
+    public void initWindow(){
 
-    public void keyPressed(KeyEvent e, int[][] obstacles, ArrayList<Enemy> enemies) {
+        window.setSize(Inventory.ROWS * Inventory.TILE_SIZE +14,Inventory.COLUMNS * Inventory.TILE_SIZE+35);
+
+        window.setLocationRelativeTo(null);
+        window.setVisible(true);
+        window.setResizable(false);
+
+
+    }
+    public void keyPressed(KeyEvent e, int[][] obstacles, ArrayList<Enemy> enemies, ArrayList<Boss> bosses) {
 
         int key = e.getKeyCode();
 
@@ -84,6 +95,9 @@ public class Player extends Unit {
                 pos.translate(0, -1);
                 for (Enemy enemy : enemies) {
                     enemy.move(obstacles);
+                }
+                for (Boss boss : bosses) {
+                    boss.move(obstacles);
                 }
             }
         } catch (Exception nothingSpecial){
@@ -95,6 +109,9 @@ public class Player extends Unit {
                 for (Enemy enemy : enemies) {
                     enemy.move(obstacles);
                 }
+                for (Boss boss : bosses) {
+                    boss.move(obstacles);
+                }
             }
         } catch (Exception nothingSpecial){
 
@@ -104,6 +121,9 @@ public class Player extends Unit {
                 pos.translate(0, 1);
                 for (Enemy enemy : enemies) {
                     enemy.move(obstacles);
+                }
+                for (Boss boss : bosses) {
+                    boss.move(obstacles);
                 }
             }
         } catch (Exception nothingSpecial){
@@ -115,13 +135,17 @@ public class Player extends Unit {
                 for (Enemy enemy : enemies) {
                     enemy.move(obstacles);
                 }
+                for (Boss boss : bosses) {
+                    boss.move(obstacles);
+                }
             }
         } catch (Exception nothingSpecial){
 
         }        try {
             if (key == KeyEvent.VK_I) {
                 Inventory inventory= new Inventory();
-                inventory.initWindow();
+                window.add(inventory);
+                SwingUtilities.invokeLater(this::initWindow);
 
                 }
         } catch (Exception nothingSpecial){

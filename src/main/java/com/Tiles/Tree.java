@@ -25,7 +25,6 @@ public class Tree {
     private void loadImage() {
         try {
 
-//            image = ImageIO.read(new File("/images/enemy.png"));
             File enemyImageFile = new File("src/main/resources/images/tree.png");
             System.out.println("File IO is OK");
             image = ImageIO.read(enemyImageFile);

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import com.Interfaces.Inventory;
+import com.Items.HealthPotion;
 import com.Tiles.*;
 import javafx.scene.Scene;
 import javafx.scene.shape.Rectangle;
@@ -26,7 +27,7 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
     public static final int NUM_ENEMIES = gen.nextInt(10,30);
     public static final int NUM_ROCKS = 15;
     public static final int NUM_TREES = 15;
-//    public static final int NUM_BOSS = 1;
+    public static final int NUM_BOSS = 1;
     public static final int[][] MAS_MAP = new int[COLUMNS][ROWS];
 
     // suppress serialization warning
@@ -40,6 +41,7 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
     private final ArrayList<Stone> stone;
     private final ArrayList<Tree> trees;
     private final ArrayList<Grass> grasses;
+    private final ArrayList<Boss> bosses;
 
 
     public CreateMap() {
@@ -50,12 +52,11 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
         MAS_MAP[1][0] = 1;
         MAS_MAP[0][1] = 1;
         // initialize the game state
-        //player = new Player();
         enemies = populateEnemies();
         stone = fillStones();
         trees = fillTrees();
         grasses = fillGrass();
-//        bosses = addBoss();
+        bosses = addBoss();
 
 
 
@@ -78,6 +79,7 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
 
         // give the player experience for killing enemies
         killEnemies();
+        killBosses();
 
         // calling repaint() will trigger paintComponent() to run again,
         // which will refresh/redraw the graphics.
@@ -110,9 +112,11 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
             tree.draw(g, this);
         }
 
-//        for (Boss boss : bosses) {
-//            boss.draw(g, this);
-//        }
+        for (Boss boss : bosses) {
+            boss.draw(g, this);
+            boss.tick();
+            boss.drawHealthBar(g);
+        }
         player.draw(g, this);
         drawActionPanel(g);
 
@@ -128,7 +132,7 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         // react to key down events
-        player.keyPressed(e,MAS_MAP, enemies);
+        player.keyPressed(e,MAS_MAP, enemies,bosses);
     }
     public void mousePressed(MouseEvent m){
         player.mousePressed(m,enemies);
@@ -145,6 +149,7 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
         String text = "Exp " + player.getExperience();
         String textLvl = "Level " + player.getLevel();
         String hplvl = "HP " + player.getHP();
+        String inv = "For inventory press 'i'";
         // we need to cast the Graphics to Graphics2D to draw nicer text
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.getHSBColor(31,18,95));
@@ -188,12 +193,14 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
         // determine the y coordinate for the text
         // (note we add the ascent, as in java 2d 0 is top of the screen)
         g2d.drawString(hplvl,x2,y);
-        Button inventory = new Button("Inventory");
-        int x3 = (int) (rect.getX() + (rect.getWidth() - metrics.stringWidth(text)) / 2);
-        int y3 = (int) (rect.getY() + ((rect.getHeight() - metrics.getHeight()) / 2) + metrics.getAscent());
-        inventory.setBounds(x3,y3,TILE_SIZE*3,TILE_SIZE-10);
-        inventory.setFont(new Font("Lato", Font.BOLD, 25));
-        inventory.setVisible(true);
+
+        int x3 = (int) (rect.getX() + (rect.getWidth() - metrics.stringWidth(text)) - 250);
+
+        g2d.drawString(inv,x3,y);
+//        Button inventory = new Button("Inventory");
+//        inventory.setBounds(x3,y3,TILE_SIZE*3,TILE_SIZE-10);
+//        inventory.setFont(new Font("Lato", Font.BOLD, 25));
+//        inventory.setVisible(true);
         //TODO: Realise inventory button.
 
     }
@@ -234,21 +241,21 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
 
         return stoneList;
     }
-//    private ArrayList<Boss> addBoss() {
-//        ArrayList<Boss> bossList = new ArrayList<>();
-//        Random rand = new Random();
-//        int bossX = rand.nextInt(COLUMNS);
-//        int bossY = rand.nextInt(ROWS);
-//        for (int i = 0; i < NUM_BOSS; ) {
-//            if (MAS_MAP[bossX][bossY] == 0) {
-//                MAS_MAP[bossX][bossY] = 2;
-//                new Boss(bossX, bossY);
-//                i++;
-//
-//            }
-//        }
-//        return bossList;
-//    }
+    private ArrayList<Boss> addBoss() {
+        ArrayList<Boss> bossList = new ArrayList<>();
+        Random rand = new Random();
+        int bossX = rand.nextInt(COLUMNS);
+        int bossY = rand.nextInt(ROWS);
+        for (int i = 0; i < NUM_BOSS; ) {
+            if (MAS_MAP[bossX][bossY] == 0) {
+                MAS_MAP[bossX][bossY] = 2;
+                bossList.add(new Boss(bossX, bossY));
+                i++;
+
+            }
+        }
+        return bossList;
+    }
 
     private ArrayList<Tree> fillTrees() {
         ArrayList<Tree> treeList = new ArrayList<>();
@@ -298,4 +305,17 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
         // remove enemies from the board
         enemies.removeAll(enemiesKilled);
     }
-}
+    private void killBosses() {
+        // allow player to pickup coins
+        ArrayList<Boss> bossesKilled = new ArrayList<>();
+
+        for (Boss boss : bosses) {
+
+                if (player.getPos().equals(boss.getPos())) {
+                    player.addExperience(500);
+                    bossesKilled.add(boss);
+                }
+            }bosses.removeAll(bossesKilled);
+        }
+
+    }

@@ -5,17 +5,17 @@ import java.awt.event.ItemEvent;
 import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
-import com.Enemy;
 import com.Items.*;
 import com.Tiles.*;
 
 import javax.swing.*;
 
-public class Inventory {
+public class Inventory extends JPanel {
+
     ArrayList<Item> items;
-    public static final int TILE_SIZE = 50;
-    public static final int ROWS = 9;
-    public static final int COLUMNS = 9;
+    public static final int TILE_SIZE = 49;
+    public static final int ROWS = 7;
+    public static final int COLUMNS = 7;
     
     public Inventory(){
 
@@ -23,28 +23,15 @@ public class Inventory {
         patches = fillPatches();
 
     }
-    JFrame inventory = new JFrame("Inventory");
 
-    public void initWindow(){
-
-        inventory.setSize(300,300);
-
-        //window.setLocationRelativeTo(null); //
-        inventory.setVisible(true);
-        inventory.setResizable(false);
-        inventory.pack();
-        inventory.setLayout(null);
-
-    }
     public void paintComponent(Graphics g) {
-
+        super.paintComponent(g);
         for (Patches patch : patches) {
-            patch.draw(g, (ImageObserver) this);
+            patch.draw(g, this);
         }
 
         Toolkit.getDefaultToolkit().sync();
     }
-
 
     ArrayList<Patches> patches;
     private ArrayList<Patches> fillPatches() {
