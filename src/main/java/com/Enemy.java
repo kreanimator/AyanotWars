@@ -60,7 +60,7 @@ public class Enemy extends Unit {
         int dx = (int)Math.floor(Math.random() * ( 1 + 1 + 1) -1);
         int dy = (int)Math.floor(Math.random() * ( 1 + 1 + 1) -1);
         try {
-            if (obstacles [pos.x][pos.y]-1 != 2){
+            if (obstacles [pos.x + dx][pos.y +dy] == 0){
                 pos.translate(dx, dy);
             }
         } catch (Exception ignored) {
