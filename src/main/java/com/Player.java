@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
 
+import com.Interfaces.Inventory;
 import com.PlayerType.Mage;
 import com.PlayerType.Warlock;
 import com.PlayerType.Warrior;
@@ -115,6 +116,14 @@ public class Player extends Unit {
                     enemy.move(obstacles);
                 }
             }
+        } catch (Exception nothingSpecial){
+
+        }        try {
+            if (key == KeyEvent.VK_I) {
+                Inventory inventory= new Inventory();
+                inventory.initWindow();
+
+                }
         } catch (Exception nothingSpecial){
 
         }

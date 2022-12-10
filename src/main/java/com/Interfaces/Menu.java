@@ -17,6 +17,7 @@ public class Menu implements ActionListener {
 
     public Menu() {
 
+
         window = new JFrame("Ayanot Wars");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setSize(900, 900);
@@ -24,6 +25,7 @@ public class Menu implements ActionListener {
         window.setLocationRelativeTo(null);
         window.setLayout(null);
         window.setBackground(Color.WHITE);
+
 
 
 

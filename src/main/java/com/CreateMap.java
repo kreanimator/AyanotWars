@@ -6,7 +6,10 @@ import java.awt.event.*;
 import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Random;
+
+import com.Interfaces.Inventory;
 import com.Tiles.*;
+import javafx.scene.Scene;
 import javafx.scene.shape.Rectangle;
 
 
@@ -32,10 +35,12 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
 
     // objects that appear on the game board
     private final Player player = new Player();
+    private final Inventory inventory = new Inventory();
     private final ArrayList<Enemy> enemies;
     private final ArrayList<Stone> stone;
     private final ArrayList<Tree> trees;
     private final ArrayList<Grass> grasses;
+
 
     public CreateMap() {
         // set the game board size
@@ -104,6 +109,7 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
         for (Tree tree : trees) {
             tree.draw(g, this);
         }
+
 //        for (Boss boss : bosses) {
 //            boss.draw(g, this);
 //        }
@@ -153,6 +159,8 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
         g2d.setRenderingHint(
                 RenderingHints.KEY_FRACTIONALMETRICS,
                 RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+
+
         // set the text color and font
         g2d.setColor(java.awt.Color.BLACK);
         g2d.setFont(new Font("Lato", Font.BOLD, 25));
@@ -180,12 +188,16 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
         // determine the y coordinate for the text
         // (note we add the ascent, as in java 2d 0 is top of the screen)
         g2d.drawString(hplvl,x2,y);
+        Button inventory = new Button("Inventory");
+        int x3 = (int) (rect.getX() + (rect.getWidth() - metrics.stringWidth(text)) / 2);
+        int y3 = (int) (rect.getY() + ((rect.getHeight() - metrics.getHeight()) / 2) + metrics.getAscent());
+        inventory.setBounds(x3,y3,TILE_SIZE*3,TILE_SIZE-10);
+        inventory.setFont(new Font("Lato", Font.BOLD, 25));
+        inventory.setVisible(true);
+        //TODO: Realise inventory button.
+
     }
-    private void drawHealthBar(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(java.awt.Color.RED);
-        g2.fillRect(0,60, 50, 10);
-    }
+
 
     private ArrayList<Enemy> populateEnemies() {
         ArrayList<Enemy> enemyList = new ArrayList<>();
