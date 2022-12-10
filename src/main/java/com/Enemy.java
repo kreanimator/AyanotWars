@@ -1,7 +1,5 @@
 package com;
 
-import com.CreateMap;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -27,7 +25,8 @@ public class Enemy extends Unit {
 
 
     void getDamage(int value){
-    this.hp -= value;
+
+        this.hp -= value;
     }
 
     private void loadImage() {
@@ -72,9 +71,6 @@ public class Enemy extends Unit {
     boolean isKilled() {return hp <= 0;}
     public String getHP(){return String.valueOf(hp);}
 
-//    private static int direction() {
-//        return new Random().nextInt(2);
-//    }
     public void draw(Graphics g, ImageObserver observer) {
 
         g.drawImage(
@@ -96,7 +92,7 @@ public class Enemy extends Unit {
         g2.setRenderingHint(
                 RenderingHints.KEY_FRACTIONALMETRICS,
                 RenderingHints.VALUE_FRACTIONALMETRICS_ON);
-        g2.fillRect(pos.x * CreateMap.TILE_SIZE, pos.y * CreateMap.TILE_SIZE-10, 50, 5);
+       g2.fillRect(pos.x * CreateMap.TILE_SIZE, pos.y * CreateMap.TILE_SIZE-10, 50, 5);
     }
 
     public Point getPos() {

@@ -146,8 +146,14 @@ public class Player extends Unit {
                 Inventory inventory= new Inventory();
                 window.add(inventory);
                 SwingUtilities.invokeLater(this::initWindow);
+            }
+        } catch (Exception nothingSpecial){
 
-                }
+        }        try {
+            if (key == KeyEvent.VK_O) {
+                window.dispose();
+
+            }
         } catch (Exception nothingSpecial){
 
         }
