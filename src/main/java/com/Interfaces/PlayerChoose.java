@@ -14,9 +14,12 @@ public class PlayerChoose implements ActionListener  {
     JButton warrior, warlock, mage;
     JLabel logo;
     JLabel iconWar, iconMag, iconWarl;
-    Font myFont = new Font("TimesRoman", Font.BOLD, 30);
+    JTextField name;
+
+    Font myFont = new Font("Lato", Font.BOLD, 30);
 
     public PlayerChoose() {
+
 
         chooseWindow = new JFrame("Ayanot Wars");
         chooseWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -24,6 +27,19 @@ public class PlayerChoose implements ActionListener  {
         chooseWindow.setResizable(false);
         chooseWindow.setLocationRelativeTo(null);
         chooseWindow.setLayout(null);
+
+        JLabel nameEnter = new JLabel();
+        nameEnter.setText("Enter your name: ");
+        nameEnter.setFont(myFont);
+        nameEnter.setVisible(true);
+        nameEnter.setBounds(145,200,300,60);
+
+
+        name=new JTextField();
+        name.setBounds(415, 200, 200, 60);
+        name.setVisible(true);
+        name.setFont(myFont);
+
 
         logo = new JLabel();
         logo.setBounds(250, 30, 400, 100);
@@ -33,16 +49,19 @@ public class PlayerChoose implements ActionListener  {
         warrior.setFont(myFont);
         warrior.setBounds(325, 325, 200, 60);
         warrior.addActionListener(this);
+        warrior.setFocusable(false);
 
         warlock = new JButton("Warlock");
         warlock.setFont(myFont);
         warlock.setBounds(325, 405, 200, 60);
         warlock.addActionListener(this);
+        warlock.setFocusable(false);
 
         mage = new JButton("Mage");
         mage.setFont(myFont);
         mage.setBounds(325, 485, 200, 60);
         mage.addActionListener(this);
+        mage.setFocusable(false);
 
         iconWar = new JLabel();
         iconWar.setBounds(250, 325, 60, 60);
@@ -62,6 +81,9 @@ public class PlayerChoose implements ActionListener  {
         iconMag.setHorizontalAlignment(SwingConstants.LEFT);
         iconMag.setVisible(true);
 
+
+
+
         chooseWindow.add(logo);
         chooseWindow.add(warrior);
         chooseWindow.add(mage);
@@ -69,6 +91,8 @@ public class PlayerChoose implements ActionListener  {
         chooseWindow.add(iconWar);
         chooseWindow.add(iconWarl);
         chooseWindow.add(iconMag);
+        chooseWindow.add(name);
+        chooseWindow.add(nameEnter);
         chooseWindow.setVisible(true);
 
     }
@@ -89,6 +113,7 @@ public class PlayerChoose implements ActionListener  {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == warrior) {
+            String textFieldValue = name.getText();
             Player.setPlayerClass("warrior");
             CreateMap createMap = new CreateMap();
             window.add(createMap);
@@ -98,6 +123,7 @@ public class PlayerChoose implements ActionListener  {
             chooseWindow.dispose();
         }
         if (e.getSource() == warlock) {
+            String textFieldValue = name.getText();
             Player.setPlayerClass("warlock");
             CreateMap createMap = new CreateMap();
             window.add(createMap);
@@ -106,6 +132,7 @@ public class PlayerChoose implements ActionListener  {
             chooseWindow.dispose();
         }
         if (e.getSource() == mage) {
+            String textFieldValue = name.getText();
             Player.setPlayerClass("mage");
             CreateMap createMap = new CreateMap();
             window.add(createMap);

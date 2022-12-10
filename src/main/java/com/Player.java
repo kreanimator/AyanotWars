@@ -14,6 +14,7 @@ import java.util.Objects;
 import java.util.Random;
 
 import com.Interfaces.Inventory;
+import com.Interfaces.PlayerChoose;
 import com.PlayerType.Mage;
 import com.PlayerType.Warlock;
 import com.PlayerType.Warrior;
@@ -42,14 +43,37 @@ public class Player extends Unit {
             Mage mage = new Mage();
         }
     }
+    public void setPlayerName(Graphics g) {
+        // set the text to be displayed
+        String name = "";
+
+        // we need to cast the Graphics to Graphics2D to draw nicer text
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(
+                RenderingHints.KEY_TEXT_ANTIALIASING,
+                RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g2d.setRenderingHint(
+                RenderingHints.KEY_RENDERING,
+                RenderingHints.VALUE_RENDER_QUALITY);
+        g2d.setRenderingHint(
+                RenderingHints.KEY_FRACTIONALMETRICS,
+                RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+        g2d.setColor(java.awt.Color.BLACK);
+        g2d.setFont(new Font("Lato", Font.BOLD, 15));
+        FontMetrics metrics = g2d.getFontMetrics(g2d.getFont());
+        int x = (pos.x * CreateMap.TILE_SIZE);
+
+        int y = (pos.y * CreateMap.TILE_SIZE-15);
+        g2d.drawString(name, x, y);
+    }
 
     public Player() {
         Random rd = new Random();
-        int dx = rd.nextInt();
-        int dy = rd.nextInt();
+        int x = rd.nextInt();
+        int y = rd.nextInt();
         loadImage();
 
-        pos = new Point(dx, dy);
+        pos = new Point(x, y);
         experience = 0;
     }
 

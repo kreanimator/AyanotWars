@@ -92,6 +92,7 @@ public class Enemy extends Unit {
                 RenderingHints.VALUE_FRACTIONALMETRICS_ON);
         int x = pos.x * CreateMap.TILE_SIZE;
        g2.fillRect(x, pos.y * CreateMap.TILE_SIZE-10, 50, 5);
+
     }
 
     public Point getPos() {

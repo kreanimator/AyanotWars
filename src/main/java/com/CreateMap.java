@@ -116,6 +116,7 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
             boss.drawHealthBar(g);
         }
         player.draw(g, this);
+        player.setPlayerName(g);
         drawActionPanel(g);
 
         // this smooths out animations on some systems
