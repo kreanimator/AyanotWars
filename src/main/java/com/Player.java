@@ -100,7 +100,7 @@ public class Player extends Unit {
                     boss.move(obstacles);
                 }
             }
-        } catch (Exception nothingSpecial){
+        } catch (Exception ignored){
 
         }
         try {
@@ -113,7 +113,7 @@ public class Player extends Unit {
                     boss.move(obstacles);
                 }
             }
-        } catch (Exception nothingSpecial){
+        } catch (Exception ignored){
 
         }
         try {
@@ -126,7 +126,7 @@ public class Player extends Unit {
                     boss.move(obstacles);
                 }
             }
-        } catch (Exception nothingSpecial){
+        } catch (Exception ignored){
 
         }
         try {
@@ -139,7 +139,7 @@ public class Player extends Unit {
                     boss.move(obstacles);
                 }
             }
-        } catch (Exception nothingSpecial){
+        } catch (Exception ignored){
 
         }        try {
             if (key == KeyEvent.VK_I) {
@@ -147,14 +147,14 @@ public class Player extends Unit {
                 window.add(inventory);
                 SwingUtilities.invokeLater(this::initWindow);
             }
-        } catch (Exception nothingSpecial){
+        } catch (Exception ignored){
 
         }        try {
             if (key == KeyEvent.VK_O) {
                 window.dispose();
 
             }
-        } catch (Exception nothingSpecial){
+        } catch (Exception ignored){
 
         }
 

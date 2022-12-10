@@ -248,7 +248,7 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
             for (int i = 0; i < NUM_BOSS; ) {
 
                 if (MAS_MAP[bossX][bossY] == 0) {
-                    MAS_MAP[bossX][bossY] = 2;
+                    MAS_MAP[bossX][bossY] = 1;
                     bossList.add(new Boss(bossX, bossY));
                     i++;
 
