@@ -7,4 +7,5 @@ public class App {
         new Menu();
     }
     // TODO: 07.12.2022 COLLISION
+    // TODO: 10.12.2022 Checking Git Work
 }
