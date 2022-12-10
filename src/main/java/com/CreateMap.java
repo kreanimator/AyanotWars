@@ -24,7 +24,7 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
     public static final int ROWS = 15;
     public static final int COLUMNS = 30;
     // controls how many enemies appear on the board
-    public static final int NUM_ENEMIES = gen.nextInt(10,30);
+    public static final int NUM_ENEMIES = gen.nextInt(10, 30);
     public static final int NUM_ROCKS = 15;
     public static final int NUM_TREES = 15;
     public static final int NUM_BOSS = 1;
@@ -59,7 +59,6 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
         bosses = addBoss();
 
 
-
         // this timer will call the actionPerformed() method every DELAY ms
         int DELAY = 25;
         // keep a reference to the timer object that triggers actionPerformed() in
@@ -80,7 +79,6 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
         // give the player experience for killing enemies
         killEnemies();
         killBosses();
-
         // calling repaint() will trigger paintComponent() to run again,
         // which will refresh/redraw the graphics.
         repaint();
@@ -132,10 +130,11 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         // react to key down events
-        player.keyPressed(e,MAS_MAP, enemies,bosses);
+        player.keyPressed(e, MAS_MAP, enemies, bosses);
     }
-    public void mousePressed(MouseEvent m){
-        player.mousePressed(m,enemies);
+
+    public void mousePressed(MouseEvent m) {
+        player.mousePressed(m, enemies);
     }
 
     @Override
@@ -152,7 +151,7 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
         String inv = "For inventory press 'i'";
         // we need to cast the Graphics to Graphics2D to draw nicer text
         Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(Color.getHSBColor(31,18,95));
+        g2.setColor(Color.getHSBColor(31, 18, 95));
         g2.fillRect(0, TILE_SIZE * (ROWS - 1), TILE_SIZE * COLUMNS, TILE_SIZE);
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(
@@ -177,7 +176,6 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
         Rectangle rect = new Rectangle(0, TILE_SIZE * (ROWS - 1), TILE_SIZE * COLUMNS, TILE_SIZE);
 
 
-
         // determine the x coordinate for the text
         int x = (int) (rect.getX() + (rect.getWidth() - metrics.stringWidth(text)) / 2);
         // determine the y coordinate for the text
@@ -188,15 +186,15 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
         int x1 = (int) (rect.getX() + (rect.getWidth() - metrics.stringWidth(text)) / 3);
         // determine the y coordinate for the text
         // (note we add the ascent, as in java 2d 0 is top of the screen)
-        g2d.drawString(textLvl,x1,y);
+        g2d.drawString(textLvl, x1, y);
         int x2 = (int) (rect.getX() + (rect.getWidth() - metrics.stringWidth(text)) / 8);
         // determine the y coordinate for the text
         // (note we add the ascent, as in java 2d 0 is top of the screen)
-        g2d.drawString(hplvl,x2,y);
+        g2d.drawString(hplvl, x2, y);
 
         int x3 = (int) (rect.getX() + (rect.getWidth() - metrics.stringWidth(text)) - 250);
 
-        g2d.drawString(inv,x3,y);
+        g2d.drawString(inv, x3, y);
 //        Button inventory = new Button("Inventory");
 //        inventory.setBounds(x3,y3,TILE_SIZE*3,TILE_SIZE-10);
 //        inventory.setFont(new Font("Lato", Font.BOLD, 25));
@@ -213,7 +211,7 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
         // create the given number of enemies in random positions on the board.
         // note that there is not check here to prevent two coins from occupying the same
         // spot, nor to prevent coins from spawning in the same spot as the player
-        for (int i = 0; i < NUM_ENEMIES;) {
+        for (int i = 0; i < NUM_ENEMIES; ) {
             int enemyX = rand.nextInt(COLUMNS);
             int enemyY = rand.nextInt(ROWS);
             if (MAS_MAP[enemyX][enemyY] == 0) {
@@ -229,7 +227,7 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
     private ArrayList<Stone> fillStones() {
         ArrayList<Stone> stoneList = new ArrayList<>();
         Random rand = new Random();
-        for (int i = 0; i < NUM_ROCKS;) {
+        for (int i = 0; i < NUM_ROCKS; ) {
             int rockX = rand.nextInt(COLUMNS);
             int rockY = rand.nextInt(ROWS);
             if (MAS_MAP[rockX][rockY] == 0) {
@@ -241,21 +239,23 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
 
         return stoneList;
     }
-    private ArrayList<Boss> addBoss() {
-        ArrayList<Boss> bossList = new ArrayList<>();
-        Random rand = new Random();
-        int bossX = rand.nextInt(COLUMNS);
-        int bossY = rand.nextInt(ROWS);
-        for (int i = 0; i < NUM_BOSS; ) {
-            if (MAS_MAP[bossX][bossY] == 0) {
-                MAS_MAP[bossX][bossY] = 2;
-                bossList.add(new Boss(bossX, bossY));
-                i++;
 
+    private ArrayList<Boss> addBoss() {
+            ArrayList<Boss> bossList = new ArrayList<>();
+            Random rand = new Random();
+            int bossX = rand.nextInt(COLUMNS);
+            int bossY = rand.nextInt(ROWS);
+            for (int i = 0; i < NUM_BOSS; ) {
+
+                if (MAS_MAP[bossX][bossY] == 0) {
+                    MAS_MAP[bossX][bossY] = 2;
+                    bossList.add(new Boss(bossX, bossY));
+                    i++;
+
+                  }
             }
+            return bossList;
         }
-        return bossList;
-    }
 
     private ArrayList<Tree> fillTrees() {
         ArrayList<Tree> treeList = new ArrayList<>();
@@ -282,7 +282,7 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
     }
 
     private void killEnemies() {
-        // allow player to pickup coins
+        // allow player to kill enemies
         ArrayList<Enemy> enemiesKilled = new ArrayList<>();
 
         for (Enemy enemy : enemies) {
@@ -296,9 +296,10 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
                         player.addLevel(i);
                     }
                     enemiesKilled.add(enemy);
-//                }if (String.valueOf(NUM_ENEMIES).equals(String.valueOf(enemiesKilled))){
+               }
+//                if (String.valueOf(NUM_ENEMIES).equals(String.valueOf(enemiesKilled))){
 //                    populateEnemies();
-            }
+//            }
                     //TODO: Regeneration of enemies
             }
         }
@@ -306,7 +307,6 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
         enemies.removeAll(enemiesKilled);
     }
     private void killBosses() {
-        // allow player to pickup coins
         ArrayList<Boss> bossesKilled = new ArrayList<>();
 
         for (Boss boss : bosses) {
