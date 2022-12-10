@@ -6,6 +6,6 @@ public class App {
     public static void main(String[] args) {
         new Menu();
     }
-    // TODO: 07.12.2022 COLLISION
+    // TODO: 07.12.2022 COLLISIONx
     // TODO: 10.12.2022 Checking Git Work
 }
