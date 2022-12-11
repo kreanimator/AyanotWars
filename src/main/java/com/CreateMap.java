@@ -10,8 +10,8 @@ import java.util.Random;
 import com.Interfaces.Inventory;
 import com.Items.HealthPotion;
 import com.Tiles.*;
-import javafx.scene.Scene;
-import javafx.scene.shape.Rectangle;
+//import javafx.scene.Scene;
+//import javafx.scene.shape.Rectangle;
 
 
 
