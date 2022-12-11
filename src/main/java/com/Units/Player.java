@@ -105,33 +105,43 @@ public class Player extends Unit {
         window.dispose();
     }
 
-    public void keyPressed(KeyEvent e, int[][] obstacles, ArrayList<Enemy> enemies, ArrayList<Boss> bosses) {
+    public int[][] keyPressed(KeyEvent e, int[][] obstacles, ArrayList<Enemy> enemies, ArrayList<Boss> bosses) {
 
         int key = e.getKeyCode();
 
 
         try {
             if (key == KeyEvent.VK_UP && obstacles[pos.x][pos.y - 1] != 2) {
+
                 pos.translate(0, -1);
                 for (Enemy enemy : enemies) {
+                    obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
                     enemy.move(obstacles);
+                    obstacles[enemy.getPos().x][enemy.getPos().y] = 2;
                 }
                 for (Boss boss : bosses) {
                     boss.move(obstacles);
                 }
+
+                obstacles[pos.x][pos.y + 1] = 0;
+                obstacles[pos.x ][pos.y] = 2;
             }
         } catch (Exception ignored) {
 
         }
         try {
             if (key == KeyEvent.VK_RIGHT && obstacles[pos.x + 1][pos.y] != 2) {
+
                 pos.translate(1, 0);
                 for (Enemy enemy : enemies) {
+                    obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
                     enemy.move(obstacles);
-                }
+                    obstacles[enemy.getPos().x][enemy.getPos().y] = 2;                }
                 for (Boss boss : bosses) {
                     boss.move(obstacles);
                 }
+                obstacles[pos.x - 1][pos.y] = 0;
+                obstacles[pos.x][pos.y] = 2;
             }
         } catch (Exception ignored) {
 
@@ -140,24 +150,33 @@ public class Player extends Unit {
             if (key == KeyEvent.VK_DOWN && obstacles[pos.x][pos.y + 1] != 2) {
                 pos.translate(0, 1);
                 for (Enemy enemy : enemies) {
+                    obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
                     enemy.move(obstacles);
+                    obstacles[enemy.getPos().x][enemy.getPos().y] = 2;
                 }
                 for (Boss boss : bosses) {
                     boss.move(obstacles);
                 }
+                obstacles[pos.x][pos.y - 1] = 0;
+                obstacles[pos.x][pos.y] = 2;
             }
         } catch (Exception ignored) {
 
         }
         try {
             if (key == KeyEvent.VK_LEFT && obstacles[pos.x - 1][pos.y] != 2) {
+
                 pos.translate(-1, 0);
                 for (Enemy enemy : enemies) {
+                    obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
                     enemy.move(obstacles);
+                    obstacles[enemy.getPos().x][enemy.getPos().y] = 2;
                 }
                 for (Boss boss : bosses) {
                     boss.move(obstacles);
                 }
+                obstacles[pos.x + 1][pos.y] = 0;
+                obstacles[pos.x][pos.y] = 2;
             }
         } catch (Exception ignored) {
 
@@ -172,6 +191,7 @@ public class Player extends Unit {
 
         }
 
+        return obstacles;
     }
 
     public void mouseClicked(MouseEvent e, ArrayList<Enemy> enemies) {

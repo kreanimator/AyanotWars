@@ -28,7 +28,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener, Mo
     public static final int NUM_ROCKS = 15;
     public static final int NUM_TREES = 15;
     public static final int NUM_BOSS = 1;
-    public static final int[][] MAS_MAP = new int[COLUMNS][ROWS];
+    public static int[][] MAS_MAP = new int[COLUMNS][ROWS];
 
     // suppress serialization warning
     @Serial
@@ -131,7 +131,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener, Mo
     @Override
     public void keyPressed(KeyEvent e) {
         // react to key down events
-        player.keyPressed(e, MAS_MAP, enemies, bosses);
+        MAS_MAP = player.keyPressed(e, MAS_MAP, enemies, bosses);
         inventory.keyPressed(e);
     }
 
