@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class Menu implements ActionListener {
 
-    JFrame window;
+    JDialog window;
     JButton startButton;
     JLabel logo;
 
@@ -18,13 +18,14 @@ public class Menu implements ActionListener {
     public Menu() {
 
 
-        window = new JFrame("Ayanot Wars");
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window = new JDialog();
+//        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setSize(900, 900);
         window.setResizable(false);
         window.setLocationRelativeTo(null);
         window.setLayout(null);
         window.setBackground(Color.WHITE);
+        window.setTitle("Ayanot wars");
 
 
         logo = new JLabel();

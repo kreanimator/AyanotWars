@@ -9,10 +9,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
-public class Inventory extends JPanel implements ActionListener{
-
+public class Inventory extends JPanel {
     ArrayList<Item> items;
     public static final int TILE_SIZE = 49;
     public static final int ROWS = 7;
@@ -39,7 +39,6 @@ public class Inventory extends JPanel implements ActionListener{
         inventory.setFont(new Font("Lato", Font.BOLD, 25));
         inventory.setVisible(true);
         inventory.setBackground(Color.getHSBColor(31, 18, 95));
-        inventory.addActionListener(this);
         //TODO: Realise inventory button.
         return inventory;
     }
@@ -56,19 +55,4 @@ public class Inventory extends JPanel implements ActionListener{
         return patchesList;
     }
 
-    public void keyPressed(KeyEvent e) {
-        int key = e.getKeyCode();
-        try {
-            if (key == KeyEvent.VK_I) {
-                Player.closeWindow();
-            }
-        } catch (Exception ignored) {
-
-        }
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
 }

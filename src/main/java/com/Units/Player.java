@@ -10,17 +10,21 @@ import com.PlayerType.Warrior;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Random;
+import java.util.stream.Stream;
 
-public class Player {
+public class Player  {
 
     private BufferedImage image;
     private final Point pos;
@@ -31,6 +35,7 @@ public class Player {
     private static String playerClass = "";
     public int damage;
     private int attackRange;
+    private int facingDirection;
 
 
     public static void setPlayerClass(String playerClass) {
@@ -98,28 +103,31 @@ public class Player {
         g.drawImage(image, pos.x * CreateMap.TILE_SIZE, pos.y * CreateMap.TILE_SIZE, observer);
     }
 
-    static JFrame window = new JFrame("Inventory");
+    static JDialog inventoryWindow = new JDialog();
 
     public void initWindow() {
 
-        window.setSize(Inventory.ROWS * Inventory.TILE_SIZE + 14, Inventory.COLUMNS * Inventory.TILE_SIZE + 35);
-        window.setLocationRelativeTo(null);
-        window.setVisible(true);
-        window.setResizable(false);
+        inventoryWindow.setSize(Inventory.ROWS * Inventory.TILE_SIZE + 14, Inventory.COLUMNS * Inventory.TILE_SIZE + 35);
+        inventoryWindow.setLocationRelativeTo(null);
+        inventoryWindow.setVisible(true);
+        inventoryWindow.setResizable(false);
+        inventoryWindow.setTitle("Inventory");
+        //window.addKeyListener( this);
     }
 
     public static void closeWindow() {
-        window.dispose();
+        inventoryWindow.dispose();
+        System.out.println("Work");
     }
 
-    public int[][] keyPressed(KeyEvent e, int[][] obstacles, ArrayList<Enemy> enemies, ArrayList<Boss> bosses) {
+    public int[][] keyPressed(KeyEvent e, int[][] obstacles, ArrayList<Enemy> enemies, ArrayList<Boss> bosses,int facingDirection) {
 
         int key = e.getKeyCode();
 
 
         try {
             if (key == KeyEvent.VK_UP && obstacles[pos.x][pos.y - 1] != 2) {
-
+                facingDirection =0;
                 pos.translate(0, -1);
                 for (Enemy enemy : enemies) {
                     obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
@@ -138,7 +146,7 @@ public class Player {
         }
         try {
             if (key == KeyEvent.VK_RIGHT && obstacles[pos.x + 1][pos.y] != 2) {
-
+                facingDirection =1;
                 pos.translate(1, 0);
                 for (Enemy enemy : enemies) {
                     obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
@@ -156,6 +164,7 @@ public class Player {
         try {
             if (key == KeyEvent.VK_DOWN && obstacles[pos.x][pos.y + 1] != 2) {
                 pos.translate(0, 1);
+                facingDirection=2;
                 for (Enemy enemy : enemies) {
                     obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
                     enemy.move(obstacles);
@@ -172,7 +181,7 @@ public class Player {
         }
         try {
             if (key == KeyEvent.VK_LEFT && obstacles[pos.x - 1][pos.y] != 2) {
-
+                facingDirection = 3;
                 pos.translate(-1, 0);
                 for (Enemy enemy : enemies) {
                     obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
@@ -191,14 +200,34 @@ public class Player {
         try {
             if (key == KeyEvent.VK_I) {
                 Inventory inventory = new Inventory();
-                window.add(inventory);
+                inventoryWindow.add(inventory);
+                inventoryWindow.addKeyListener(new KeyListener() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                    }
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+                        int key = e.getKeyCode();
+                        try {
+                            if (key == KeyEvent.VK_I) {
+                                Player.closeWindow();
+                            }
+                        } catch (Exception ignored) {
+
+                        }
+                    }
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+
+                    }
+                });
                 SwingUtilities.invokeLater(this::initWindow);
             }
         } catch (Exception ignored) {
 
         }try {
             if (key == KeyEvent.VK_SPACE) {
-               attack(15);
+               attack();
             }
         } catch (Exception ignored) {
 
@@ -207,25 +236,21 @@ public class Player {
         return obstacles;
     }
 
-//    public void mouseClicked(MouseEvent e, ArrayList<Enemy> enemies) {
-//        int mb = e.getButton();
-//
-//        try {
-//
-//            if (mb == MouseEvent.BUTTON1) {
-//                attack();
-//                for (Enemy enemy : enemies) {
-//                    enemy.getDamage(15);
-//                }
-//            }
-//        } catch (Exception ignored) {
-//
-//        }
-//    }
-
-    static void attack(int value) {
+    public void attack() { //TODO: Attack method
         System.out.println("Is attacking");
-        hp -= value;
+        hp -= 15;
+        if (facingDirection ==0){
+
+        }
+        if (facingDirection ==1){
+
+        }
+        if (facingDirection ==2){
+
+        }
+        if (facingDirection ==3){
+
+        }
     }
 
     public void tick() {
@@ -270,7 +295,6 @@ public class Player {
     public Point getPos() {
         return pos;
     }
-
 }
 
 

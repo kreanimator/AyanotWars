@@ -97,7 +97,7 @@ public class PlayerChoose implements ActionListener {
 
     }
 
-    JFrame window = new JFrame("Ayanot wars");
+    JDialog window = new JDialog();
 
     public void initWindow() {
 
@@ -108,7 +108,8 @@ public class PlayerChoose implements ActionListener {
         window.setResizable(false);
         window.pack();
         window.setLayout(null);
-//        window.add(Inventory.addButton());
+        window.setTitle("Ayanot wars");
+//       window.add(Inventory.addButton());
          //TODO: Fix the inventory button, cvause it's ruins game.
 
     }
@@ -137,7 +138,7 @@ public class PlayerChoose implements ActionListener {
             window.add(createMap);
             window.addKeyListener(createMap);
             SwingUtilities.invokeLater(this::initWindow);
-            chooseWindow.dispose();
+           chooseWindow.dispose();
         }
         if (e.getSource() == mage) {
 
@@ -146,7 +147,7 @@ public class PlayerChoose implements ActionListener {
             window.add(createMap);
             window.addKeyListener(createMap);
             SwingUtilities.invokeLater(this::initWindow);
-            chooseWindow.dispose();
+           chooseWindow.dispose();
         }
     }
 }
