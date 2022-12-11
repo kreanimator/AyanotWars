@@ -45,7 +45,8 @@ public class Player extends Unit {
     }
     public void setPlayerName(Graphics g) {
         // set the text to be displayed
-        String name = "";
+
+        String name = PlayerChoose.setPlayerName();
 
         // we need to cast the Graphics to Graphics2D to draw nicer text
         Graphics2D g2d = (Graphics2D) g;
@@ -59,8 +60,7 @@ public class Player extends Unit {
                 RenderingHints.KEY_FRACTIONALMETRICS,
                 RenderingHints.VALUE_FRACTIONALMETRICS_ON);
         g2d.setColor(java.awt.Color.BLACK);
-        g2d.setFont(new Font("Lato", Font.BOLD, 15));
-        FontMetrics metrics = g2d.getFontMetrics(g2d.getFont());
+        g2d.setFont(new Font("Lato", Font.BOLD, 12));
         int x = (pos.x * CreateMap.TILE_SIZE);
 
         int y = (pos.y * CreateMap.TILE_SIZE-15);
@@ -170,13 +170,6 @@ public class Player extends Unit {
                 Inventory inventory= new Inventory();
                 window.add(inventory);
                 SwingUtilities.invokeLater(this::initWindow);
-            }
-        } catch (Exception ignored){
-
-        }        try {
-            if (key == KeyEvent.VK_O) {
-                window.dispose();
-
             }
         } catch (Exception ignored){
 

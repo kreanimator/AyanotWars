@@ -14,7 +14,7 @@ public class PlayerChoose implements ActionListener  {
     JButton warrior, warlock, mage;
     JLabel logo;
     JLabel iconWar, iconMag, iconWarl;
-    JTextField name;
+    static JTextField name;
 
     Font myFont = new Font("Lato", Font.BOLD, 30);
 
@@ -39,6 +39,7 @@ public class PlayerChoose implements ActionListener  {
         name.setBounds(415, 200, 200, 60);
         name.setVisible(true);
         name.setFont(myFont);
+        name.addActionListener(this);
 
 
         logo = new JLabel();
@@ -109,11 +110,17 @@ public class PlayerChoose implements ActionListener  {
         window.setLayout(null);
 
     }
+    public static String setPlayerName(){
+        String playerName = name.getText();
+        name.selectAll();
+        return playerName;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == warrior) {
-            String textFieldValue = name.getText();
+            String playerName = name.getText();
+            name.selectAll();
             Player.setPlayerClass("warrior");
             CreateMap createMap = new CreateMap();
             window.add(createMap);
@@ -123,7 +130,8 @@ public class PlayerChoose implements ActionListener  {
             chooseWindow.dispose();
         }
         if (e.getSource() == warlock) {
-            String textFieldValue = name.getText();
+            String playerName = name.getText();
+            name.selectAll();
             Player.setPlayerClass("warlock");
             CreateMap createMap = new CreateMap();
             window.add(createMap);
@@ -132,7 +140,8 @@ public class PlayerChoose implements ActionListener  {
             chooseWindow.dispose();
         }
         if (e.getSource() == mage) {
-            String textFieldValue = name.getText();
+            String playerName = name.getText();
+            name.selectAll();
             Player.setPlayerClass("mage");
             CreateMap createMap = new CreateMap();
             window.add(createMap);
