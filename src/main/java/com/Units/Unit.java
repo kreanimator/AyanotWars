@@ -13,7 +13,8 @@ public abstract class Unit {
     }
 
 
-    void attack() {
+    public static int attack() {
+        return 0;
     }
 
     void getDamage(int value) {

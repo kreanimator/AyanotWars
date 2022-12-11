@@ -108,7 +108,8 @@ public class PlayerChoose implements ActionListener {
         window.setResizable(false);
         window.pack();
         window.setLayout(null);
-        window.add(Inventory.addButton());
+//        window.add(Inventory.addButton());
+         //TODO: Fix the inventory button, cvause it's ruins game.
 
     }
 

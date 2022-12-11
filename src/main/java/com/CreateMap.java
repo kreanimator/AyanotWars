@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 
-public class CreateMap extends JPanel implements ActionListener, KeyListener, MouseListener {
+public class CreateMap extends JPanel implements ActionListener, KeyListener {
 
     // controls the size of the map
     static Random gen = new Random();
@@ -136,30 +136,30 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener, Mo
     }
 
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        player.mouseClicked(e, enemies);
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
+//    @Override
+//    public void mouseClicked(MouseEvent e) {
+//        player.mouseClicked(e, enemies);
+//    }
+//
+//    @Override
+//    public void mousePressed(MouseEvent e) {
+//
+//    }
+//
+//    @Override
+//    public void mouseReleased(MouseEvent e) {
+//
+//    }
+//
+//    @Override
+//    public void mouseEntered(MouseEvent e) {
+//
+//    }
+//
+//    @Override
+//    public void mouseExited(MouseEvent e) {
+//
+//    }
 
     @Override
     public void keyReleased(KeyEvent e) {
@@ -219,9 +219,6 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener, Mo
         int x3 = (int) (rect.getX() + (rect.getWidth() - metrics.stringWidth(text)) - 250);
 
         g2d.drawString(inv, x3, y);
-
-
-
     }
 
 
@@ -308,7 +305,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener, Mo
 
         for (Enemy enemy : enemies) {
             if (enemy.isAlive()) {
-                enemy.getDamage(player.damage);
+                enemy.getDamage(15);
                 // if the player is on the same tile as an enemy, collect it
                 if (player.getPos().equals(enemy.getPos())) {
                     if (enemy.isKilled()) {
@@ -343,5 +340,4 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener, Mo
         }
         bosses.removeAll(bossesKilled);
     }
-
 }

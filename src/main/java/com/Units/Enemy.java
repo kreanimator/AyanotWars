@@ -16,8 +16,7 @@ public class Enemy extends Unit {
     private BufferedImage image;
 
     private final Point pos;
-    private int hp = 100;
-    private boolean isKilled;
+    private int hp = 15;
 
     public Enemy(int x, int y) {
 

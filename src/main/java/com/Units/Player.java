@@ -20,16 +20,18 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
 
-public class Player extends Unit {
+public class Player {
 
     private BufferedImage image;
     private final Point pos;
 
     private int experience;
-    protected int hp = 100;
+    protected static int hp = 100;
     private int level = 1;
     private static String playerClass = "";
     public int damage;
+    private int attackRange;
+
 
     public static void setPlayerClass(String playerClass) {
 
@@ -62,11 +64,16 @@ public class Player extends Unit {
         int y = (pos.y * CreateMap.TILE_SIZE - 15);
         g2d.drawString(name, x, y);
     }
+    public static int getDamage(int value){
+        hp -= value;
+        return value;
+    }
 
     public Player() {
         Random rd = new Random();
         int x = rd.nextInt();
         int y = rd.nextInt();
+        attackRange = 1;
         loadImage();
 
         pos = new Point(x, y);
@@ -189,29 +196,36 @@ public class Player extends Unit {
             }
         } catch (Exception ignored) {
 
+        }try {
+            if (key == KeyEvent.VK_SPACE) {
+               attack(15);
+            }
+        } catch (Exception ignored) {
+
         }
 
         return obstacles;
     }
 
-    public void mouseClicked(MouseEvent e, ArrayList<Enemy> enemies) {
-        int mb = e.getButton();
+//    public void mouseClicked(MouseEvent e, ArrayList<Enemy> enemies) {
+//        int mb = e.getButton();
+//
+//        try {
+//
+//            if (mb == MouseEvent.BUTTON1) {
+//                attack();
+//                for (Enemy enemy : enemies) {
+//                    enemy.getDamage(15);
+//                }
+//            }
+//        } catch (Exception ignored) {
+//
+//        }
+//    }
 
-        try {
-
-            if (mb == MouseEvent.BUTTON1) {
-                attack();
-                for (Enemy enemy : enemies) {
-                    enemy.getDamage(15);
-                }
-            }
-        } catch (Exception nothingSpecial) {
-
-        }
-    }
-
-    void attack(int damage) {
-        this.hp -= damage;
+    static void attack(int value) {
+        System.out.println("Is attacking");
+        hp -= value;
     }
 
     public void tick() {
