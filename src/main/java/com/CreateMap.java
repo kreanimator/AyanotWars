@@ -16,7 +16,7 @@ import com.Tiles.*;
 
 
 
-public class CreateMap extends JPanel implements ActionListener , KeyListener {
+public class CreateMap extends JPanel implements ActionListener , KeyListener,MouseListener {
 
     // controls the size of the map
     static Random gen = new Random();
@@ -135,8 +135,30 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
         inventory.keyPressed(e);
     }
 
-    public void mousePressed(MouseEvent m) {
-        player.mousePressed(m, enemies);
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        player.mouseClicked(e, enemies);
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 
     @Override
@@ -296,8 +318,9 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
                     player.addExperience(100);
                     for(int i =1; i < 20; i++) {
                         player.addLevel(i);
+                    }if(enemy.isKilled()) {
+                        enemiesKilled.add(enemy);
                     }
-                    enemiesKilled.add(enemy);
                }
 //                if (String.valueOf(NUM_ENEMIES).equals(String.valueOf(enemiesKilled))){
 //                    populateEnemies();

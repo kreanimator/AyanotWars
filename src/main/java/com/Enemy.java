@@ -2,10 +2,12 @@ package com;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class Enemy extends Unit {
@@ -13,7 +15,7 @@ public class Enemy extends Unit {
     private BufferedImage image;
 
     private final Point pos;
-    private int hp = 1000;
+    private int hp = 100;
     private boolean isKilled;
 
     public Enemy(int x, int y) {
@@ -66,6 +68,8 @@ public class Enemy extends Unit {
     boolean isAlive (){
         return hp > 0;
     }
+
+
     boolean isKilled() {return hp <= 0;}
     public String getHP(){return String.valueOf(hp);}
 

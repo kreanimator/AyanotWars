@@ -77,6 +77,7 @@ public class Player extends Unit {
         experience = 0;
     }
 
+
     private void loadImage() {
         try {
 
@@ -176,8 +177,8 @@ public class Player extends Unit {
         }
 
     }
-    public void mousePressed(MouseEvent m,ArrayList<Enemy> enemies){
-        int mb = m.getButton();
+    public void mouseClicked(MouseEvent e,ArrayList<Enemy> enemies){
+        int mb = e.getButton();
 
         try {
 

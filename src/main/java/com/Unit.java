@@ -1,6 +1,9 @@
 package com;
 
-public class Unit{
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
+public abstract class Unit{
 
     double exp = 0;
     protected double hp = 0;
@@ -28,5 +31,5 @@ public class Unit{
         return hp > 0;
     }
 
-    }
+}
 

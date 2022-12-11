@@ -14,6 +14,7 @@ public class PlayerChoose implements ActionListener  {
     JButton warrior, warlock, mage;
     JLabel logo;
     JLabel iconWar, iconMag, iconWarl;
+
     static JTextField name;
 
     Font myFont = new Font("Lato", Font.BOLD, 30);
@@ -33,6 +34,8 @@ public class PlayerChoose implements ActionListener  {
         nameEnter.setFont(myFont);
         nameEnter.setVisible(true);
         nameEnter.setBounds(145,200,300,60);
+
+
 
 
         name=new JTextField();
@@ -97,6 +100,7 @@ public class PlayerChoose implements ActionListener  {
         chooseWindow.setVisible(true);
 
     }
+
     JFrame window = new JFrame("Ayanot wars");
 
     public void initWindow(){
@@ -119,8 +123,6 @@ public class PlayerChoose implements ActionListener  {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == warrior) {
-            String playerName = name.getText();
-            name.selectAll();
             Player.setPlayerClass("warrior");
             CreateMap createMap = new CreateMap();
             window.add(createMap);
@@ -130,8 +132,7 @@ public class PlayerChoose implements ActionListener  {
             chooseWindow.dispose();
         }
         if (e.getSource() == warlock) {
-            String playerName = name.getText();
-            name.selectAll();
+
             Player.setPlayerClass("warlock");
             CreateMap createMap = new CreateMap();
             window.add(createMap);
@@ -140,8 +141,7 @@ public class PlayerChoose implements ActionListener  {
             chooseWindow.dispose();
         }
         if (e.getSource() == mage) {
-            String playerName = name.getText();
-            name.selectAll();
+
             Player.setPlayerClass("mage");
             CreateMap createMap = new CreateMap();
             window.add(createMap);
