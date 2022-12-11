@@ -32,7 +32,7 @@ public class Enemy extends Unit {
 
     private void loadImage() {
         try {
-            File enemyImageFile = new File("src/main/resources/images/enemy.png");
+            File enemyImageFile = new File("src/main/resources/images/enemies/enemy.png");
             System.out.println("File IO is OK");
             image = ImageIO.read(enemyImageFile);
         } catch (IOException exc) {

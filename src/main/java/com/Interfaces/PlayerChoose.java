@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.Objects;
 
 public class PlayerChoose implements ActionListener {
-    JFrame chooseWindow;
+    JDialog chooseWindow;
     JButton warrior, warlock, mage;
     JLabel logo;
     JLabel iconWar, iconMag, iconWarl;
@@ -22,12 +22,13 @@ public class PlayerChoose implements ActionListener {
     public PlayerChoose() {
 
 
-        chooseWindow = new JFrame("Ayanot Wars");
-        chooseWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        chooseWindow = new JDialog();
+        chooseWindow.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         chooseWindow.setSize(900, 900);
         chooseWindow.setResizable(false);
         chooseWindow.setLocationRelativeTo(null);
         chooseWindow.setLayout(null);
+        chooseWindow.setTitle("Ayanot Wars");
 
         JLabel nameEnter = new JLabel();
         nameEnter.setText("Enter your name: ");

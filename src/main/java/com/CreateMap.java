@@ -1,6 +1,5 @@
 package com;
 
-import com.Interfaces.Inventory;
 import com.Tiles.Grass;
 import com.Tiles.Stone;
 import com.Tiles.Tree;
@@ -36,7 +35,6 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
 
     // objects that appear on the game board
     private final Player player = new Player();
-    private final Inventory inventory = new Inventory();
     private final ArrayList<Enemy> enemies;
     private final ArrayList<Stone> stone;
     private final ArrayList<Tree> trees;

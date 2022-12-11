@@ -10,8 +10,6 @@ import com.PlayerType.Warrior;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
@@ -19,13 +17,12 @@ import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.Random;
-import java.util.stream.Stream;
 
 public class Player  {
 
+    private static String nameClass ="";
     private BufferedImage image;
     private final Point pos;
 
@@ -41,13 +38,16 @@ public class Player  {
     public static void setPlayerClass(String playerClass) {
 
         if (Objects.equals(playerClass, "warrior")) {
-            Player.playerClass = "src/main/resources/images/warrior.png";
+            Player.playerClass = "src/main/resources/images/player/"+playerClass+".png";
+            Player.nameClass = "warrior.png";
             Warrior warrior = new Warrior();
         } else if (Objects.equals(playerClass, "warlock")) {
             Player.playerClass = "src/main/resources/images/warlock.png";
+            Player.nameClass  = "warlock.png";
             Warlock warlock = new Warlock();
         } else if (Objects.equals(playerClass, "mage")) {
             Player.playerClass = "src/main/resources/images/mage.png";
+            Player.nameClass  = "mage.png";
             Mage mage = new Mage();
         }
     }
@@ -112,12 +112,6 @@ public class Player  {
         inventoryWindow.setVisible(true);
         inventoryWindow.setResizable(false);
         inventoryWindow.setTitle("Inventory");
-        //window.addKeyListener( this);
-    }
-
-    public static void closeWindow() {
-        inventoryWindow.dispose();
-        System.out.println("Work");
     }
 
     public int[][] keyPressed(KeyEvent e, int[][] obstacles, ArrayList<Enemy> enemies, ArrayList<Boss> bosses,int facingDirection) {
@@ -128,6 +122,9 @@ public class Player  {
         try {
             if (key == KeyEvent.VK_UP && obstacles[pos.x][pos.y - 1] != 2) {
                 facingDirection =0;
+                File playerImgFileUp = new File("src/main/resources/images/player/up/"+ nameClass);
+                image = ImageIO.read(playerImgFileUp);
+
                 pos.translate(0, -1);
                 for (Enemy enemy : enemies) {
                     obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
@@ -147,7 +144,11 @@ public class Player  {
         try {
             if (key == KeyEvent.VK_RIGHT && obstacles[pos.x + 1][pos.y] != 2) {
                 facingDirection =1;
+                File playerImageFileRight = new File("src/main/resources/images/player/right/"+ nameClass);
+                image = ImageIO.read(playerImageFileRight);
                 pos.translate(1, 0);
+
+
                 for (Enemy enemy : enemies) {
                     obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
                     enemy.move(obstacles);
@@ -164,6 +165,8 @@ public class Player  {
         try {
             if (key == KeyEvent.VK_DOWN && obstacles[pos.x][pos.y + 1] != 2) {
                 pos.translate(0, 1);
+                File playerImageFileDown = new File("src/main/resources/images/player/down/"+ nameClass);
+                image = ImageIO.read(playerImageFileDown);
                 facingDirection=2;
                 for (Enemy enemy : enemies) {
                     obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
@@ -181,8 +184,11 @@ public class Player  {
         }
         try {
             if (key == KeyEvent.VK_LEFT && obstacles[pos.x - 1][pos.y] != 2) {
+
                 facingDirection = 3;
                 pos.translate(-1, 0);
+                File playerImageFileLeft = new File("src/main/resources/images/player/left/"+ nameClass);
+                image = ImageIO.read(playerImageFileLeft);
                 for (Enemy enemy : enemies) {
                     obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
                     enemy.move(obstacles);
@@ -191,6 +197,7 @@ public class Player  {
                 for (Boss boss : bosses) {
                     boss.move(obstacles);
                 }
+
                 obstacles[pos.x + 1][pos.y] = 0;
                 obstacles[pos.x][pos.y] = 2;
             }
@@ -210,7 +217,7 @@ public class Player  {
                         int key = e.getKeyCode();
                         try {
                             if (key == KeyEvent.VK_I) {
-                                Player.closeWindow();
+                                inventoryWindow.dispose();
                             }
                         } catch (Exception ignored) {
 
@@ -238,7 +245,11 @@ public class Player  {
 
     public void attack() { //TODO: Attack method
         System.out.println("Is attacking");
-        hp -= 15;
+        ArrayList<Enemy> enemies = new ArrayList<>();
+
+        for (Enemy enemy: enemies){
+            enemy.getDamage(15);
+        }
         if (facingDirection ==0){
 
         }
