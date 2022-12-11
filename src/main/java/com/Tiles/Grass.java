@@ -30,6 +30,7 @@ public class Grass {
             System.out.println("Error opening image file: " + exc.getMessage());
         }
     }
+
     public void draw(Graphics g, ImageObserver observer) {
         g.drawImage(
                 image,
@@ -38,6 +39,7 @@ public class Grass {
                 observer
         );
     }
+
     public Point getPos() {
         return pos;
     }

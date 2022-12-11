@@ -1,8 +1,6 @@
 package com.PlayerType;
 
-import com.Player;
-import com.Skills.PowerUp;
-
+import com.Units.Player;
 
 
 public class Warrior extends Player {

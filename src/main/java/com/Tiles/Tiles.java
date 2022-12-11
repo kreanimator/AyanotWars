@@ -18,6 +18,7 @@ public class Tiles {
             System.out.println("Error opening image file: " + exc.getMessage());
         }
     }
+
     public void getStone() {
         try {
 
@@ -26,6 +27,7 @@ public class Tiles {
             System.out.println("Error opening image file: " + exc.getMessage());
         }
     }
+
     public void getTree() {
         try {
 
@@ -35,7 +37,7 @@ public class Tiles {
         }
     }
 
- //    public enum Type {
+    //    public enum Type {
 //        GRASS,
 //        WATER,
 //        STONE,

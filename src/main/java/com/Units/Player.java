@@ -1,4 +1,11 @@
-package com;
+package com.Units;
+
+import com.CreateMap;
+import com.Interfaces.Inventory;
+import com.Interfaces.PlayerChoose;
+import com.PlayerType.Mage;
+import com.PlayerType.Warlock;
+import com.PlayerType.Warrior;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -13,22 +20,16 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
 
-import com.Interfaces.Inventory;
-import com.Interfaces.PlayerChoose;
-import com.PlayerType.Mage;
-import com.PlayerType.Warlock;
-import com.PlayerType.Warrior;
-
 public class Player extends Unit {
 
     private BufferedImage image;
     private final Point pos;
 
     private int experience;
-    protected int hp =100;
+    protected int hp = 100;
     private int level = 1;
     private static String playerClass = "";
-    protected int damage;
+    public int damage;
 
     public static void setPlayerClass(String playerClass) {
 
@@ -43,6 +44,7 @@ public class Player extends Unit {
             Mage mage = new Mage();
         }
     }
+
     public void setPlayerName(Graphics g) {
         // set the text to be displayed
 
@@ -50,20 +52,14 @@ public class Player extends Unit {
 
         // we need to cast the Graphics to Graphics2D to draw nicer text
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setRenderingHint(
-                RenderingHints.KEY_TEXT_ANTIALIASING,
-                RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        g2d.setRenderingHint(
-                RenderingHints.KEY_RENDERING,
-                RenderingHints.VALUE_RENDER_QUALITY);
-        g2d.setRenderingHint(
-                RenderingHints.KEY_FRACTIONALMETRICS,
-                RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
         g2d.setColor(java.awt.Color.BLACK);
         g2d.setFont(new Font("Lato", Font.BOLD, 12));
         int x = (pos.x * CreateMap.TILE_SIZE);
 
-        int y = (pos.y * CreateMap.TILE_SIZE-15);
+        int y = (pos.y * CreateMap.TILE_SIZE - 15);
         g2d.drawString(name, x, y);
     }
 
@@ -92,24 +88,23 @@ public class Player extends Unit {
 
     public void draw(Graphics g, ImageObserver observer) {
 
-        g.drawImage(
-                image,
-                pos.x * CreateMap.TILE_SIZE,
-                pos.y * CreateMap.TILE_SIZE,
-                observer
-        );
+        g.drawImage(image, pos.x * CreateMap.TILE_SIZE, pos.y * CreateMap.TILE_SIZE, observer);
     }
-    static JFrame window = new JFrame("Inventory");
-    public void initWindow(){
 
-        window.setSize(Inventory.ROWS * Inventory.TILE_SIZE +14,Inventory.COLUMNS * Inventory.TILE_SIZE+35);
+    static JFrame window = new JFrame("Inventory");
+
+    public void initWindow() {
+
+        window.setSize(Inventory.ROWS * Inventory.TILE_SIZE + 14, Inventory.COLUMNS * Inventory.TILE_SIZE + 35);
         window.setLocationRelativeTo(null);
         window.setVisible(true);
         window.setResizable(false);
     }
-    public static void closeWindow(){
+
+    public static void closeWindow() {
         window.dispose();
     }
+
     public void keyPressed(KeyEvent e, int[][] obstacles, ArrayList<Enemy> enemies, ArrayList<Boss> bosses) {
 
         int key = e.getKeyCode();
@@ -125,7 +120,7 @@ public class Player extends Unit {
                     boss.move(obstacles);
                 }
             }
-        } catch (Exception ignored){
+        } catch (Exception ignored) {
 
         }
         try {
@@ -138,7 +133,7 @@ public class Player extends Unit {
                     boss.move(obstacles);
                 }
             }
-        } catch (Exception ignored){
+        } catch (Exception ignored) {
 
         }
         try {
@@ -151,7 +146,7 @@ public class Player extends Unit {
                     boss.move(obstacles);
                 }
             }
-        } catch (Exception ignored){
+        } catch (Exception ignored) {
 
         }
         try {
@@ -164,20 +159,22 @@ public class Player extends Unit {
                     boss.move(obstacles);
                 }
             }
-        } catch (Exception ignored){
+        } catch (Exception ignored) {
 
-        }        try {
+        }
+        try {
             if (key == KeyEvent.VK_I) {
-                Inventory inventory= new Inventory();
+                Inventory inventory = new Inventory();
                 window.add(inventory);
                 SwingUtilities.invokeLater(this::initWindow);
             }
-        } catch (Exception ignored){
+        } catch (Exception ignored) {
 
         }
 
     }
-    public void mouseClicked(MouseEvent e,ArrayList<Enemy> enemies){
+
+    public void mouseClicked(MouseEvent e, ArrayList<Enemy> enemies) {
         int mb = e.getButton();
 
         try {
@@ -188,11 +185,12 @@ public class Player extends Unit {
                     enemy.getDamage(15);
                 }
             }
-        } catch (Exception nothingSpecial){
+        } catch (Exception nothingSpecial) {
 
         }
     }
-    void attack (int damage){
+
+    void attack(int damage) {
         this.hp -= damage;
     }
 
@@ -213,16 +211,21 @@ public class Player extends Unit {
     public String getExperience() {
         return String.valueOf(experience);
     }
+
     public String getLevel() {
         return String.valueOf(level);
     }
-    public String getHP(){return String.valueOf(hp);}
+
+    public String getHP() {
+        return String.valueOf(hp);
+    }
 
     public void addExperience(int amount) {
         experience += amount;
     }
-    public void addLevel(int amount){
-        if (experience == 1000){
+
+    public void addLevel(int amount) {
+        if (experience == 1000) {
             level += amount;
             experience = 0;
             hp = (int) (hp * 1.2);

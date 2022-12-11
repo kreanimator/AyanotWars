@@ -1,5 +1,13 @@
 package com;
 
+import com.Interfaces.Inventory;
+import com.Tiles.Grass;
+import com.Tiles.Stone;
+import com.Tiles.Tree;
+import com.Units.Boss;
+import com.Units.Enemy;
+import com.Units.Player;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -7,16 +15,8 @@ import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.Interfaces.Inventory;
-import com.Items.HealthPotion;
-import com.Tiles.*;
-//import javafx.scene.Scene;
-//import javafx.scene.shape.Rectangle;
 
-
-
-
-public class CreateMap extends JPanel implements ActionListener , KeyListener,MouseListener {
+public class CreateMap extends JPanel implements ActionListener, KeyListener, MouseListener {
 
     // controls the size of the map
     static Random gen = new Random();
@@ -260,26 +260,25 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener,Mo
                 i++;
             }
         }
-
         return stoneList;
     }
 
     private ArrayList<Boss> addBoss() {
-            ArrayList<Boss> bossList = new ArrayList<>();
-            Random rand = new Random();
-            int bossX = rand.nextInt(COLUMNS);
-            int bossY = rand.nextInt(ROWS);
-            for (int i = 0; i < NUM_BOSS; ) {
+        ArrayList<Boss> bossList = new ArrayList<>();
+        Random rand = new Random();
+        int bossX = rand.nextInt(COLUMNS);
+        int bossY = rand.nextInt(ROWS);
+        for (int i = 0; i < NUM_BOSS; ) {
 
-                if (MAS_MAP[bossX][bossY] == 0) {
-                    MAS_MAP[bossX][bossY] = 1;
-                    bossList.add(new Boss(bossX, bossY));
-                    i++;
+            if (MAS_MAP[bossX][bossY] == 0) {
+                MAS_MAP[bossX][bossY] = 1;
+                bossList.add(new Boss(bossX, bossY));
+                i++;
 
-                  }
             }
-            return bossList;
         }
+        return bossList;
+    }
 
     private ArrayList<Tree> fillTrees() {
         ArrayList<Tree> treeList = new ArrayList<>();
@@ -295,6 +294,7 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener,Mo
         }
         return treeList;
     }
+
     private ArrayList<Grass> fillGrass() {
         ArrayList<Grass> grassList = new ArrayList<>();
         for (int i = 0; i < COLUMNS; i++) {
@@ -314,33 +314,37 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener,Mo
                 enemy.getDamage(player.damage);
                 // if the player is on the same tile as an enemy, collect it
                 if (player.getPos().equals(enemy.getPos())) {
-                    // give the player some points for picking this up
-                    player.addExperience(100);
-                    for(int i =1; i < 20; i++) {
-                        player.addLevel(i);
-                    }if(enemy.isKilled()) {
+                    if (enemy.isKilled()) {
+                        // give the player some points for picking this up
+                        player.addExperience(100);
+                        for (int i = 1; i < 20; i++) {
+                            player.addLevel(i);
+                        }
                         enemiesKilled.add(enemy);
                     }
-               }
+
+                }
 //                if (String.valueOf(NUM_ENEMIES).equals(String.valueOf(enemiesKilled))){
 //                    populateEnemies();
 //            }
-                    //TODO: Regeneration of enemies
+                //TODO: Regeneration of enemies
             }
         }
         // remove enemies from the board
         enemies.removeAll(enemiesKilled);
     }
+
     private void killBosses() {
         ArrayList<Boss> bossesKilled = new ArrayList<>();
 
         for (Boss boss : bosses) {
 
-                if (player.getPos().equals(boss.getPos())) {
-                    player.addExperience(500);
-                    bossesKilled.add(boss);
-                }
-            }bosses.removeAll(bossesKilled);
+            if (player.getPos().equals(boss.getPos())) {
+                player.addExperience(500);
+                bossesKilled.add(boss);
+            }
         }
-
+        bosses.removeAll(bossesKilled);
     }
+
+}

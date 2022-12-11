@@ -1,8 +1,9 @@
-package com;
+package com.Units;
+
+import com.CreateMap;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.File;
@@ -34,6 +35,7 @@ public class Boss {
             System.out.println("Error opening image file: " + exc.getMessage());
         }
     }
+
     public void tick() {
 
         if (pos.x < 0) {
@@ -48,12 +50,13 @@ public class Boss {
             pos.y = CreateMap.ROWS - 1;
         }
     }
-    public void move (int [][] obstacles){
 
-        int dx = (int)Math.floor(Math.random() * ( 1 + 1 + 1) -1);
-        int dy = (int)Math.floor(Math.random() * ( 1 + 1 + 1) -1);
+    public void move(int[][] obstacles) {
+
+        int dx = (int) Math.floor(Math.random() * (1 + 1 + 1) - 1);
+        int dy = (int) Math.floor(Math.random() * (1 + 1 + 1) - 1);
         try {
-            if (obstacles [pos.x + dx][pos.y +dy] == 0) {
+            if (obstacles[pos.x + dx][pos.y + dy] == 0) {
                 pos.translate(dx, dy);
             }
         } catch (Exception ignored) {
@@ -63,6 +66,7 @@ public class Boss {
     private static int direction() {
         return new Random().nextInt(2);
     }
+
     public void draw(Graphics g, ImageObserver observer) {
 
         g.drawImage(
@@ -72,6 +76,7 @@ public class Boss {
                 observer
         );
     }
+
     public void drawHealthBar(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(java.awt.Color.RED);
@@ -84,8 +89,9 @@ public class Boss {
         g2.setRenderingHint(
                 RenderingHints.KEY_FRACTIONALMETRICS,
                 RenderingHints.VALUE_FRACTIONALMETRICS_ON);
-        g2.fillRect(pos.x * CreateMap.TILE_SIZE, pos.y * CreateMap.TILE_SIZE-10, 50, 5);
+        g2.fillRect(pos.x * CreateMap.TILE_SIZE, pos.y * CreateMap.TILE_SIZE - 10, 50, 5);
     }
+
     public Point getPos() {
         return pos;
     }

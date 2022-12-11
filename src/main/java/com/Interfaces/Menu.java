@@ -27,8 +27,6 @@ public class Menu implements ActionListener {
         window.setBackground(Color.WHITE);
 
 
-
-
         logo = new JLabel();
         logo.setBounds(250, 30, 400, 100);
         logo.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/logo.png"))));
@@ -38,6 +36,7 @@ public class Menu implements ActionListener {
         startButton.setFont(myFont);
         startButton.setBounds(350, 425, 150, 60);
         startButton.addActionListener(this);
+        startButton.setFocusable(false);
 
 
         window.add(logo);
@@ -48,8 +47,8 @@ public class Menu implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == startButton) {
-                new PlayerChoose();
-                window.setVisible(false);
+            new PlayerChoose();
+            window.setVisible(false);
 
         }
     }

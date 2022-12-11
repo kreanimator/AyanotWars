@@ -1,22 +1,22 @@
 package com.Interfaces;
 
+import com.Items.Item;
+import com.Units.Player;
+import com.Tiles.Patches;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import com.Items.*;
-import com.Player;
-import com.Tiles.*;
 
-import javax.swing.*;
-
-public class Inventory extends JPanel  {
+public class Inventory extends JPanel {
 
     ArrayList<Item> items;
     public static final int TILE_SIZE = 49;
     public static final int ROWS = 7;
     public static final int COLUMNS = 7;
-    
-    public Inventory(){
+
+    public Inventory() {
 
         new Dimension(TILE_SIZE * COLUMNS, TILE_SIZE * ROWS);
         patches = fillPatches();
@@ -33,6 +33,7 @@ public class Inventory extends JPanel  {
     }
 
     ArrayList<Patches> patches;
+
     private ArrayList<Patches> fillPatches() {
         ArrayList<Patches> patchesList = new ArrayList<>();
         for (int i = 0; i < COLUMNS; i++) {
@@ -43,13 +44,13 @@ public class Inventory extends JPanel  {
         return patchesList;
     }
 
-    public void keyPressed(KeyEvent e){
+    public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
         try {
             if (key == KeyEvent.VK_I) {
                 Player.closeWindow();
             }
-        } catch (Exception ignored){
+        } catch (Exception ignored) {
 
         }
     }

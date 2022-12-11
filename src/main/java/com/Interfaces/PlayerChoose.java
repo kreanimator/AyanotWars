@@ -1,7 +1,7 @@
 package com.Interfaces;
 
 import com.CreateMap;
-import com.Player;
+import com.Units.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
-public class PlayerChoose implements ActionListener  {
+public class PlayerChoose implements ActionListener {
     JFrame chooseWindow;
     JButton warrior, warlock, mage;
     JLabel logo;
@@ -33,12 +33,10 @@ public class PlayerChoose implements ActionListener  {
         nameEnter.setText("Enter your name: ");
         nameEnter.setFont(myFont);
         nameEnter.setVisible(true);
-        nameEnter.setBounds(145,200,300,60);
+        nameEnter.setBounds(145, 200, 300, 60);
 
 
-
-
-        name=new JTextField();
+        name = new JTextField();
         name.setBounds(415, 200, 200, 60);
         name.setVisible(true);
         name.setFont(myFont);
@@ -86,8 +84,6 @@ public class PlayerChoose implements ActionListener  {
         iconMag.setVisible(true);
 
 
-
-
         chooseWindow.add(logo);
         chooseWindow.add(warrior);
         chooseWindow.add(mage);
@@ -103,9 +99,9 @@ public class PlayerChoose implements ActionListener  {
 
     JFrame window = new JFrame("Ayanot wars");
 
-    public void initWindow(){
+    public void initWindow() {
 
-        window.setSize(900,900);
+        window.setSize(900, 900);
 
         //window.setLocationRelativeTo(null); //
         window.setVisible(true);
@@ -114,7 +110,8 @@ public class PlayerChoose implements ActionListener  {
         window.setLayout(null);
 
     }
-    public static String setPlayerName(){
+
+    public static String setPlayerName() {
         String playerName = name.getText();
         name.selectAll();
         return playerName;

@@ -1,9 +1,6 @@
-package com;
+package com.Units;
 
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-
-public abstract class Unit{
+public abstract class Unit {
 
     double exp = 0;
     protected double hp = 0;
@@ -16,18 +13,21 @@ public abstract class Unit{
     }
 
 
-    void attack(){
+    void attack() {
     }
-    void getDamage(int value){
+
+    void getDamage(int value) {
         this.hp -= value;
     }
-    void increaseLevel(int value){
+
+    void increaseLevel(int value) {
         this.exp += value;
-        if (exp > 1000){
+        if (exp > 1000) {
             level++;
         }
     }
-    boolean isAlive (){
+
+    boolean isAlive() {
         return hp > 0;
     }
 
