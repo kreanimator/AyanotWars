@@ -51,8 +51,7 @@ public class Inventory extends JPanel  {
         int key = e.getKeyCode();
         try {
             if (key == KeyEvent.VK_I) {
-
-
+                Player.closeWindow();
             }
         } catch (Exception ignored){
 

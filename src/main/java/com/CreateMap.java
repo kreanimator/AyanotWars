@@ -132,6 +132,7 @@ public class CreateMap extends JPanel implements ActionListener , KeyListener {
     public void keyPressed(KeyEvent e) {
         // react to key down events
         player.keyPressed(e, MAS_MAP, enemies, bosses);
+        inventory.keyPressed(e);
     }
 
     public void mousePressed(MouseEvent m) {

@@ -98,16 +98,16 @@ public class Player extends Unit {
                 observer
         );
     }
-    JFrame window = new JFrame("Inventory");
+    static JFrame window = new JFrame("Inventory");
     public void initWindow(){
 
         window.setSize(Inventory.ROWS * Inventory.TILE_SIZE +14,Inventory.COLUMNS * Inventory.TILE_SIZE+35);
-
         window.setLocationRelativeTo(null);
         window.setVisible(true);
         window.setResizable(false);
-
-
+    }
+    public static void closeWindow(){
+        window.dispose();
     }
     public void keyPressed(KeyEvent e, int[][] obstacles, ArrayList<Enemy> enemies, ArrayList<Boss> bosses) {
 
