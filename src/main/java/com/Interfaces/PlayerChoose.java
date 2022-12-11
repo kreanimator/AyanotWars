@@ -108,6 +108,7 @@ public class PlayerChoose implements ActionListener {
         window.setResizable(false);
         window.pack();
         window.setLayout(null);
+        window.add(Inventory.addButton());
 
     }
 

@@ -219,11 +219,8 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener, Mo
         int x3 = (int) (rect.getX() + (rect.getWidth() - metrics.stringWidth(text)) - 250);
 
         g2d.drawString(inv, x3, y);
-//        Button inventory = new Button("Inventory");
-//        inventory.setBounds(x3,y3,TILE_SIZE*3,TILE_SIZE-10);
-//        inventory.setFont(new Font("Lato", Font.BOLD, 25));
-//        inventory.setVisible(true);
-        //TODO: Realise inventory button.
+
+
 
     }
 
