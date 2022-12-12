@@ -20,9 +20,7 @@ public class Drop {
 
     public ArrayList<Coin> DropCoin() {
         ArrayList<Coin> coins = new ArrayList<>();
-        ArrayList<HealthPotion> potions = new ArrayList<>();
         for (int i = 0; i < NUM_COINS; i++) {
-            coins.add(new Coin());
             potions.add(new HealthPotion());
         }
         return coins;

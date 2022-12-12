@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
-
+import java.util.ArrayList;
 
 
 public class Enemy extends Unit {
@@ -16,7 +16,7 @@ public class Enemy extends Unit {
     private BufferedImage image;
 
     private final Point pos;
-    private int hp = 15;
+    private int hp = 45;
     int height = 50;
     int width = 50;
 
@@ -106,6 +106,7 @@ public class Enemy extends Unit {
     }
 
     public void drawHealthBar(Graphics g) {
+        ArrayList<Enemy> enemies;
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(java.awt.Color.RED);
         g2.setRenderingHint(
@@ -119,7 +120,6 @@ public class Enemy extends Unit {
                 RenderingHints.VALUE_FRACTIONALMETRICS_ON);
         int x = pos.x * CreateMap.TILE_SIZE;
         g2.fillRect(x, pos.y * CreateMap.TILE_SIZE - 10, 50, 5);
-
     }
 
     public Point getPos() {

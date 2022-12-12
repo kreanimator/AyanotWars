@@ -6,6 +6,7 @@ import com.Tiles.Tree;
 import com.Units.Boss;
 import com.Units.Enemy;
 import com.Units.Player;
+import com.Interfaces.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,6 +41,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
     private final ArrayList<Tree> trees;
     private final ArrayList<Grass> grasses;
     private final ArrayList<Boss> bosses;
+    //private final ArrayList<Inventory> inventories;
 
 
 
@@ -77,11 +79,9 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         // give the player experience for killing enemies
         killEnemies();
         killBosses();
+        repaint();
         // calling repaint() will trigger paintComponent() to run again,
         // which will refresh/redraw the graphics.
-        repaint();
-
-
     }
 
     @Override
@@ -274,24 +274,35 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         ArrayList<Enemy> enemiesKilled = new ArrayList<>();
 
         for (Enemy enemy : enemies) {
-
                 // if the player is on the same tile as an enemy, collect it
                 if (enemy.isKilled()) {
-                    if (player.getPos().equals(enemy.getPos())) {
+//                    if (player.getPos().equals(enemy.getPos())) {
                         // give the player some points for picking this up
                         player.addExperience(100);
                         for (int i = 1; i < 20; i++) {
                             player.addLevel(i);
                         }
                         enemiesKilled.add(enemy);
-                    }
+//                    }
                 }
                 //TODO: Regeneration of enemies
-
         }
         // remove enemies from the board
         enemies.removeAll(enemiesKilled);
     }
+//    private void collectItems() {
+//        ArrayList<Inventory> itemsCollected = new ArrayList<>();
+//
+//        for (Inventory inventory: inventories) {
+//
+//                player.addExperience(100);
+//                for (int i = 1; i < 20; i++) {
+//                    player.addLevel(i);
+//                }
+//                itemsCollected.add(inventory);
+//        }
+//        enemies.removeAll(itemsCollected);
+//    }
 
 
     private void killBosses() {
@@ -309,17 +320,12 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
 
     public void checkCollisions() {
 
-
         Rectangle r3 = player.getBounds();
 
 
         for (Enemy enemy : enemies) {
             Rectangle r2 = enemy.getBounds();
             if (r3.intersects(r2)) {
-//                player.getPos().x = 2;
-//                player.getPos().y = 2;
-//                enemy.getPos().x =2;
-//                enemy.getPos().y = 2;
                 System.out.println("Collision");
 
             }

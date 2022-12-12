@@ -74,10 +74,6 @@ public class Player {
         g2d.drawString(name, x, y);
     }
 
-    //    public static int getDamage(int value){
-//        hp -= value;
-//        return value;
-//    }
     public int getDamage() {
         return damage;
 
@@ -199,7 +195,6 @@ public class Player {
         }
         try {
             if (key == KeyEvent.VK_LEFT && obstacles[pos.x - 1][pos.y] != 2) {
-
                 facingDirection = LEFT;
                 pos.translate(-1, 0);
                 File playerImageFileLeft = new File("src/main/resources/images/player/left/" + nameClass);
@@ -212,7 +207,6 @@ public class Player {
                 for (Boss boss : bosses) {
                     boss.move(obstacles);
                 }
-
                 obstacles[pos.x + 1][pos.y] = 0;
                 obstacles[pos.x][pos.y] = 2;
             }
@@ -227,7 +221,6 @@ public class Player {
                     @Override
                     public void keyTyped(KeyEvent e) {
                     }
-
                     @Override
                     public void keyPressed(KeyEvent e) {
                         int key = e.getKeyCode();
@@ -238,7 +231,6 @@ public class Player {
                         } catch (Exception ignored) {
                         }
                     }
-
                     @Override
                     public void keyReleased(KeyEvent e) {
 
@@ -252,24 +244,24 @@ public class Player {
         try {
             if (key == KeyEvent.VK_SPACE) {
                 for (Enemy enemy : enemies) {
-                    if (pos.x == enemy.getPos().x && pos.y == enemy.getPos().y - 1) {
-                        System.out.println("Attack down");
-                        attack();
-                        enemy.getCurrentHP();
-                    }
-                    if (pos.x == enemy.getPos().x && pos.y == enemy.getPos().y + 1) {
+                    if (  facingDirection == FORWARD && pos.x == enemy.getPos().x && pos.y == enemy.getPos().y + 1) {
                         System.out.println("Attack up");
-                        attack();
+                        enemy.getDamage(15);
                         enemy.getCurrentHP();
                     }
-                    if (pos.x == enemy.getPos().x - 1 && pos.y == enemy.getPos().y) {
-                        System.out.println("Attack Right");
-                        attack();
+                    if (facingDirection == BACKWARD &&pos.x == enemy.getPos().x && pos.y == enemy.getPos().y - 1) {
+                        System.out.println("Attack down");
+                        enemy.getDamage(15);
                         enemy.getCurrentHP();
                     }
-                    if (pos.x == enemy.getPos().x + 1 && pos.y == enemy.getPos().y) {
+                    if (facingDirection == LEFT &&pos.x == enemy.getPos().x + 1 && pos.y == enemy.getPos().y) {
                         System.out.println("Attack Left");
-                        attack();
+                        enemy.getDamage(15);
+                        enemy.getCurrentHP();
+                    }
+                    if (facingDirection == RIGHT &&pos.x == enemy.getPos().x - 1 && pos.y == enemy.getPos().y) {
+                        System.out.println("Attack Right");
+                        enemy.getDamage(15);
                         enemy.getCurrentHP();
                     }
                 }
