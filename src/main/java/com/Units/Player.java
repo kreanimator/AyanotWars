@@ -128,7 +128,7 @@ public class Player {
 
         int key = e.getKeyCode();
 
-
+        //TODO: Realise turn when you're standing in front of obstacle.
         try {
             if (key == KeyEvent.VK_UP && obstacles[pos.x][pos.y - 1] != 2) {
                 facingDirection = FORWARD;
