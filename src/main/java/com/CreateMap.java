@@ -75,7 +75,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         // prevent the player from disappearing off the board
         player.tick();
         // give the player experience for killing enemies
-        killEnemies();
+        //killEnemies();
         killBosses();
         // calling repaint() will trigger paintComponent() to run again,
         // which will refresh/redraw the graphics.
@@ -130,7 +130,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         // react to key down events
-        MAS_MAP = player.keyPressed(e, MAS_MAP, enemies, bosses, 0);
+        MAS_MAP = player.keyPressed(e, MAS_MAP, enemies, bosses);
     }
 
     @Override
@@ -278,14 +278,15 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         for (Enemy enemy : enemies) {
 
                 // if the player is on the same tile as an enemy, collect it
-                if (enemy.isKilled()){
-//                if (player.getPos().equals(enemy.getPos())) {
-                    // give the player some points for picking this up
-                    player.addExperience(100);
-                    for (int i = 1; i < 20; i++) {
-                        player.addLevel(i);
+                if (enemy.isKilled()) {
+                    if (player.getPos().equals(enemy.getPos())) {
+                        // give the player some points for picking this up
+                        player.addExperience(100);
+                        for (int i = 1; i < 20; i++) {
+                            player.addLevel(i);
+                        }
+                        enemiesKilled.add(enemy);
                     }
-                    enemiesKilled.add(enemy);
                 }
                 //TODO: Regeneration of enemies
 
