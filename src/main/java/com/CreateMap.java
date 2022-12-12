@@ -212,8 +212,6 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         }
         return enemyList;
     }
-
-
     private ArrayList<Stone> fillStones() {
         ArrayList<Stone> stoneList = new ArrayList<>();
         Random rand = new Random();

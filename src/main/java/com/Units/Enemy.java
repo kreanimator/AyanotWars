@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 
 
+
 public class Enemy extends Unit {
 
     private BufferedImage image;
@@ -19,6 +20,11 @@ public class Enemy extends Unit {
     private int hp = 15;
     int height = 50;
     int width = 50;
+
+    String u = "src/main/resources/images/enemies/enemyup.png";
+    String d = "src/main/resources/images/enemies/enemydown.png";
+    String l = "src/main/resources/images/enemies/enemyleft.png";
+    String r = "src/main/resources/images/enemies/enemyright.png";
 
     public Enemy(int x, int y,int height, int width) {
 
@@ -39,7 +45,7 @@ public class Enemy extends Unit {
 
     private void loadImage() {
         try {
-            File enemyImageFile = new File("src/main/resources/images/enemies/enemy.png");
+            File enemyImageFile = new File("src/main/resources/images/enemies/enemydown.png");
             System.out.println("File IO is OK");
             image = ImageIO.read(enemyImageFile);
         } catch (IOException exc) {
