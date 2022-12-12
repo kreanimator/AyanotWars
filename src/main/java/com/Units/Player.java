@@ -251,8 +251,28 @@ public class Player {
         }
         try {
             if (key == KeyEvent.VK_SPACE) {
-                attack();
-                System.out.println("attack");
+                for (Enemy enemy : enemies) {
+                    if (pos.x == enemy.getPos().x && pos.y == enemy.getPos().y - 1) {
+                        System.out.println("Attack down");
+                        attack();
+                        enemy.getCurrentHP();
+                    }
+                    if (pos.x == enemy.getPos().x && pos.y == enemy.getPos().y + 1) {
+                        System.out.println("Attack up");
+                        attack();
+                        enemy.getCurrentHP();
+                    }
+                    if (pos.x == enemy.getPos().x - 1 && pos.y == enemy.getPos().y) {
+                        System.out.println("Attack Right");
+                        attack();
+                        enemy.getCurrentHP();
+                    }
+                    if (pos.x == enemy.getPos().x + 1 && pos.y == enemy.getPos().y) {
+                        System.out.println("Attack Left");
+                        attack();
+                        enemy.getCurrentHP();
+                    }
+                }
             }
         } catch (Exception ignored) {
 
@@ -264,22 +284,7 @@ public class Player {
 
     public void attack() { //TODO: Attack method
         for (Enemy enemy : enemies) {
-            if (pos.x == enemy.getPos().x && pos.y == enemy.getPos().y - 1) {
-                System.out.println("Attack up");
-                enemy.getDamage(getDamage());
-            }
-            if (pos.x == enemy.getPos().x && pos.y == enemy.getPos().y + 1) {
-                System.out.println("Attack down");
-                enemy.getDamage(getDamage());
-            }
-            if (pos.x == enemy.getPos().x - 1 && pos.y == enemy.getPos().y) {
-                System.out.println("Attack Left");
-                enemy.getDamage(getDamage());
-            }
-            if (pos.x == enemy.getPos().x + 1 && pos.y == enemy.getPos().y) {
-                System.out.println("Attack Right");
-                enemy.getDamage(getDamage());
-            }
+            enemy.getDamage(15);
         }
     }
 

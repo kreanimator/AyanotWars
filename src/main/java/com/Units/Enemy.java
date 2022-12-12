@@ -1,7 +1,6 @@
 package com.Units;
 
 import com.CreateMap;
-import com.Units.Unit;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -41,6 +40,9 @@ public class Enemy extends Unit {
     public void getDamage(int value) {
 
         this.hp -= value;
+    }
+    public void getCurrentHP(){
+        System.out.println(hp);
     }
 
     private void loadImage() {

@@ -75,7 +75,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         // prevent the player from disappearing off the board
         player.tick();
         // give the player experience for killing enemies
-        //killEnemies();
+        killEnemies();
         killBosses();
         // calling repaint() will trigger paintComponent() to run again,
         // which will refresh/redraw the graphics.
