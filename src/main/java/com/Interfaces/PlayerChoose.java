@@ -98,7 +98,7 @@ public class PlayerChoose implements ActionListener {
 
     }
 
-    JDialog window = new JDialog();
+    JFrame window = new JFrame();
 
     public void initWindow() {
 

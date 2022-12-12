@@ -25,6 +25,8 @@ public class Player  {
     private static String nameClass ="";
     private BufferedImage image;
     private final Point pos;
+    int height = 50;
+    int width = 50;
 
     private int experience;
     protected static int hp = 100;
@@ -35,20 +37,22 @@ public class Player  {
     private int facingDirection;
 
 
+
+
     public static void setPlayerClass(String playerClass) {
 
         if (Objects.equals(playerClass, "warrior")) {
             Player.playerClass = "src/main/resources/images/player/"+playerClass+".png";
             Player.nameClass = "warrior.png";
-            Warrior warrior = new Warrior();
+            //Warrior warrior = new Warrior();
         } else if (Objects.equals(playerClass, "warlock")) {
             Player.playerClass = "src/main/resources/images/warlock.png";
             Player.nameClass  = "warlock.png";
-            Warlock warlock = new Warlock();
+           // Warlock warlock = new Warlock();
         } else if (Objects.equals(playerClass, "mage")) {
             Player.playerClass = "src/main/resources/images/mage.png";
             Player.nameClass  = "mage.png";
-            Mage mage = new Mage();
+            //Mage mage = new Mage();
         }
     }
 
@@ -73,14 +77,18 @@ public class Player  {
         hp -= value;
         return value;
     }
+    public Rectangle getBounds() {
+        return new Rectangle(pos.x, pos.y, width, height);
+    }
 
-    public Player() {
+    public Player(int width,int height) {
         Random rd = new Random();
         int x = rd.nextInt();
         int y = rd.nextInt();
         attackRange = 1;
         loadImage();
-
+        this.height = height;
+        this.width = width;
         pos = new Point(x, y);
         experience = 0;
     }
@@ -127,9 +135,9 @@ public class Player  {
 
                 pos.translate(0, -1);
                 for (Enemy enemy : enemies) {
-                    obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
+                    //obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
                     enemy.move(obstacles);
-                    obstacles[enemy.getPos().x][enemy.getPos().y] = 2;
+                    //obstacles[enemy.getPos().x][enemy.getPos().y] = 2;
                 }
                 for (Boss boss : bosses) {
                     boss.move(obstacles);
@@ -150,9 +158,10 @@ public class Player  {
 
 
                 for (Enemy enemy : enemies) {
-                    obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
+                    //obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
                     enemy.move(obstacles);
-                    obstacles[enemy.getPos().x][enemy.getPos().y] = 2;                }
+                    //obstacles[enemy.getPos().x][enemy.getPos().y] = 2;
+                }
                 for (Boss boss : bosses) {
                     boss.move(obstacles);
                 }
@@ -169,9 +178,9 @@ public class Player  {
                 image = ImageIO.read(playerImageFileDown);
                 facingDirection=2;
                 for (Enemy enemy : enemies) {
-                    obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
+                    //obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
                     enemy.move(obstacles);
-                    obstacles[enemy.getPos().x][enemy.getPos().y] = 2;
+                    //obstacles[enemy.getPos().x][enemy.getPos().y] = 2;
                 }
                 for (Boss boss : bosses) {
                     boss.move(obstacles);
@@ -190,9 +199,9 @@ public class Player  {
                 File playerImageFileLeft = new File("src/main/resources/images/player/left/"+ nameClass);
                 image = ImageIO.read(playerImageFileLeft);
                 for (Enemy enemy : enemies) {
-                    obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
+                    //obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
                     enemy.move(obstacles);
-                    obstacles[enemy.getPos().x][enemy.getPos().y] = 2;
+                    //obstacles[enemy.getPos().x][enemy.getPos().y] = 2;
                 }
                 for (Boss boss : bosses) {
                     boss.move(obstacles);

@@ -17,11 +17,18 @@ public class Enemy extends Unit {
 
     private final Point pos;
     private int hp = 15;
+    int height = 50;
+    int width = 50;
 
-    public Enemy(int x, int y) {
+    public Enemy(int x, int y,int height, int width) {
 
         loadImage();
         pos = new Point(x, y);
+        this.height = height;
+        this.width = width;
+    }
+    public Rectangle getBounds() {
+        return new Rectangle(pos.x, pos.y, width, height);
     }
 
 

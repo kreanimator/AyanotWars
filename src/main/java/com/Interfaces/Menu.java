@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class Menu implements ActionListener {
 
-    JDialog window;
+    JFrame window;
     JButton startButton;
     JLabel logo;
 
@@ -18,7 +18,7 @@ public class Menu implements ActionListener {
     public Menu() {
 
 
-        window = new JDialog();
+        window = new JFrame();
 //        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setSize(900, 900);
         window.setResizable(false);
