@@ -11,7 +11,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.Serial;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -41,6 +40,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
     private final ArrayList<Tree> trees;
     private final ArrayList<Grass> grasses;
     private final ArrayList<Boss> bosses;
+
 
 
     public CreateMap() {
@@ -74,13 +74,9 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
 
         // prevent the player from disappearing off the board
         player.tick();
-
-        checkCollisions();
         // give the player experience for killing enemies
         killEnemies();
-
         killBosses();
-
         // calling repaint() will trigger paintComponent() to run again,
         // which will refresh/redraw the graphics.
         repaint();
@@ -280,17 +276,19 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         ArrayList<Enemy> enemiesKilled = new ArrayList<>();
 
         for (Enemy enemy : enemies) {
-                // if the player is on the same tile as an enemy, collect it
-                if (player.getPos().equals(enemy.getPos())) {
-                        // give the player some points for picking this up
-                        player.addExperience(100);
-                        for (int i = 1; i < 20; i++) {
-                            player.addLevel(i);
-                        }
-                        enemiesKilled.add(enemy);
 
+                // if the player is on the same tile as an enemy, collect it
+                if (enemy.isKilled()){
+//                if (player.getPos().equals(enemy.getPos())) {
+                    // give the player some points for picking this up
+                    player.addExperience(100);
+                    for (int i = 1; i < 20; i++) {
+                        player.addLevel(i);
+                    }
+                    enemiesKilled.add(enemy);
+                }
                 //TODO: Regeneration of enemies
-            }
+
         }
         // remove enemies from the board
         enemies.removeAll(enemiesKilled);
@@ -312,6 +310,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
 
     public void checkCollisions() {
 
+
         Rectangle r3 = player.getBounds();
 
 
@@ -322,10 +321,9 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
 //                player.getPos().y = 2;
 //                enemy.getPos().x =2;
 //                enemy.getPos().y = 2;
-                System.out.println(enemy.getBounds());
+                System.out.println("Collision");
 
             }
-
         }
     }
     public void enemyCollide(){
