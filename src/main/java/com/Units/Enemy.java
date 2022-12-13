@@ -8,7 +8,9 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 
@@ -21,10 +23,7 @@ public class Enemy extends Unit {
     int height = 50;
     int width = 50;
 
-    String u = "src/main/resources/images/enemies/enemyup.png";
-    String d = "src/main/resources/images/enemies/enemydown.png";
-    String l = "src/main/resources/images/enemies/enemyleft.png";
-    String r = "src/main/resources/images/enemies/enemyright.png";
+
 
     public Enemy(int x, int y,int height, int width) {
 
@@ -68,8 +67,9 @@ public class Enemy extends Unit {
 
     private void loadImage() {
         try {
-            File enemyImageFile = new File("src/main/resources/images/enemies/enemydown.png");
-            System.out.println("File IO is OK");
+            Random rand = new Random();
+            int randomNum = rand.nextInt((4 - 1) + 1) + 1;
+            File enemyImageFile = new File("src/main/resources/images/enemies/"+randomNum+".png");
             image = ImageIO.read(enemyImageFile);
         } catch (IOException exc) {
             System.out.println("Error opening image file: " + exc.getMessage());
@@ -98,6 +98,14 @@ public class Enemy extends Unit {
         try {
             if (obstacles[pos.x + dx][pos.y + dy] == 0) {
                 pos.translate(dx, dy);
+                try {
+                    Random rand = new Random();
+                    int randomNum = rand.nextInt((4 - 1) + 1) + 1;
+                    File enemyImageFile = new File("src/main/resources/images/enemies/"+randomNum+".png");
+                    image = ImageIO.read(enemyImageFile);
+                } catch (IOException exc) {
+                    System.out.println("Error opening image file: " + exc.getMessage());
+                }
             }
         } catch (Exception ignored) {
         }

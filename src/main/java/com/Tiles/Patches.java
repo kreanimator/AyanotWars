@@ -25,7 +25,6 @@ public class Patches {
         try {
 
             File enemyImageFile = new File("src/main/resources/images/patches.png");
-            System.out.println("File IO is OK");
             image = ImageIO.read(enemyImageFile);
         } catch (IOException exc) {
             System.out.println("Error opening image file: " + exc.getMessage());

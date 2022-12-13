@@ -1,8 +1,6 @@
 package com;
 
-import com.Tiles.Grass;
-import com.Tiles.Stone;
-import com.Tiles.Tree;
+import com.Tiles.*;
 import com.Units.Boss;
 import com.Units.Enemy;
 import com.Units.Player;
@@ -21,13 +19,16 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
     // controls the size of the map
     static Random gen = new Random();
     public static final int TILE_SIZE = 50;
-    public static final int ROWS = 15;
-    public static final int COLUMNS = 30;
+    public static final int ROWS = 100;
+    public static final int COLUMNS = 100;
     // controls how many enemies appear on the board
-    public static final int NUM_ENEMIES = gen.nextInt(10, 30);
-    public static final int NUM_ROCKS = 15;
-    public static final int NUM_TREES = 15;
+    public static final int NUM_ENEMIES = gen.nextInt(30, 70);
+    public static final int NUM_ROCKS = 40;
+    public static final int NUM_TREES = 40;
+    public static final int NUM_SKULLS = 30;
     public static final int NUM_BOSS = 1;
+    public static int xOffset = 0;
+    public static int yOffset = 0;
     public static int[][] MAS_MAP = new int[COLUMNS][ROWS];
 
     // suppress serialization warning
@@ -41,23 +42,32 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
     private final ArrayList<Tree> trees;
     private final ArrayList<Grass> grasses;
     private final ArrayList<Boss> bosses;
+    private final ArrayList<Skull> skulls;
     //private final ArrayList<Inventory> inventories;
 
 
 
     public CreateMap() {
         // set the game board size
-        setPreferredSize(new Dimension(TILE_SIZE * COLUMNS, TILE_SIZE * ROWS));
+        setPreferredSize(new Dimension(TILE_SIZE * 100, TILE_SIZE * 100));
 
         MAS_MAP[0][0] = 1;
         MAS_MAP[1][0] = 1;
         MAS_MAP[0][1] = 1;
-        // initialize the game state
-        enemies = Enemy.populateEnemies();
+
+        skulls = Skull.fillSkulls();
         stone = Stone.fillStones();
         trees = Tree.fillTrees();
-        grasses = Grass.fillGrass();
+
+        enemies = Enemy.populateEnemies();
         bosses = Boss.addBoss();
+        grasses = Grass.fillGrass();
+        // initialize the game state
+
+
+
+
+
 
 
         // this timer will call the actionPerformed() method every DELAY ms
@@ -95,6 +105,9 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         for (Grass grass : grasses) {
             grass.draw(g, this);
         }
+        for (Skull skull: skulls){
+            skull.draw(g,this);
+        }
         for (Enemy enemy : enemies) {
             enemy.draw(g, this);
             enemy.tick();
@@ -113,6 +126,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
             boss.tick();
             boss.drawHealthBar(g);
         }
+
         player.draw(g, this);
         player.setPlayerName(g);
         GameInterface.drawActionPanel(g);

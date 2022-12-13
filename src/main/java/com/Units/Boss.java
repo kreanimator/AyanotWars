@@ -29,10 +29,10 @@ public class Boss {
 
     private void loadImage() {
         try {
-
-            File enemyImageFile = new File("src/main/resources/images/boss.png");
-            System.out.println("File IO is OK");
-            image = ImageIO.read(enemyImageFile);
+            Random rand = new Random();
+            int randomNum = rand.nextInt((4 - 1) + 1) + 1;
+            File bossImageFile = new File("src/main/resources/images/enemies/BOSS/"+randomNum+".png");
+            image = ImageIO.read(bossImageFile);
         } catch (IOException exc) {
             System.out.println("Error opening image file: " + exc.getMessage());
         }
@@ -76,6 +76,10 @@ public class Boss {
         try {
             if (obstacles[pos.x + dx][pos.y + dy] == 0) {
                 pos.translate(dx, dy);
+                Random rand = new Random();
+                int randomNum = rand.nextInt((4 - 1) + 1) + 1;
+                File bossImageFile = new File("src/main/resources/images/enemies/BOSS/"+randomNum+".png");
+                image = ImageIO.read(bossImageFile);
             }
         } catch (Exception ignored) {
         }

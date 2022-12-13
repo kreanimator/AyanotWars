@@ -3,7 +3,6 @@ package com.Units;
 import com.CreateMap;
 import com.Interfaces.Inventory;
 import com.Interfaces.PlayerChoose;
-import com.Tiles.AttackSprite;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -27,7 +26,6 @@ public class Player {
     private final static int BACKWARD = 1;
     private final static int LEFT = 2;
     private final static int RIGHT = 3;
-    AttackSprite attackSprite;
     int height = 50;
     int width = 50;
 
@@ -102,9 +100,7 @@ public class Player {
         try {
 
             File playerImgFile = new File(playerClass);
-            System.out.println("File IO is ok");
             image = ImageIO.read(playerImgFile);
-            System.out.println("Image IO is OK");
         } catch (IOException exc) {
             System.out.println("Error opening image file: " + exc.getMessage());
         }
@@ -136,7 +132,7 @@ public class Player {
                 facingDirection = FORWARD;
                 File playerImgFileUp = new File("src/main/resources/images/player/up/" + nameClass);
                 image = ImageIO.read(playerImgFileUp);
-
+                CreateMap.yOffset +=10;
                 pos.translate(0, -1);
                 for (Enemy enemy : enemies) {
                     obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
@@ -158,6 +154,7 @@ public class Player {
         try {
             if (key == KeyEvent.VK_RIGHT && obstacles[pos.x + 1][pos.y] != 2) {
                 facingDirection = RIGHT;
+                CreateMap.xOffset -=10;
                 File playerImageFileRight = new File("src/main/resources/images/player/right/" + nameClass);
                 image = ImageIO.read(playerImageFileRight);
                 pos.translate(1, 0);
@@ -182,6 +179,7 @@ public class Player {
         try {
             if (key == KeyEvent.VK_DOWN && obstacles[pos.x][pos.y + 1] != 2) {
                 pos.translate(0, 1);
+                CreateMap.yOffset -=10;
                 File playerImageFileDown = new File("src/main/resources/images/player/down/" + nameClass);
                 image = ImageIO.read(playerImageFileDown);
                 facingDirection = BACKWARD;
@@ -204,6 +202,7 @@ public class Player {
         try {
             if (key == KeyEvent.VK_LEFT && obstacles[pos.x - 1][pos.y] != 2) {
                 facingDirection = LEFT;
+                CreateMap.xOffset +=10;
                 pos.translate(-1, 0);
                 File playerImageFileLeft = new File("src/main/resources/images/player/left/" + nameClass);
                 image = ImageIO.read(playerImageFileLeft);
@@ -255,7 +254,11 @@ public class Player {
         }
         try {
             if (key == KeyEvent.VK_SPACE) {
+
                 for (Enemy enemy : enemies) {
+                    obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
+                    enemy.move(obstacles);
+                    obstacles[enemy.getPos().x][enemy.getPos().y] = 2;
                         if (facingDirection == FORWARD && pos.x == enemy.getPos().x && pos.y == enemy.getPos().y + 1) {
 
                             System.out.println("Attack up");
@@ -297,7 +300,12 @@ public class Player {
                         }
                     }
                 for (Boss boss : bosses) {
+                    obstacles[boss.getPos().x][boss.getPos().y] = 0;
+                    boss.move(obstacles);
+                    obstacles[boss.getPos().x][boss.getPos().y] = 2;
                     if (facingDirection == FORWARD && pos.x == boss.getPos().x && pos.y == boss.getPos().y + 1) {
+
+
 
                         System.out.println("Attack up");
                         boss.getDamage(playerDamage());
@@ -387,7 +395,7 @@ public class Player {
         if (experience == 1000) {
             level += amount;
             experience = 0;
-            hp = (int) (hp * 1.2);
+            //hp = (int) (hp * 1.2); //TODO get out of rectangle whin increasing lvl
             damage = (int) (damage *1.2);
 
         }

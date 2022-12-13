@@ -11,38 +11,37 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Stone {
+public class Skull {
 
     private BufferedImage image;
 
     private final Point pos;
 
-    public Stone(int x, int y) {
+    public Skull(int x, int y) {
 
         loadImage();
 
 
         pos = new Point(x, y);
     }
-    public static ArrayList<Stone> fillStones() {
-        ArrayList<Stone> stoneList = new ArrayList<>();
+    public static ArrayList<Skull> fillSkulls() {
+        ArrayList<Skull> skullList = new ArrayList<>();
         Random rand = new Random();
-        for (int i = 0; i < CreateMap.NUM_ROCKS; ) {
-            int rockX = rand.nextInt(CreateMap.COLUMNS);
-            int rockY = rand.nextInt(CreateMap.ROWS);
-            if (CreateMap.MAS_MAP[rockX][rockY] == 0) {
-                CreateMap.MAS_MAP[rockX][rockY] = 2;
-                stoneList.add(new Stone(rockX, rockY));
+        for (int i = 0; i < CreateMap.NUM_SKULLS; ) {
+            int skullX = rand.nextInt(CreateMap.COLUMNS);
+            int skullY = rand.nextInt(CreateMap.ROWS);
+            if (CreateMap.MAS_MAP[skullX][skullY] == 0) {
+                skullList.add(new Skull(skullX ,skullY));
                 i++;
             }
         }
-        return stoneList;
+        return skullList;
     }
 
     private void loadImage() {
         try {
 
-            File enemyImageFile = new File("src/main/resources/images/stone.png");
+            File enemyImageFile = new File("src/main/resources/images/skull.png");
             image = ImageIO.read(enemyImageFile);
         } catch (IOException exc) {
             System.out.println("Error opening image file: " + exc.getMessage());
@@ -57,6 +56,4 @@ public class Stone {
     public Point getPos() {
         return pos;
     }
-
 }
-

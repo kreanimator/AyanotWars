@@ -34,7 +34,6 @@ public class Grass {
         try {
 
             File enemyImageFile = new File("src/main/resources/images/grass.png");
-            System.out.println("File IO is OK");
             image = ImageIO.read(enemyImageFile);
         } catch (IOException exc) {
             System.out.println("Error opening image file: " + exc.getMessage());
@@ -44,8 +43,8 @@ public class Grass {
     public void draw(Graphics g, ImageObserver observer) {
         g.drawImage(
                 image,
-                pos.x * CreateMap.TILE_SIZE,
-                pos.y * CreateMap.TILE_SIZE,
+                (pos.x * CreateMap.TILE_SIZE) + CreateMap.xOffset,
+                (pos.y * CreateMap.TILE_SIZE) + CreateMap.yOffset,
                 observer
         );
     }

@@ -42,7 +42,6 @@ public class Tree {
         try {
 
             File enemyImageFile = new File("src/main/resources/images/tree.png");
-            System.out.println("File IO is OK");
             image = ImageIO.read(enemyImageFile);
         } catch (IOException exc) {
             System.out.println("Error opening image file: " + exc.getMessage());
@@ -51,7 +50,7 @@ public class Tree {
 
     public void draw(Graphics g, ImageObserver observer) {
 
-        g.drawImage(image, pos.x * CreateMap.TILE_SIZE, pos.y * CreateMap.TILE_SIZE, observer);
+        g.drawImage(image, (pos.x * CreateMap.TILE_SIZE)+CreateMap.xOffset, (pos.y * CreateMap.TILE_SIZE)+CreateMap.yOffset, observer);
     }
 
     public Point getPos() {
