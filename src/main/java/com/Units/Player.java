@@ -85,8 +85,10 @@ public class Player {
 
     public Player(int width, int height) {
         Random rd = new Random();
-        int x = rd.nextInt();
-        int y = rd.nextInt();
+//        int x = rd.nextInt();
+//        int y = rd.nextInt();
+        int x = (CreateMap.COLUMNS* CreateMap.TILE_SIZE)/2;
+        int y = (CreateMap.ROWS* CreateMap.TILE_SIZE)/2;
         attackRange = 1;
         loadImage();
         this.height = height;
