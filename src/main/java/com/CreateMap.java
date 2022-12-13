@@ -7,10 +7,10 @@ import com.Units.Boss;
 import com.Units.Enemy;
 import com.Units.Player;
 import com.Interfaces.*;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Random;
@@ -53,11 +53,11 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         MAS_MAP[1][0] = 1;
         MAS_MAP[0][1] = 1;
         // initialize the game state
-        enemies = populateEnemies();
-        stone = fillStones();
-        trees = fillTrees();
-        grasses = fillGrass();
-        bosses = addBoss();
+        enemies = Enemy.populateEnemies();
+        stone = Stone.fillStones();
+        trees = Tree.fillTrees();
+        grasses = Grass.fillGrass();
+        bosses = Boss.addBoss();
 
 
         // this timer will call the actionPerformed() method every DELAY ms
@@ -83,7 +83,6 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         // calling repaint() will trigger paintComponent() to run again,
         // which will refresh/redraw the graphics.
     }
-
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -116,7 +115,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         }
         player.draw(g, this);
         player.setPlayerName(g);
-        drawActionPanel(g);
+        GameInterface.drawActionPanel(g);
 
         // this smooths out animations on some systems
         Toolkit.getDefaultToolkit().sync();
@@ -138,171 +137,6 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         // react to key up events
     }
 
-
-    private void drawActionPanel(Graphics g) {
-        // set the text to be displayed
-        String text = "EXP: " ;
-        String textLvl = "Level " + player.getLevel();
-        String hplvl = "HP: ";
-        String inv = "For inventory press 'i'";
-        // we need to cast the Graphics to Graphics2D to draw nicer text
-        Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(Color.getHSBColor(31, 18, 95));
-        g2.fillRect(0, TILE_SIZE * (ROWS - 1), TILE_SIZE * COLUMNS, TILE_SIZE);
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setRenderingHint(
-                RenderingHints.KEY_TEXT_ANTIALIASING,
-                RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        g2d.setRenderingHint(
-                RenderingHints.KEY_RENDERING,
-                RenderingHints.VALUE_RENDER_QUALITY);
-        g2d.setRenderingHint(
-                RenderingHints.KEY_FRACTIONALMETRICS,
-                RenderingHints.VALUE_FRACTIONALMETRICS_ON);
-        // set the text color and font
-        g2d.setColor(java.awt.Color.BLACK);
-        g2d.setFont(new Font("Lato", Font.BOLD, 25));
-        // draw the score in the bottom center of the screen
-        // https://stackoverflow.com/a/27740330/4655368
-        FontMetrics metrics = g2d.getFontMetrics(g2d.getFont());
-        // the text will be contained within this rectangle.
-        // here I've sized it to be the entire bottom row of board tiles
-        Rectangle rect = new Rectangle(0, TILE_SIZE * (ROWS - 1), TILE_SIZE * COLUMNS, TILE_SIZE);
-
-        // determine the x coordinate for the text
-        int x = (int) (rect.getX() + (rect.getWidth() - metrics.stringWidth(text)) / 2);
-        // determine the y coordinate for the text
-        // (note we add the ascent, as in java 2d 0 is top of the screen)
-        int y = (int) (rect.getY() + ((rect.getHeight() - metrics.getHeight()) / 2) + metrics.getAscent());
-        // draw the string
-        g2d.drawString(text, x, y);
-
-        int x1 = (int) (rect.getX() + (rect.getWidth() - metrics.stringWidth(text)) / 3);
-        // determine the y coordinate for the text
-        // (note we add the ascent, as in java 2d 0 is top of the screen)
-        g2d.drawString(textLvl, x1, y);
-        int x2 = (int) (rect.getX() + (rect.getWidth() - metrics.stringWidth(text)) / 8);
-        // determine the y coordinate for the text
-        // (note we add the ascent, as in java 2d 0 is top of the screen)
-        g2d.drawString(hplvl, x2, y);
-
-        int x3 = (int) (rect.getX() + (rect.getWidth() - metrics.stringWidth(text)) - 250);
-        //Drawing a frame for HP bar.
-        g2.drawLine(x2+50, y+2, x2+150, y+2);
-        g2.drawLine(x2+50, y-19, x2+150, y-19);
-        g2.drawLine(x2+49, y-19,x2+49,y+2);
-        g2.drawLine(x2+150, y-19,x2+150,y+2);
-        //Drawing a frame for EXP bar.
-        g2.drawLine(x+60, y+2, x+160, y+2);
-        g2.drawLine(x+60, y-19, x+160, y-19);
-        g2.drawLine(x+59, y-19,x+59,y+2);
-        g2.drawLine(x+160, y-19,x+160,y+2);
-        g2d.drawString(inv, x3, y);
-        g2.setColor(java.awt.Color.RED);
-        g2.setRenderingHint(
-                RenderingHints.KEY_TEXT_ANTIALIASING,
-                RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        g2.setRenderingHint(
-                RenderingHints.KEY_RENDERING,
-                RenderingHints.VALUE_RENDER_QUALITY);
-        g2.setRenderingHint(
-                RenderingHints.KEY_FRACTIONALMETRICS,
-                RenderingHints.VALUE_FRACTIONALMETRICS_ON);
-
-        int widthhp = player.getHP();
-        g2.fillRect(x2+50, y-18, widthhp, 20);
-
-        g2.setColor(Color.GREEN);
-        g2.setRenderingHint(
-                RenderingHints.KEY_TEXT_ANTIALIASING,
-                RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        g2.setRenderingHint(
-                RenderingHints.KEY_RENDERING,
-                RenderingHints.VALUE_RENDER_QUALITY);
-        g2.setRenderingHint(
-                RenderingHints.KEY_FRACTIONALMETRICS,
-                RenderingHints.VALUE_FRACTIONALMETRICS_ON);
-
-        int width = player.getExperience()/10;
-        g2.fillRect(x+60, y-18, width, 20);
-    }
-
-
-    private ArrayList<Enemy> populateEnemies() {
-        ArrayList<Enemy> enemyList = new ArrayList<>();
-        Random rand = new Random();
-
-        // create the given number of enemies in random positions on the board.
-        // note that there is not check here to prevent two coins from occupying the same
-        // spot, nor to prevent coins from spawning in the same spot as the player
-        for (int i = 0; i < NUM_ENEMIES; ) {
-            int enemyX = rand.nextInt(COLUMNS);
-            int enemyY = rand.nextInt(ROWS);
-            if (MAS_MAP[enemyX][enemyY] == 0) {
-                MAS_MAP[enemyX][enemyY] = 1;
-                enemyList.add(new Enemy(enemyX, enemyY, 50, 50));
-                i++;
-            }
-        }
-        return enemyList;
-    }
-    private ArrayList<Stone> fillStones() {
-        ArrayList<Stone> stoneList = new ArrayList<>();
-        Random rand = new Random();
-        for (int i = 0; i < NUM_ROCKS; ) {
-            int rockX = rand.nextInt(COLUMNS);
-            int rockY = rand.nextInt(ROWS);
-            if (MAS_MAP[rockX][rockY] == 0) {
-                MAS_MAP[rockX][rockY] = 2;
-                stoneList.add(new Stone(rockX, rockY));
-                i++;
-            }
-        }
-        return stoneList;
-    }
-
-    private ArrayList<Boss> addBoss() {
-        ArrayList<Boss> bossList = new ArrayList<>();
-        Random rand = new Random();
-        int bossX = rand.nextInt(COLUMNS);
-        int bossY = rand.nextInt(ROWS);
-        for (int i = 0; i < NUM_BOSS; ) {
-
-            if (MAS_MAP[bossX][bossY] == 0) {
-                MAS_MAP[bossX][bossY] = 1;
-                bossList.add(new Boss(bossX, bossY));
-                i++;
-
-            }
-        }
-        return bossList;
-    }
-
-    private ArrayList<Tree> fillTrees() {
-        ArrayList<Tree> treeList = new ArrayList<>();
-        Random rand = new Random();
-        for (int i = 0; i < NUM_TREES; ) {
-            int treeX = rand.nextInt(COLUMNS);
-            int treeY = rand.nextInt(ROWS);
-            if (MAS_MAP[treeX][treeY] == 0) {
-                MAS_MAP[treeX][treeY] = 2;
-                treeList.add(new Tree(treeX, treeY));
-                i++;
-            }
-        }
-        return treeList;
-    }
-
-    private ArrayList<Grass> fillGrass() {
-        ArrayList<Grass> grassList = new ArrayList<>();
-        for (int i = 0; i < COLUMNS; i++) {
-            for (int j = 0; j < ROWS; j++) {
-                grassList.add(new Grass(i, j));
-            }
-        }
-        return grassList;
-    }
-
     private void killEnemies() {
         // allow player to kill enemies
         ArrayList<Enemy> enemiesKilled = new ArrayList<>();
@@ -310,6 +144,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         for (Enemy enemy : enemies) {
                 // if the player is on the same tile as an enemy, collect it
                 if (enemy.isKilled()) {
+
 //                    if (player.getPos().equals(enemy.getPos())) {
                         // give the player some points for picking this up
                         player.addExperience(100);
@@ -337,7 +172,6 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
 //        }
 //        enemies.removeAll(itemsCollected);
 //    }
-
 
     private void killBosses() {
         ArrayList<Boss> bossesKilled = new ArrayList<>();

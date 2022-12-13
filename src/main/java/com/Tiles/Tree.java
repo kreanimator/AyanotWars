@@ -8,6 +8,8 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Tree {
     private BufferedImage image;
@@ -20,6 +22,20 @@ public class Tree {
 
 
         pos = new Point(x, y);
+    }
+    public static ArrayList<Tree> fillTrees() {
+        ArrayList<Tree> treeList = new ArrayList<>();
+        Random rand = new Random();
+        for (int i = 0; i < CreateMap.NUM_TREES; ) {
+            int treeX = rand.nextInt(CreateMap.COLUMNS);
+            int treeY = rand.nextInt(CreateMap.ROWS);
+            if (CreateMap.MAS_MAP[treeX][treeY] == 0) {
+                CreateMap.MAS_MAP[treeX][treeY] = 2;
+                treeList.add(new Tree(treeX, treeY));
+                i++;
+            }
+        }
+        return treeList;
     }
 
     private void loadImage() {

@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Grass {
     private BufferedImage image;
@@ -18,6 +19,15 @@ public class Grass {
 
         loadImage();
         pos = new Point(x, y);
+    }
+    public static ArrayList<Grass> fillGrass() {
+        ArrayList<Grass> grassList = new ArrayList<>();
+        for (int i = 0; i < CreateMap.COLUMNS; i++) {
+            for (int j = 0; j < CreateMap.ROWS; j++) {
+                grassList.add(new Grass(i, j));
+            }
+        }
+        return grassList;
     }
 
     private void loadImage() {

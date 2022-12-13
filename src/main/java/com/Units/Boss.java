@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -35,6 +36,22 @@ public class Boss {
         } catch (IOException exc) {
             System.out.println("Error opening image file: " + exc.getMessage());
         }
+    }
+    public static ArrayList<Boss> addBoss() {
+        ArrayList<Boss> bossList = new ArrayList<>();
+        Random rand = new Random();
+        int bossX = rand.nextInt(CreateMap.COLUMNS);
+        int bossY = rand.nextInt(CreateMap.ROWS);
+        for (int i = 0; i < CreateMap.NUM_BOSS; ) {
+
+            if (CreateMap.MAS_MAP[bossX][bossY] == 0) {
+                CreateMap.MAS_MAP[bossX][bossY] = 1;
+                bossList.add(new Boss(bossX, bossY));
+                i++;
+
+            }
+        }
+        return bossList;
     }
 
     public void tick() {

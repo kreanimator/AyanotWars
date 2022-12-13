@@ -3,6 +3,7 @@ package com.Units;
 import com.CreateMap;
 import com.Interfaces.Inventory;
 import com.Interfaces.PlayerChoose;
+import com.Tiles.AttackSprite;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -26,12 +27,13 @@ public class Player {
     private final static int BACKWARD = 1;
     private final static int LEFT = 2;
     private final static int RIGHT = 3;
+    AttackSprite attackSprite;
     int height = 50;
     int width = 50;
 
-    private int experience;
+    private static int experience;
     public static int hp = 100;
-    private int level = 1;
+    private static int level = 1;
     private static String playerClass = "";
     public int damage = 15;
     private int attackRange;
@@ -46,11 +48,11 @@ public class Player {
             Player.nameClass = "warrior.png";
             //Warrior warrior = new Warrior();
         } else if (Objects.equals(playerClass, "warlock")) {
-            Player.playerClass = "src/main/resources/images/warlock.png";
+            Player.playerClass = "src/main/resources/images/player/" + playerClass + ".png";
             Player.nameClass = "warlock.png";
             // Warlock warlock = new Warlock();
         } else if (Objects.equals(playerClass, "mage")) {
-            Player.playerClass = "src/main/resources/images/mage.png";
+            Player.playerClass = "src/main/resources/images/player/" + playerClass + ".png";
             Player.nameClass = "mage.png";
             //Mage mage = new Mage();
         }
@@ -259,26 +261,38 @@ public class Player {
                             System.out.println("Attack up");
                             enemy.getDamage(playerDamage());
                             enemy.getCurrentHP();
+                            File playerAttackImgFileUp = new File("src/main/resources/images/player/attack/up/" + nameClass);
+                            image = ImageIO.read(playerAttackImgFileUp);
 
                         }
 
                         if (facingDirection == BACKWARD && pos.x == enemy.getPos().x && pos.y == enemy.getPos().y - 1) {
+
                             System.out.println("Attack down");
                             enemy.getDamage(playerDamage());
                             enemy.getCurrentHP();
+                            File playerAttackImgFileDown = new File("src/main/resources/images/player/attack/down/" + nameClass);
+                            image = ImageIO.read(playerAttackImgFileDown);
+
 
                         }
 
                         if (facingDirection == LEFT && pos.x == enemy.getPos().x + 1 && pos.y == enemy.getPos().y) {
+
                             System.out.println("Attack Left");
                             enemy.getDamage(playerDamage());
                             enemy.getCurrentHP();
+                            File playerAttackImgFileLeft = new File("src/main/resources/images/player/attack/left/" + nameClass);
+                            image = ImageIO.read(playerAttackImgFileLeft);
                         }
 
                         if (facingDirection == RIGHT && pos.x == enemy.getPos().x - 1 && pos.y == enemy.getPos().y) {
+
                             System.out.println("Attack Right");
                             enemy.getDamage(playerDamage());
                             enemy.getCurrentHP();
+                            File playerAttackImgFileRight = new File("src/main/resources/images/player/attack/right/" + nameClass);
+                            image = ImageIO.read(playerAttackImgFileRight);
 
                         }
                     }
@@ -288,6 +302,9 @@ public class Player {
                         System.out.println("Attack up");
                         boss.getDamage(playerDamage());
                         boss.getCurrentHP();
+                        File playerAttackImgFileDown = new File("src/main/resources/images/player/attack/up/" + nameClass);
+                        image = ImageIO.read(playerAttackImgFileDown);
+
                     }
                     if (facingDirection == BACKWARD && pos.x == boss.getPos().x && pos.y == boss.getPos().y - 1) {
 
@@ -295,16 +312,25 @@ public class Player {
 
                         boss.getDamage(playerDamage());
                         boss.getCurrentHP();
+                        File playerAttackImgFileDown = new File("src/main/resources/images/player/attack/down/" + nameClass);
+                        image = ImageIO.read(playerAttackImgFileDown);
                     }
                     if (facingDirection == LEFT && pos.x == boss.getPos().x + 1 && pos.y == boss.getPos().y) {
+
                         System.out.println("Attack Left");
                         boss.getDamage(playerDamage());
                         boss.getCurrentHP();
+                        File playerAttackImgFileLeft = new File("src/main/resources/images/player/attack/left/" + nameClass);
+                        image = ImageIO.read(playerAttackImgFileLeft);
                     }
                     if (facingDirection == RIGHT && pos.x == boss.getPos().x - 1 && pos.y == boss.getPos().y) {
+
                         System.out.println("Attack Right");
                         boss.getDamage(playerDamage());
                         boss.getCurrentHP();
+                        File playerAttackImgFileRight = new File("src/main/resources/images/player/attack/right/" + nameClass);
+                        image = ImageIO.read(playerAttackImgFileRight);
+                        System.out.println(playerAttackImgFileRight);
                     }
                 }
             }
@@ -314,6 +340,7 @@ public class Player {
 
         return obstacles;
     }
+
 
 
     public void attack() { //TODO: Attack method
@@ -340,15 +367,15 @@ public class Player {
         }
     }
 
-    public int getExperience() {
+    public static int getExperience() {
         return experience;
     }
 
-    public String getLevel() {
+    public static String getLevel() {
         return String.valueOf(level);
     }
 
-    public int getHP() {
+    public static int getHP() {
         return hp;
     }
 

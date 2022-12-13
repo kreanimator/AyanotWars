@@ -9,6 +9,7 @@ import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class Enemy extends Unit {
@@ -32,7 +33,24 @@ public class Enemy extends Unit {
         this.height = height;
         this.width = width;
     }
+    public static ArrayList<Enemy> populateEnemies() {
+        ArrayList<Enemy> enemyList = new ArrayList<>();
+        Random rand = new Random();
 
+        // create the given number of enemies in random positions on the board.
+        // note that there is not check here to prevent two coins from occupying the same
+        // spot, nor to prevent coins from spawning in the same spot as the player
+        for (int i = 0; i < CreateMap.NUM_ENEMIES; ) {
+            int enemyX = rand.nextInt(CreateMap.COLUMNS);
+            int enemyY = rand.nextInt(CreateMap.ROWS);
+            if (CreateMap.MAS_MAP[enemyX][enemyY] == 0) {
+                CreateMap.MAS_MAP[enemyX][enemyY] = 1;
+                enemyList.add(new Enemy(enemyX, enemyY, 50, 50));
+                i++;
+            }
+        }
+        return enemyList;
+    }
 
 
     public Rectangle getBounds() {
