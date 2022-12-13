@@ -5,9 +5,12 @@ import com.Units.*;
 import com.CreateMap;
 
 
+import javax.swing.*;
 
 
 public class GameInterface {
+
+
 
     public static void drawActionPanel(Graphics g) {
         // set the text to be displayed
@@ -38,7 +41,7 @@ public class GameInterface {
         FontMetrics metrics = g2d.getFontMetrics(g2d.getFont());
         // the text will be contained within this rectangle.
         // here I've sized it to be the entire bottom row of board tiles
-        Rectangle rect = new Rectangle(0, CreateMap.TILE_SIZE * (CreateMap.ROWS - 1),
+        Rectangle rect = new Rectangle(-1000, CreateMap.TILE_SIZE * (CreateMap.ROWS - 1),
                 CreateMap.TILE_SIZE * CreateMap.COLUMNS, CreateMap.TILE_SIZE);
 
         // determine the x coordinate for the text

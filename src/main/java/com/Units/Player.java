@@ -22,6 +22,7 @@ public class Player {
     private static String nameClass = "";
     private BufferedImage image;
     private final Point pos;
+    private static Point pos1;
     private final static int FORWARD = 0;
     private final static int BACKWARD = 1;
     private final static int LEFT = 2;
@@ -55,7 +56,6 @@ public class Player {
             //Mage mage = new Mage();
         }
     }
-
     public void setPlayerName(Graphics g) {
         // set the text to be displayed
 
@@ -87,13 +87,14 @@ public class Player {
         Random rd = new Random();
         int x = rd.nextInt();
         int y = rd.nextInt();
-//        int x = ((CreateMap.COLUMNS + CreateMap.ROWS)* CreateMap.TILE_SIZE )/2 + width/2;
-//        int y = ((CreateMap.ROWS + CreateMap.COLUMNS)* CreateMap.TILE_SIZE)/2 + height/2;
+
+
         attackRange = 1;
         loadImage();
         this.height = height;
         this.width = width;
-        pos = new Point(x, y);
+//        pos = new Point(x + CreateMap.xOffset, y+CreateMap.yOffset);
+        pos = new Point(CreateMap.xOffset, CreateMap.yOffset);
         experience = 0;
 
     }
@@ -136,7 +137,7 @@ public class Player {
                 facingDirection = FORWARD;
                 File playerImgFileUp = new File("src/main/resources/images/player/up/" + nameClass);
                 image = ImageIO.read(playerImgFileUp);
-                CreateMap.yOffset +=10;
+                CreateMap.yOffset +=50;
                 pos.translate(0, -1);
                 for (Enemy enemy : enemies) {
                     obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
@@ -158,7 +159,7 @@ public class Player {
         try {
             if (key == KeyEvent.VK_RIGHT && obstacles[pos.x + 1][pos.y] != 2) {
                 facingDirection = RIGHT;
-                CreateMap.xOffset -=10;
+                CreateMap.xOffset -=50;
                 File playerImageFileRight = new File("src/main/resources/images/player/right/" + nameClass);
                 image = ImageIO.read(playerImageFileRight);
                 pos.translate(1, 0);
@@ -183,7 +184,7 @@ public class Player {
         try {
             if (key == KeyEvent.VK_DOWN && obstacles[pos.x][pos.y + 1] != 2) {
                 pos.translate(0, 1);
-                CreateMap.yOffset -=10;
+                CreateMap.yOffset -=50;
                 File playerImageFileDown = new File("src/main/resources/images/player/down/" + nameClass);
                 image = ImageIO.read(playerImageFileDown);
                 facingDirection = BACKWARD;
@@ -206,7 +207,7 @@ public class Player {
         try {
             if (key == KeyEvent.VK_LEFT && obstacles[pos.x - 1][pos.y] != 2) {
                 facingDirection = LEFT;
-                CreateMap.xOffset +=10;
+                CreateMap.xOffset +=50;
                 pos.translate(-1, 0);
                 File playerImageFileLeft = new File("src/main/resources/images/player/left/" + nameClass);
                 image = ImageIO.read(playerImageFileLeft);

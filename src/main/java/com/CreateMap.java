@@ -29,6 +29,8 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
     public static final int NUM_BOSS = 1;
     public static int xOffset = 0;
     public static int yOffset = 0;
+    public static final int WIDTH = 1280;
+    public static final int HEIGHT = 700;
     public static int[][] MAS_MAP = new int[COLUMNS][ROWS];
 
     // suppress serialization warning
@@ -50,7 +52,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
 
     public CreateMap() {
         // set the game board size
-        setPreferredSize(new Dimension(TILE_SIZE * ROWS, TILE_SIZE * COLUMNS));
+        setPreferredSize(new Dimension(WIDTH,HEIGHT));
 
         MAS_MAP[0][0] = 1;
         MAS_MAP[1][0] = 1;
@@ -70,7 +72,6 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
 
 
 
-
         // this timer will call the actionPerformed() method every DELAY ms
         int DELAY = 25;
         // keep a reference to the timer object that triggers actionPerformed() in
@@ -78,7 +79,6 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         Timer timer = new Timer(DELAY, this);
         timer.start();
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         // this method is called by the timer every DELAY ms.

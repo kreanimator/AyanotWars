@@ -27,11 +27,9 @@ public class PlayerChoose extends JPanel implements ActionListener {
     JPanel actionPanel;
     static JTextField name;
 
-    KeyboardFocusManager km = new DefaultKeyboardFocusManager();
 
 
     Font myFont = new Font("Lato", Font.BOLD, 30);
-    JLabel fon = new JLabel();
 
 
     public PlayerChoose() {
@@ -110,9 +108,7 @@ public class PlayerChoose extends JPanel implements ActionListener {
         chooseWindow.add(nameEnter);
         chooseWindow.setVisible(true);
 
-        actionPanel = new JPanel();
-        actionPanel.setBounds(0,0,CreateMap.ROWS,CreateMap.TILE_SIZE);
-        actionPanel.setVisible(true);
+
     }
 
 
@@ -120,19 +116,17 @@ public class PlayerChoose extends JPanel implements ActionListener {
 
     public void initWindow() {
 
-        window.setSize(900, 900);
+        window.setSize(900, 700);
 
-        //window.setLocationRelativeTo(null); //
         window.setVisible(true);
         window.setExtendedState(JFrame.MAXIMIZED_BOTH);
         window.setResizable(false);
         window.pack();
-        window.setLayout(null);
+        //window.setLayout(null);
         window.setTitle("Ayanot wars");
         window.toFront();
-        window.requestFocus();
-        window.add(actionPanel);
-        window.setBackground(Color.BLUE);
+        //window.requestFocus();
+
 //       window.add(Inventory.addButton());
          //TODO: Fix the inventory button, cause it's ruins game.
 
