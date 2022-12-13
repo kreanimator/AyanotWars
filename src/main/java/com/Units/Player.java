@@ -132,7 +132,7 @@ public class Player {
                 facingDirection = FORWARD;
                 File playerImgFileUp = new File("src/main/resources/images/player/up/" + nameClass);
                 image = ImageIO.read(playerImgFileUp);
-                CreateMap.yOffset +=10;
+                CreateMap.yOffset +=20;
                 pos.translate(0, -1);
                 for (Enemy enemy : enemies) {
                     obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
@@ -154,7 +154,7 @@ public class Player {
         try {
             if (key == KeyEvent.VK_RIGHT && obstacles[pos.x + 1][pos.y] != 2) {
                 facingDirection = RIGHT;
-                CreateMap.xOffset -=10;
+                CreateMap.xOffset -=20;
                 File playerImageFileRight = new File("src/main/resources/images/player/right/" + nameClass);
                 image = ImageIO.read(playerImageFileRight);
                 pos.translate(1, 0);
@@ -179,7 +179,7 @@ public class Player {
         try {
             if (key == KeyEvent.VK_DOWN && obstacles[pos.x][pos.y + 1] != 2) {
                 pos.translate(0, 1);
-                CreateMap.yOffset -=10;
+                CreateMap.yOffset -=20;
                 File playerImageFileDown = new File("src/main/resources/images/player/down/" + nameClass);
                 image = ImageIO.read(playerImageFileDown);
                 facingDirection = BACKWARD;
@@ -202,7 +202,7 @@ public class Player {
         try {
             if (key == KeyEvent.VK_LEFT && obstacles[pos.x - 1][pos.y] != 2) {
                 facingDirection = LEFT;
-                CreateMap.xOffset +=10;
+                CreateMap.xOffset +=20;
                 pos.translate(-1, 0);
                 File playerImageFileLeft = new File("src/main/resources/images/player/left/" + nameClass);
                 image = ImageIO.read(playerImageFileLeft);

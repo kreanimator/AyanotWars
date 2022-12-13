@@ -3,10 +3,10 @@ package com.Interfaces;
 import com.CreateMap;
 import com.Units.Player;
 
+import javax.net.ssl.KeyManager;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.Objects;
 
 public class PlayerChoose implements ActionListener {
@@ -16,6 +16,8 @@ public class PlayerChoose implements ActionListener {
     JLabel iconWar, iconMag, iconWarl;
 
     static JTextField name;
+    KeyboardFocusManager km = new DefaultKeyboardFocusManager();
+
 
     Font myFont = new Font("Lato", Font.BOLD, 30);
 
@@ -110,6 +112,7 @@ public class PlayerChoose implements ActionListener {
         window.pack();
         window.setLayout(null);
         window.setTitle("Ayanot wars");
+        window.addFocusListener((FocusListener) km);
 //       window.add(Inventory.addButton());
          //TODO: Fix the inventory button, cvause it's ruins game.
 
