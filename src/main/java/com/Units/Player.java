@@ -85,16 +85,17 @@ public class Player {
 
     public Player(int width, int height) {
         Random rd = new Random();
-//        int x = rd.nextInt();
-//        int y = rd.nextInt();
-        int x = (CreateMap.COLUMNS* CreateMap.TILE_SIZE)/2 + width/2;
-        int y = (CreateMap.ROWS* CreateMap.TILE_SIZE)/2 + height/2;
+        int x = rd.nextInt();
+        int y = rd.nextInt();
+//        int x = ((CreateMap.COLUMNS + CreateMap.ROWS)* CreateMap.TILE_SIZE )/2 + width/2;
+//        int y = ((CreateMap.ROWS + CreateMap.COLUMNS)* CreateMap.TILE_SIZE)/2 + height/2;
         attackRange = 1;
         loadImage();
         this.height = height;
         this.width = width;
         pos = new Point(x, y);
         experience = 0;
+
     }
 
 
@@ -374,6 +375,15 @@ public class Player {
             pos.y = 0;
         } else if (pos.y >= CreateMap.ROWS) {
             pos.y = (CreateMap.ROWS - 1) + CreateMap.yOffset;
+        }        if (pos.x < 0) {
+            pos.x = 0;
+        } else if (pos.x >= CreateMap.COLUMNS) {
+            pos.x = (CreateMap.COLUMNS + 1) + CreateMap.xOffset;
+        }
+        if (pos.y < 0) {
+            pos.y = 0;
+        } else if (pos.y >= CreateMap.ROWS) {
+            pos.y = (CreateMap.ROWS + 1) + CreateMap.yOffset;
         }
     }
 

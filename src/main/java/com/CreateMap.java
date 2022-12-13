@@ -43,6 +43,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
     private final ArrayList<Grass> grasses;
     private final ArrayList<Boss> bosses;
     private final ArrayList<Skull> skulls;
+
     //private final ArrayList<Inventory> inventories;
 
 
@@ -100,7 +101,6 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         // because Component implements the ImageObserver interface, and JPanel
         // extends from Component. So "this" Board instance, as a Component, can
         // react to imageUpdate() events triggered by g.drawImage()
-
         // draw our graphics.
         for (Grass grass : grasses) {
             grass.draw(g, this);

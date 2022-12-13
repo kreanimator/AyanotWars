@@ -105,17 +105,21 @@ public class PlayerChoose implements ActionListener {
 
     JFrame window = new JFrame();
 
+
+
     public void initWindow() {
 
         window.setSize(900, 900);
 
         //window.setLocationRelativeTo(null); //
         window.setVisible(true);
+        window.setExtendedState(JFrame.MAXIMIZED_BOTH);
         window.setResizable(false);
         window.pack();
         window.setLayout(null);
         window.setTitle("Ayanot wars");
-        window.addFocusListener((FocusListener) km);
+        window.toFront();
+        window.requestFocus();
 //       window.add(Inventory.addButton());
          //TODO: Fix the inventory button, cvause it's ruins game.
 

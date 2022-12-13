@@ -87,8 +87,19 @@ public class Enemy extends Unit {
         if (pos.y < 0) {
             pos.y = 0;
         } else if (pos.y >= CreateMap.ROWS) {
-            pos.y = (CreateMap.ROWS - 1) + CreateMap.yOffset;
+            pos.y = (CreateMap.ROWS + 1) + CreateMap.yOffset;
         }
+        if (pos.x < 0) {
+            pos.x = 0;
+        } else if (pos.x >= CreateMap.COLUMNS) {
+            pos.x = (CreateMap.COLUMNS + 1) + CreateMap.xOffset;
+        }
+        if (pos.y < 0) {
+            pos.y = 0;
+        } else if (pos.y >= CreateMap.ROWS) {
+            pos.y = (CreateMap.ROWS + 1) + CreateMap.yOffset;
+        }
+
     }
 
     public void move(int[][] obstacles) {
