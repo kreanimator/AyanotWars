@@ -1,29 +1,40 @@
 package com.Interfaces;
 
 import com.CreateMap;
+import com.Tiles.Grass;
+import com.Tiles.Skull;
+import com.Tiles.Stone;
+import com.Tiles.Tree;
+import com.Units.Boss;
+import com.Units.Enemy;
 import com.Units.Player;
 
+import javax.imageio.ImageIO;
 import javax.net.ssl.KeyManager;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.Objects;
 
-public class PlayerChoose implements ActionListener {
+public class PlayerChoose extends JPanel implements ActionListener {
     JDialog chooseWindow;
+
     JButton warrior, warlock, mage;
     JLabel logo;
     JLabel iconWar, iconMag, iconWarl;
-    JDialog actionPanel;
+    JPanel actionPanel;
     static JTextField name;
 
     KeyboardFocusManager km = new DefaultKeyboardFocusManager();
 
 
     Font myFont = new Font("Lato", Font.BOLD, 30);
+    JLabel fon = new JLabel();
+
 
     public PlayerChoose() {
-
 
         chooseWindow = new JDialog();
         chooseWindow.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -99,13 +110,13 @@ public class PlayerChoose implements ActionListener {
         chooseWindow.add(nameEnter);
         chooseWindow.setVisible(true);
 
-//        actionPanel = new JDialog();
-//        actionPanel.setBounds();
+        actionPanel = new JPanel();
+        actionPanel.setBounds(0,0,CreateMap.ROWS,CreateMap.TILE_SIZE);
+        actionPanel.setVisible(true);
     }
 
+
     JFrame window = new JFrame();
-
-
 
     public void initWindow() {
 
@@ -120,8 +131,10 @@ public class PlayerChoose implements ActionListener {
         window.setTitle("Ayanot wars");
         window.toFront();
         window.requestFocus();
+        window.add(actionPanel);
+        window.setBackground(Color.BLUE);
 //       window.add(Inventory.addButton());
-         //TODO: Fix the inventory button, cvause it's ruins game.
+         //TODO: Fix the inventory button, cause it's ruins game.
 
     }
 

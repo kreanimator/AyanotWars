@@ -111,7 +111,8 @@ public class Player {
 
     public void draw(Graphics g, ImageObserver observer) {
 
-        g.drawImage(image, (pos.x * CreateMap.TILE_SIZE)+CreateMap.xOffset, (pos.y * CreateMap.TILE_SIZE)+CreateMap.yOffset, observer);
+        g.drawImage(image, (pos.x * CreateMap.TILE_SIZE)+CreateMap.xOffset,
+                (pos.y * CreateMap.TILE_SIZE)+CreateMap.yOffset, observer);
     }
 
     static JDialog inventoryWindow = new JDialog();
