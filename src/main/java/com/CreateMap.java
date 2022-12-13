@@ -141,9 +141,9 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
 
     private void drawActionPanel(Graphics g) {
         // set the text to be displayed
-        String text = "Exp " + player.getExperience();
+        String text = "EXP: " ;
         String textLvl = "Level " + player.getLevel();
-        String hplvl = "HP " + player.getHP();
+        String hplvl = "HP: ";
         String inv = "For inventory press 'i'";
         // we need to cast the Graphics to Graphics2D to draw nicer text
         Graphics2D g2 = (Graphics2D) g;
@@ -159,8 +159,6 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         g2d.setRenderingHint(
                 RenderingHints.KEY_FRACTIONALMETRICS,
                 RenderingHints.VALUE_FRACTIONALMETRICS_ON);
-
-
         // set the text color and font
         g2d.setColor(java.awt.Color.BLACK);
         g2d.setFont(new Font("Lato", Font.BOLD, 25));
@@ -171,7 +169,6 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         // here I've sized it to be the entire bottom row of board tiles
         Rectangle rect = new Rectangle(0, TILE_SIZE * (ROWS - 1), TILE_SIZE * COLUMNS, TILE_SIZE);
 
-
         // determine the x coordinate for the text
         int x = (int) (rect.getX() + (rect.getWidth() - metrics.stringWidth(text)) / 2);
         // determine the y coordinate for the text
@@ -179,6 +176,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         int y = (int) (rect.getY() + ((rect.getHeight() - metrics.getHeight()) / 2) + metrics.getAscent());
         // draw the string
         g2d.drawString(text, x, y);
+
         int x1 = (int) (rect.getX() + (rect.getWidth() - metrics.stringWidth(text)) / 3);
         // determine the y coordinate for the text
         // (note we add the ascent, as in java 2d 0 is top of the screen)
@@ -189,8 +187,44 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         g2d.drawString(hplvl, x2, y);
 
         int x3 = (int) (rect.getX() + (rect.getWidth() - metrics.stringWidth(text)) - 250);
-
+        //Drawing a frame for HP bar.
+        g2.drawLine(x2+50, y+2, x2+150, y+2);
+        g2.drawLine(x2+50, y-19, x2+150, y-19);
+        g2.drawLine(x2+49, y-19,x2+49,y+2);
+        g2.drawLine(x2+150, y-19,x2+150,y+2);
+        //Drawing a frame for EXP bar.
+        g2.drawLine(x+60, y+2, x+160, y+2);
+        g2.drawLine(x+60, y-19, x+160, y-19);
+        g2.drawLine(x+59, y-19,x+59,y+2);
+        g2.drawLine(x+160, y-19,x+160,y+2);
         g2d.drawString(inv, x3, y);
+        g2.setColor(java.awt.Color.RED);
+        g2.setRenderingHint(
+                RenderingHints.KEY_TEXT_ANTIALIASING,
+                RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g2.setRenderingHint(
+                RenderingHints.KEY_RENDERING,
+                RenderingHints.VALUE_RENDER_QUALITY);
+        g2.setRenderingHint(
+                RenderingHints.KEY_FRACTIONALMETRICS,
+                RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+
+        int widthhp = player.getHP();
+        g2.fillRect(x2+50, y-18, widthhp, 20);
+
+        g2.setColor(Color.GREEN);
+        g2.setRenderingHint(
+                RenderingHints.KEY_TEXT_ANTIALIASING,
+                RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g2.setRenderingHint(
+                RenderingHints.KEY_RENDERING,
+                RenderingHints.VALUE_RENDER_QUALITY);
+        g2.setRenderingHint(
+                RenderingHints.KEY_FRACTIONALMETRICS,
+                RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+
+        int width = player.getExperience()/10;
+        g2.fillRect(x+60, y-18, width, 20);
     }
 
 
@@ -310,28 +344,31 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
 
         for (Boss boss : bosses) {
 
-            if (player.getPos().equals(boss.getPos())) {
+            if (boss.isKilled()) {
                 player.addExperience(500);
+                for (int i = 1; i < 20; i++) {
+                    player.addLevel(i);
+                }
                 bossesKilled.add(boss);
             }
         }
         bosses.removeAll(bossesKilled);
     }
 
-    public void checkCollisions() {
-
-        Rectangle r3 = player.getBounds();
-
-
-        for (Enemy enemy : enemies) {
-            Rectangle r2 = enemy.getBounds();
-            if (r3.intersects(r2)) {
-                System.out.println("Collision");
-
-            }
-        }
-    }
-    public void enemyCollide(){
-
-    }
+//    public void checkCollisions() { //TODO
+//
+//        Rectangle r3 = player.getBounds();
+//
+//
+//        for (Enemy enemy : enemies) {
+//            Rectangle r2 = enemy.getBounds();
+//            if (r3.intersects(r2)) {
+//                System.out.println("Collision");
+//
+//            }
+//        }
+//    }
+//    public void enemyCollide(){
+//
+//    }
 }

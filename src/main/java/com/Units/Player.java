@@ -30,10 +30,10 @@ public class Player {
     int width = 50;
 
     private int experience;
-    protected static int hp = 100;
+    public static int hp = 100;
     private int level = 1;
     private static String playerClass = "";
-    public int damage;
+    public int damage = 15;
     private int attackRange;
     private int facingDirection;
     ArrayList<Enemy> enemies;
@@ -142,7 +142,9 @@ public class Player {
                     obstacles[enemy.getPos().x][enemy.getPos().y] = 2;
                 }
                 for (Boss boss : bosses) {
+                    obstacles[boss.getPos().x][boss.getPos().y] = 0;
                     boss.move(obstacles);
+                    obstacles[boss.getPos().x][boss.getPos().y] = 2;
                 }
 
                 obstacles[pos.x][pos.y + 1] = 0;
@@ -165,7 +167,9 @@ public class Player {
                     obstacles[enemy.getPos().x][enemy.getPos().y] = 2;
                 }
                 for (Boss boss : bosses) {
+                    obstacles[boss.getPos().x][boss.getPos().y] = 0;
                     boss.move(obstacles);
+                    obstacles[boss.getPos().x][boss.getPos().y] = 2;
                 }
                 obstacles[pos.x - 1][pos.y] = 0;
                 obstacles[pos.x][pos.y] = 2;
@@ -185,7 +189,9 @@ public class Player {
                     obstacles[enemy.getPos().x][enemy.getPos().y] = 2;
                 }
                 for (Boss boss : bosses) {
+                    obstacles[boss.getPos().x][boss.getPos().y] = 0;
                     boss.move(obstacles);
+                    obstacles[boss.getPos().x][boss.getPos().y] = 2;
                 }
                 obstacles[pos.x][pos.y - 1] = 0;
                 obstacles[pos.x][pos.y] = 2;
@@ -205,7 +211,9 @@ public class Player {
                     obstacles[enemy.getPos().x][enemy.getPos().y] = 2;
                 }
                 for (Boss boss : bosses) {
+                    obstacles[boss.getPos().x][boss.getPos().y] = 0;
                     boss.move(obstacles);
+                    obstacles[boss.getPos().x][boss.getPos().y] = 2;
                 }
                 obstacles[pos.x + 1][pos.y] = 0;
                 obstacles[pos.x][pos.y] = 2;
@@ -221,6 +229,7 @@ public class Player {
                     @Override
                     public void keyTyped(KeyEvent e) {
                     }
+
                     @Override
                     public void keyPressed(KeyEvent e) {
                         int key = e.getKeyCode();
@@ -231,6 +240,7 @@ public class Player {
                         } catch (Exception ignored) {
                         }
                     }
+
                     @Override
                     public void keyReleased(KeyEvent e) {
 
@@ -244,25 +254,57 @@ public class Player {
         try {
             if (key == KeyEvent.VK_SPACE) {
                 for (Enemy enemy : enemies) {
-                    if (  facingDirection == FORWARD && pos.x == enemy.getPos().x && pos.y == enemy.getPos().y + 1) {
+                        if (facingDirection == FORWARD && pos.x == enemy.getPos().x && pos.y == enemy.getPos().y + 1) {
+
+                            System.out.println("Attack up");
+                            enemy.getDamage(playerDamage());
+                            enemy.getCurrentHP();
+
+                        }
+
+                        if (facingDirection == BACKWARD && pos.x == enemy.getPos().x && pos.y == enemy.getPos().y - 1) {
+                            System.out.println("Attack down");
+                            enemy.getDamage(playerDamage());
+                            enemy.getCurrentHP();
+
+                        }
+
+                        if (facingDirection == LEFT && pos.x == enemy.getPos().x + 1 && pos.y == enemy.getPos().y) {
+                            System.out.println("Attack Left");
+                            enemy.getDamage(playerDamage());
+                            enemy.getCurrentHP();
+                        }
+
+                        if (facingDirection == RIGHT && pos.x == enemy.getPos().x - 1 && pos.y == enemy.getPos().y) {
+                            System.out.println("Attack Right");
+                            enemy.getDamage(playerDamage());
+                            enemy.getCurrentHP();
+
+                        }
+                    }
+                for (Boss boss : bosses) {
+                    if (facingDirection == FORWARD && pos.x == boss.getPos().x && pos.y == boss.getPos().y + 1) {
+
                         System.out.println("Attack up");
-                        enemy.getDamage(15);
-                        enemy.getCurrentHP();
+                        boss.getDamage(playerDamage());
+                        boss.getCurrentHP();
                     }
-                    if (facingDirection == BACKWARD &&pos.x == enemy.getPos().x && pos.y == enemy.getPos().y - 1) {
+                    if (facingDirection == BACKWARD && pos.x == boss.getPos().x && pos.y == boss.getPos().y - 1) {
+
                         System.out.println("Attack down");
-                        enemy.getDamage(15);
-                        enemy.getCurrentHP();
+
+                        boss.getDamage(playerDamage());
+                        boss.getCurrentHP();
                     }
-                    if (facingDirection == LEFT &&pos.x == enemy.getPos().x + 1 && pos.y == enemy.getPos().y) {
+                    if (facingDirection == LEFT && pos.x == boss.getPos().x + 1 && pos.y == boss.getPos().y) {
                         System.out.println("Attack Left");
-                        enemy.getDamage(15);
-                        enemy.getCurrentHP();
+                        boss.getDamage(playerDamage());
+                        boss.getCurrentHP();
                     }
-                    if (facingDirection == RIGHT &&pos.x == enemy.getPos().x - 1 && pos.y == enemy.getPos().y) {
+                    if (facingDirection == RIGHT && pos.x == boss.getPos().x - 1 && pos.y == boss.getPos().y) {
                         System.out.println("Attack Right");
-                        enemy.getDamage(15);
-                        enemy.getCurrentHP();
+                        boss.getDamage(playerDamage());
+                        boss.getCurrentHP();
                     }
                 }
             }
@@ -276,8 +318,11 @@ public class Player {
 
     public void attack() { //TODO: Attack method
         for (Enemy enemy : enemies) {
-            enemy.getDamage(15);
+            enemy.getDamage(playerDamage());
         }
+    }
+    public int playerDamage(){
+        return damage;
     }
 
 
@@ -295,16 +340,16 @@ public class Player {
         }
     }
 
-    public String getExperience() {
-        return String.valueOf(experience);
+    public int getExperience() {
+        return experience;
     }
 
     public String getLevel() {
         return String.valueOf(level);
     }
 
-    public String getHP() {
-        return String.valueOf(hp);
+    public int getHP() {
+        return hp;
     }
 
     public void addExperience(int amount) {
@@ -316,6 +361,7 @@ public class Player {
             level += amount;
             experience = 0;
             hp = (int) (hp * 1.2);
+            damage = (int) (damage *1.2);
 
         }
     }

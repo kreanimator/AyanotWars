@@ -32,6 +32,9 @@ public class Enemy extends Unit {
         this.height = height;
         this.width = width;
     }
+
+
+
     public Rectangle getBounds() {
         return new Rectangle(pos.x, pos.y, width, height);
     }
@@ -91,9 +94,6 @@ public class Enemy extends Unit {
         return hp <= 0;
     }
 
-    public String getHP() {
-        return String.valueOf(hp);
-    }
 
     public void draw(Graphics g, ImageObserver observer) {
 

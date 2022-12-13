@@ -16,6 +16,7 @@ public class Boss {
     private BufferedImage image;
 
     private final Point pos;
+    int hp = 500;
 
     public Boss(int x, int y) {
 
@@ -76,6 +77,21 @@ public class Boss {
                 observer
         );
     }
+    public boolean isAlive() {
+        return hp > 0;
+    }
+
+
+    public boolean isKilled() {
+        return hp <= 0;
+    }
+    public void getDamage(int value) {
+
+        this.hp -= value;
+    }
+    public void getCurrentHP(){
+        System.out.println(hp);
+    }
 
     public void drawHealthBar(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
@@ -89,7 +105,9 @@ public class Boss {
         g2.setRenderingHint(
                 RenderingHints.KEY_FRACTIONALMETRICS,
                 RenderingHints.VALUE_FRACTIONALMETRICS_ON);
-        g2.fillRect(pos.x * CreateMap.TILE_SIZE, pos.y * CreateMap.TILE_SIZE - 10, 50, 5);
+        int x = pos.x * CreateMap.TILE_SIZE;
+        int width = hp/10;
+        g2.fillRect(x, pos.y * CreateMap.TILE_SIZE - 10, width, 5);
     }
 
     public Point getPos() {
