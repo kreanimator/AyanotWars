@@ -50,7 +50,8 @@ public class Tree {
 
     public void draw(Graphics g, ImageObserver observer) {
 
-        g.drawImage(image, (pos.x * CreateMap.TILE_SIZE)+CreateMap.xOffset, (pos.y * CreateMap.TILE_SIZE)+CreateMap.yOffset, observer);
+        g.drawImage(image, (pos.x * CreateMap.TILE_SIZE)+CreateMap.xOffset,
+                (pos.y * CreateMap.TILE_SIZE)+CreateMap.yOffset, observer);
     }
 
     public Point getPos() {

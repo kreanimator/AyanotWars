@@ -19,13 +19,13 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
     // controls the size of the map
     static Random gen = new Random();
     public static final int TILE_SIZE = 50;
-    public static final int ROWS = 50;
-    public static final int COLUMNS = 50;
+    public static final int ROWS = 30;
+    public static final int COLUMNS = 30;
     // controls how many enemies appear on the board
-    public static final int NUM_ENEMIES = gen.nextInt(30, 70);
-    public static final int NUM_ROCKS = 40;
-    public static final int NUM_TREES = 40;
-    public static final int NUM_SKULLS = 30;
+    public static final int NUM_ENEMIES = gen.nextInt(10, 30);
+    public static final int NUM_ROCKS = 10;
+    public static final int NUM_TREES = 10;
+    public static final int NUM_SKULLS = 10;
     public static final int NUM_BOSS = 1;
     public static int xOffset = 0;
     public static int yOffset = 0;
@@ -49,7 +49,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
 
     public CreateMap() {
         // set the game board size
-        setPreferredSize(new Dimension(TILE_SIZE * 50, TILE_SIZE * 50));
+        setPreferredSize(new Dimension(TILE_SIZE * ROWS, TILE_SIZE * COLUMNS));
 
         MAS_MAP[0][0] = 1;
         MAS_MAP[1][0] = 1;

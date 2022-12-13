@@ -59,13 +59,12 @@ public class Boss {
         if (pos.x < 0) {
             pos.x = 0;
         } else if (pos.x >= CreateMap.COLUMNS) {
-            pos.x = CreateMap.COLUMNS - 1;
-
+            pos.x = (CreateMap.COLUMNS - 1) + CreateMap.xOffset;
         }
         if (pos.y < 0) {
             pos.y = 0;
         } else if (pos.y >= CreateMap.ROWS) {
-            pos.y = CreateMap.ROWS - 1;
+            pos.y = (CreateMap.ROWS - 1) + CreateMap.yOffset;
         }
     }
 
@@ -91,10 +90,11 @@ public class Boss {
 
     public void draw(Graphics g, ImageObserver observer) {
 
+
         g.drawImage(
                 image,
-                pos.x * CreateMap.TILE_SIZE,
-                pos.y * CreateMap.TILE_SIZE,
+                (pos.x * CreateMap.TILE_SIZE)+CreateMap.xOffset,
+                (pos.y * CreateMap.TILE_SIZE)+CreateMap.yOffset,
                 observer
         );
     }
@@ -126,9 +126,9 @@ public class Boss {
         g2.setRenderingHint(
                 RenderingHints.KEY_FRACTIONALMETRICS,
                 RenderingHints.VALUE_FRACTIONALMETRICS_ON);
-        int x = pos.x * CreateMap.TILE_SIZE;
+        int x = (pos.x * CreateMap.TILE_SIZE)+CreateMap.xOffset;
         int width = hp/10;
-        g2.fillRect(x, pos.y * CreateMap.TILE_SIZE - 10, width, 5);
+        g2.fillRect(x, (pos.y * CreateMap.TILE_SIZE - 10)+CreateMap.yOffset, width, 5);
     }
 
     public Point getPos() {

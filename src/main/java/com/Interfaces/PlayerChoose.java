@@ -14,8 +14,9 @@ public class PlayerChoose implements ActionListener {
     JButton warrior, warlock, mage;
     JLabel logo;
     JLabel iconWar, iconMag, iconWarl;
-
+    JDialog actionPanel;
     static JTextField name;
+
     KeyboardFocusManager km = new DefaultKeyboardFocusManager();
 
 
@@ -98,6 +99,8 @@ public class PlayerChoose implements ActionListener {
         chooseWindow.add(nameEnter);
         chooseWindow.setVisible(true);
 
+//        actionPanel = new JDialog();
+//        actionPanel.setBounds();
     }
 
     JFrame window = new JFrame();
