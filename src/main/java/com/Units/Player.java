@@ -1,6 +1,7 @@
 package com.Units;
 
 import com.CreateMap;
+import com.Interfaces.GameInterface;
 import com.Interfaces.Inventory;
 import com.Interfaces.PlayerChoose;
 
@@ -22,13 +23,14 @@ public class Player {
     private static String nameClass = "";
     private BufferedImage image;
     private final Point pos;
-    private static Point pos1;
     private final static int FORWARD = 0;
     private final static int BACKWARD = 1;
     private final static int LEFT = 2;
     private final static int RIGHT = 3;
     int height = 50;
     int width = 50;
+    public int x;
+    public int y;
 
     private static int experience;
     public static int hp = 100;
@@ -74,6 +76,7 @@ public class Player {
         g2d.drawString(name, x, y);
     }
 
+
     public int getDamage() {
         return damage;
 
@@ -85,16 +88,18 @@ public class Player {
 
     public Player(int width, int height) {
         Random rd = new Random();
-        int x = rd.nextInt();
-        int y = rd.nextInt();
+//        int x = rd.nextInt();
+//        int y = rd.nextInt();
+        this.x = (CreateMap.ROWS/2) -(width/2);
+        this.y = (CreateMap.COLUMNS/2) -(height/2);
 
 
         attackRange = 1;
         loadImage();
         this.height = height;
         this.width = width;
-//        pos = new Point(x + CreateMap.xOffset, y+CreateMap.yOffset);
-        pos = new Point(CreateMap.xOffset, CreateMap.yOffset);
+       pos = new Point(x , y);
+        //pos = new Point(CreateMap.xOffset, CreateMap.yOffset);
         experience = 0;
 
     }
@@ -259,6 +264,7 @@ public class Player {
         }
         try {
             if (key == KeyEvent.VK_SPACE) {
+                System.out.println(getPos());
 
                 for (Enemy enemy : enemies) {
                     obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
@@ -377,15 +383,7 @@ public class Player {
             pos.y = 0;
         } else if (pos.y >= CreateMap.ROWS) {
             pos.y = (CreateMap.ROWS - 1) + CreateMap.yOffset;
-        }        if (pos.x < 0) {
-            pos.x = 0;
-        } else if (pos.x >= CreateMap.COLUMNS) {
-            pos.x = (CreateMap.COLUMNS + 1) + CreateMap.xOffset;
-        }
-        if (pos.y < 0) {
-            pos.y = 0;
-        } else if (pos.y >= CreateMap.ROWS) {
-            pos.y = (CreateMap.ROWS + 1) + CreateMap.yOffset;
+
         }
     }
 
@@ -418,6 +416,7 @@ public class Player {
     public Point getPos() {
         return pos;
     }
+
 }
 
 

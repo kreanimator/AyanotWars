@@ -9,13 +9,9 @@ import com.Units.Boss;
 import com.Units.Enemy;
 import com.Units.Player;
 
-import javax.imageio.ImageIO;
-import javax.net.ssl.KeyManager;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.Objects;
 
 public class PlayerChoose extends JPanel implements ActionListener {
@@ -24,7 +20,6 @@ public class PlayerChoose extends JPanel implements ActionListener {
     JButton warrior, warlock, mage;
     JLabel logo;
     JLabel iconWar, iconMag, iconWarl;
-    JPanel actionPanel;
     static JTextField name;
 
 
@@ -115,17 +110,18 @@ public class PlayerChoose extends JPanel implements ActionListener {
     JFrame window = new JFrame();
 
     public void initWindow() {
-
         window.setSize(900, 700);
-
-        window.setVisible(true);
-        window.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        window.setResizable(false);
         window.pack();
-        //window.setLayout(null);
+        window.setLocationRelativeTo(null);
+        window.setVisible(true);
+        //window.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        window.setResizable(false);
+
+
+        window.getMaximizedBounds();
+
         window.setTitle("Ayanot wars");
         window.toFront();
-        //window.requestFocus();
 
 //       window.add(Inventory.addButton());
          //TODO: Fix the inventory button, cause it's ruins game.

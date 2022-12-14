@@ -39,12 +39,14 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
 
     // objects that appear on the game board
     private final Player player = new Player(50, 50);
+    private final GameInterface gameInterface = new GameInterface();
     private final ArrayList<Enemy> enemies;
     private final ArrayList<Stone> stone;
     private final ArrayList<Tree> trees;
     private final ArrayList<Grass> grasses;
     private final ArrayList<Boss> bosses;
     private final ArrayList<Skull> skulls;
+//    private final ArrayList<Sea> seas;
 
     //private final ArrayList<Inventory> inventories;
 
@@ -53,6 +55,10 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
     public CreateMap() {
         // set the game board size
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
+        setBackground(Color.blue);
+        addKeyListener(gameInterface);
+
+        
 
         MAS_MAP[0][0] = 1;
         MAS_MAP[1][0] = 1;
@@ -65,6 +71,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         enemies = Enemy.populateEnemies();
         bosses = Boss.addBoss();
         grasses = Grass.fillGrass();
+//        seas = Sea.fillSea();
         // initialize the game state
 
 
@@ -104,7 +111,11 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         // draw our graphics.
         for (Grass grass : grasses) {
             grass.draw(g, this);
+
         }
+//        for (Sea sea : seas) {
+//            sea.draw(g, this);
+//        }
         for (Skull skull: skulls){
             skull.draw(g,this);
         }
@@ -126,14 +137,13 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
             boss.tick();
             boss.drawHealthBar(g);
         }
-
         player.draw(g, this);
         player.setPlayerName(g);
         GameInterface.drawActionPanel(g);
-
         // this smooths out animations on some systems
         Toolkit.getDefaultToolkit().sync();
     }
+
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -144,6 +154,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
     public void keyPressed(KeyEvent e) {
         // react to key down events
         MAS_MAP = player.keyPressed(e, MAS_MAP, enemies, bosses);
+        gameInterface.keyPressed(e);
     }
 
     @Override
