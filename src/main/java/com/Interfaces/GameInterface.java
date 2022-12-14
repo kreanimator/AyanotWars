@@ -12,15 +12,14 @@ import com.CreateMap;
 import javax.swing.*;
 
 
-public class GameInterface implements KeyListener {
+public class GameInterface {
     int x, y;
-    private final Point pos;
+    private static Point pos=null;
 
         public GameInterface() {
 
-            int x = CreateMap.xOffset;
+            int x = CreateMap.xOffset-20;
             int y = CreateMap.yOffset+CreateMap.HEIGHT-CreateMap.TILE_SIZE;
-
 
             pos = new Point(x, y);
         }
@@ -43,7 +42,7 @@ public class GameInterface implements KeyListener {
             // we need to cast the Graphics to Graphics2D to draw nicer text
             Graphics2D g2 = (Graphics2D) g;
             g2.setColor(Color.getHSBColor(31, 18, 95));
-            g2.fillRect(CreateMap.xOffset, CreateMap.yOffset + CreateMap.HEIGHT - CreateMap.TILE_SIZE, CreateMap.WIDTH, CreateMap.TILE_SIZE);
+            g2.fillRect(pos.x, pos.y, CreateMap.WIDTH, CreateMap.TILE_SIZE*2);
             Graphics2D g2d = (Graphics2D) g;
             g2d.setRenderingHint(
                     RenderingHints.KEY_TEXT_ANTIALIASING,
@@ -62,38 +61,32 @@ public class GameInterface implements KeyListener {
             FontMetrics metrics = g2d.getFontMetrics(g2d.getFont());
             // the text will be contained within this rectangle.
             // here I've sized it to be the entire bottom row of board tiles
-            Rectangle rect = new Rectangle(CreateMap.xOffset, CreateMap.TILE_SIZE * (CreateMap.ROWS - 1),
-                    CreateMap.TILE_SIZE * CreateMap.COLUMNS, CreateMap.TILE_SIZE);
+//            Rectangle rect = new Rectangle(CreateMap.xOffset, CreateMap.TILE_SIZE * (CreateMap.ROWS - 1),
+//                    CreateMap.TILE_SIZE * CreateMap.COLUMNS, CreateMap.TILE_SIZE);
 
-            // determine the x coordinate for the text
-            int x = (int) (rect.getX() + (rect.getWidth() - metrics.stringWidth(text)) / 2);
-            // determine the y coordinate for the text
-            // (note we add the ascent, as in java 2d 0 is top of the screen)
-            int y = (int) (rect.getY() + ((rect.getHeight() - metrics.getHeight()) / 2) + metrics.getAscent());
+
             // draw the string
-            g2d.drawString(text, x, y);
+            g2d.drawString(text, pos.x + (CreateMap.WIDTH/2)-30, pos.y + CreateMap.TILE_SIZE/2);
 
-            int x1 = (int) (rect.getX() + (rect.getWidth() - metrics.stringWidth(text)) / 3);
             // determine the y coordinate for the text
             // (note we add the ascent, as in java 2d 0 is top of the screen)
-            g2d.drawString(textLvl, x1, y);
-            int x2 = (int) (rect.getX() + (rect.getWidth() - metrics.stringWidth(text)) / 8);
+            g2d.drawString(textLvl, pos.x + CreateMap.WIDTH/3, (pos.y + CreateMap.TILE_SIZE/2));
             // determine the y coordinate for the text
             // (note we add the ascent, as in java 2d 0 is top of the screen)
-            g2d.drawString(hplvl, x2, y);
+            g2d.drawString(hplvl, pos.x, (pos.y+ CreateMap.TILE_SIZE/2) + 2);
 
-            int x3 = (int) (rect.getX() + (rect.getWidth() - metrics.stringWidth(text)) - 250);
             //Drawing a frame for HP bar.
-            g2.drawLine(x2 + 50, y + 2, x2 + 150, y + 2);
-            g2.drawLine(x2 + 50, y - 19, x2 + 150, y - 19);
-            g2.drawLine(x2 + 49, y - 19, x2 + 49, y + 2);
-            g2.drawLine(x2 + 150, y - 19, x2 + 150, y + 2);
+            g2.drawLine(pos.x + 50, pos.y +9, pos.x + 150, pos.y +9);
+            g2.drawLine(pos.x + 50, pos.y+ 30, pos.x + 150, pos.y+ 30);
+            g2.drawLine(pos.x + 49, pos.y + 9 , pos.x + 49, pos.y + 30);
+            g2.drawLine(pos.x + 150, pos.y + 9, pos.x + 150, pos.y + 30);
             //Drawing a frame for EXP bar.
-            g2.drawLine(x + 60, y + 2, x + 160, y + 2);
-            g2.drawLine(x + 60, y - 19, x + 160, y - 19);
-            g2.drawLine(x + 59, y - 19, x + 59, y + 2);
-            g2.drawLine(x + 160, y - 19, x + 160, y + 2);
-            g2d.drawString(inv, x3, y);
+
+            g2.drawLine(pos.x + (CreateMap.WIDTH/2 + 50), pos.y +9, pos.x + (CreateMap.WIDTH/2 + 150), pos.y +9);
+            g2.drawLine(pos.x + (CreateMap.WIDTH/2 + 50), pos.y+ 30, pos.x + (CreateMap.WIDTH/2 + 150), pos.y+ 30);
+            g2.drawLine(pos.x + (CreateMap.WIDTH/2 + 49), pos.y + 9 , pos.x + (CreateMap.WIDTH/2 + 49), pos.y + 30);
+            g2.drawLine(pos.x + (CreateMap.WIDTH/2 + 150), pos.y + 9, pos.x + (CreateMap.WIDTH/2 + 150), pos.y + 30);
+            g2d.drawString(inv, pos.x + (CreateMap.WIDTH-(CreateMap.WIDTH/3)), pos.y + CreateMap.TILE_SIZE/2);
             g2.setColor(java.awt.Color.RED);
             g2.setRenderingHint(
                     RenderingHints.KEY_TEXT_ANTIALIASING,
@@ -106,7 +99,7 @@ public class GameInterface implements KeyListener {
                     RenderingHints.VALUE_FRACTIONALMETRICS_ON);
 
             int widthhp = Player.getHP();
-            g2.fillRect(x2 + 50, y - 18, widthhp, 20);
+            g2.fillRect(pos.x + 50, pos.y +10, widthhp, 20);
 
             g2.setColor(Color.GREEN);
             g2.setRenderingHint(
@@ -120,45 +113,26 @@ public class GameInterface implements KeyListener {
                     RenderingHints.VALUE_FRACTIONALMETRICS_ON);
 
             int width = Player.getExperience() / 10;
-            g2.fillRect(x + 60, y - 18, width, 20);
+            g2.fillRect((pos.x + CreateMap.WIDTH/2) +50, pos.y +10, width, 20);
         }
+    public void tick() {
 
-    @Override
-    public void keyTyped(KeyEvent e) {
+
+        if (pos.x < 0) {
+            pos.x = 0;
+        } else if (pos.x >= CreateMap.WIDTH) {
+            pos.x = (CreateMap.WIDTH);
+        }
+        if (pos.y < 0) {
+            pos.y = 0;
+        } else if (pos.y >= CreateMap.HEIGHT) {
+            pos.y = (CreateMap.HEIGHT);
+        }
 
     }
 
-    @Override
-    public void keyPressed(KeyEvent e) {
-        // every keyboard get has a certain code. get the value of that code from the
-        // keyboard event so that we can compare it to KeyEvent constants
-        int key = e.getKeyCode();
+}
 
-        // depending on which arrow key was pressed, we're going to move the player by
-        // one whole tile for this input
-        if (key == KeyEvent.VK_UP) {
-            System.out.println("Moving interface up");
-            pos.translate(0, -1);
-        }
-        if (key == KeyEvent.VK_RIGHT) {
-            System.out.println("Moving interface right");
-            pos.translate(1, 0);
-        }
-        if (key == KeyEvent.VK_DOWN) {
-            System.out.println("Moving interface down");
-            pos.translate(0, 1);
-        }
-        if (key == KeyEvent.VK_LEFT) {
-            System.out.println("Moving interface left");
-            pos.translate(-1, 0);
-        }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
-    }
-};
 
 
 

@@ -19,8 +19,8 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
     // controls the size of the map
     static Random gen = new Random();
     public static final int TILE_SIZE = 50;
-    public static final int ROWS = 100;
-    public static final int COLUMNS = 100;
+    public static final int ROWS = 30;
+    public static final int COLUMNS = 30;
     // controls how many enemies appear on the board
     public static final int NUM_ENEMIES = gen.nextInt(10, 30);
     public static final int NUM_ROCKS = 10;
@@ -57,7 +57,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         // set the game board size
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
         setBackground(Color.blue);
-        addKeyListener(gameInterface);
+
 
         
 
@@ -95,6 +95,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
 
         // prevent the player from disappearing off the board
         player.tick();
+        gameInterface.tick();
         // give the player experience for killing enemies
         killEnemies();
         killBosses();
@@ -155,7 +156,6 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
     public void keyPressed(KeyEvent e) {
         // react to key down events
         MAS_MAP = player.keyPressed(e, MAS_MAP, enemies, bosses);
-        gameInterface.keyPressed(e);
     }
 
     @Override
