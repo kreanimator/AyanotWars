@@ -8,9 +8,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Random;
 
 
@@ -110,6 +108,12 @@ public class Enemy extends Unit {
             }
         } catch (Exception ignored) {
         }
+    }
+    public boolean removeObstacles(int [][] obstacles){
+        if(isKilled && obstacles [pos.x][pos.y] == 2){
+           return obstacles[pos.x][pos.y] == 0;
+        }
+        return false;
     }
 
     public boolean isAlive() {

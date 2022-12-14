@@ -1,14 +1,7 @@
 package com.Interfaces;
 
 import com.CreateMap;
-import com.Tiles.Grass;
-import com.Tiles.Skull;
-import com.Tiles.Stone;
-import com.Tiles.Tree;
-import com.Units.Boss;
-import com.Units.Enemy;
 import com.Units.Player;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -21,7 +14,6 @@ public class PlayerChoose extends JPanel implements ActionListener {
     JLabel logo;
     JLabel iconWar, iconMag, iconWarl;
     static JTextField name;
-
 
 
     Font myFont = new Font("Lato", Font.BOLD, 30);

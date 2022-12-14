@@ -1,7 +1,6 @@
 package com.Units;
 
 import com.CreateMap;
-import com.Interfaces.GameInterface;
 import com.Interfaces.Inventory;
 import com.Interfaces.PlayerChoose;
 
@@ -29,8 +28,16 @@ public class Player {
     private final static int RIGHT = 3;
     int height = 50;
     int width = 50;
-    public int x;
-    public int y;
+
+    public static String getNameClass() {
+        return nameClass;
+    }
+
+    static Random rd = new Random();
+
+    static int x = rd.nextInt(CreateMap.COLUMNS);
+    static int y = rd.nextInt(CreateMap.ROWS);
+
 
     private static int experience;
     public static int hp = 100;
@@ -86,22 +93,26 @@ public class Player {
         return new Rectangle(pos.x, pos.y, width, height);
     }
 
-    public Player(int width, int height) {
-        Random rd = new Random();
-        int x = rd.nextInt(CreateMap.COLUMNS);
-        int y = rd.nextInt(CreateMap.ROWS);
+    public Player() {
+
+
+
 //        this.x = (CreateMap.ROWS/2) -(width/2);
 //        this.y = (CreateMap.COLUMNS/2) -(height/2);
 
 
         attackRange = 1;
         loadImage();
-        this.height = height;
-        this.width = width;
        pos = new Point(x , y);
         //pos = new Point(CreateMap.xOffset, CreateMap.yOffset);
         experience = 0;
+    }
+    public static int getX() {
+        return x;
+    }
 
+    public static int getY() {
+        return y;
     }
 
 
@@ -264,7 +275,6 @@ public class Player {
         }
         try {
             if (key == KeyEvent.VK_SPACE) {
-                System.out.println(getPos());
 
                 for (Enemy enemy : enemies) {
                     obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
@@ -315,8 +325,6 @@ public class Player {
                     boss.move(obstacles);
                     obstacles[boss.getPos().x][boss.getPos().y] = 2;
                     if (facingDirection == FORWARD && pos.x == boss.getPos().x && pos.y == boss.getPos().y + 1) {
-
-
 
                         System.out.println("Attack up");
                         boss.getDamage(playerDamage());
@@ -376,13 +384,13 @@ public class Player {
 
         if (pos.x < 0) {
             pos.x = 0;
-        } else if (pos.x >= CreateMap.COLUMNS && CreateMap.xOffset >= CreateMap.COLUMNS) {
+        } else if (pos.x >= CreateMap.COLUMNS ) {
             pos.x = (CreateMap.COLUMNS - 1);
 
         }
         if (pos.y < 0) {
             pos.y = 0;
-        } else if (pos.y >= CreateMap.ROWS && CreateMap.yOffset >= CreateMap.ROWS) {
+        } else if (pos.y >= CreateMap.ROWS ) {
             pos.y = (CreateMap.ROWS - 1);
 
         }

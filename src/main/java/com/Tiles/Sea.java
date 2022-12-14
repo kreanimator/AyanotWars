@@ -24,8 +24,8 @@ public class Sea {
     }
     public static ArrayList<Sea> fillSea() {
         ArrayList<Sea> seaList = new ArrayList<>();
-        for (int i = 0; i < CreateMap.COLUMNS && i>CreateMap.COLUMNS/0.1; i++) {
-            for (int j = 0; j < CreateMap.ROWS && i > CreateMap.ROWS/0.1; j++) {
+        for (int i = 0; i > CreateMap.COLUMNS/0.8 ; i++) {
+            for (int j = 0; j > CreateMap.ROWS/0.8; j++) {
                 if (CreateMap.MAS_MAP[i][j] == 0) {
                     CreateMap.MAS_MAP[i][j] = 2;
                     seaList.add(new Sea(i, j));
