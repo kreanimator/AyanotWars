@@ -88,10 +88,10 @@ public class Player {
 
     public Player(int width, int height) {
         Random rd = new Random();
-//        int x = rd.nextInt();
-//        int y = rd.nextInt();
-        this.x = (CreateMap.ROWS/2) -(width/2);
-        this.y = (CreateMap.COLUMNS/2) -(height/2);
+        int x = rd.nextInt(CreateMap.COLUMNS);
+        int y = rd.nextInt(CreateMap.ROWS);
+//        this.x = (CreateMap.ROWS/2) -(width/2);
+//        this.y = (CreateMap.COLUMNS/2) -(height/2);
 
 
         attackRange = 1;
@@ -142,7 +142,7 @@ public class Player {
                 facingDirection = FORWARD;
                 File playerImgFileUp = new File("src/main/resources/images/player/up/" + nameClass);
                 image = ImageIO.read(playerImgFileUp);
-                CreateMap.yOffset +=50;
+                CreateMap.yOffset +=pos.y;
                 pos.translate(0, -1);
                 for (Enemy enemy : enemies) {
                     obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
@@ -164,7 +164,7 @@ public class Player {
         try {
             if (key == KeyEvent.VK_RIGHT && obstacles[pos.x + 1][pos.y] != 2) {
                 facingDirection = RIGHT;
-                CreateMap.xOffset -=50;
+                CreateMap.xOffset -=pos.x;
                 File playerImageFileRight = new File("src/main/resources/images/player/right/" + nameClass);
                 image = ImageIO.read(playerImageFileRight);
                 pos.translate(1, 0);
@@ -189,7 +189,7 @@ public class Player {
         try {
             if (key == KeyEvent.VK_DOWN && obstacles[pos.x][pos.y + 1] != 2) {
                 pos.translate(0, 1);
-                CreateMap.yOffset -=50;
+                CreateMap.yOffset -= pos.y;
                 File playerImageFileDown = new File("src/main/resources/images/player/down/" + nameClass);
                 image = ImageIO.read(playerImageFileDown);
                 facingDirection = BACKWARD;
@@ -212,7 +212,7 @@ public class Player {
         try {
             if (key == KeyEvent.VK_LEFT && obstacles[pos.x - 1][pos.y] != 2) {
                 facingDirection = LEFT;
-                CreateMap.xOffset +=50;
+                CreateMap.xOffset +=pos.x;
                 pos.translate(-1, 0);
                 File playerImageFileLeft = new File("src/main/resources/images/player/left/" + nameClass);
                 image = ImageIO.read(playerImageFileLeft);
@@ -376,13 +376,15 @@ public class Player {
 
         if (pos.x < 0) {
             pos.x = 0;
-        } else if (pos.x >= CreateMap.COLUMNS) {
+        } else if (pos.x >= CreateMap.COLUMNS && CreateMap.xOffset >= CreateMap.COLUMNS) {
             pos.x = (CreateMap.COLUMNS - 1) + CreateMap.xOffset;
+            CreateMap.xOffset = (CreateMap.xOffset - CreateMap.TILE_SIZE);
         }
         if (pos.y < 0) {
             pos.y = 0;
-        } else if (pos.y >= CreateMap.ROWS) {
+        } else if (pos.y >= CreateMap.ROWS && CreateMap.yOffset >= CreateMap.ROWS) {
             pos.y = (CreateMap.ROWS - 1) + CreateMap.yOffset;
+            CreateMap.yOffset = (CreateMap.yOffset - CreateMap.TILE_SIZE);
 
         }
     }
