@@ -87,8 +87,8 @@ public class Player {
     }
 
 
-    public int getDamage() {
-        return damage;
+    public static void getDamage(int value) {
+        hp -=value ;
 
     }
 

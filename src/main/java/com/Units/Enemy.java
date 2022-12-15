@@ -57,29 +57,38 @@ public class Enemy extends Unit {
     }
     public void attackEnemies(int [][] obstacles) {
         for (Enemy enemy : enemies) {
-            if (obstacles[pos.x][pos.y - 1] == 2) {
+            if (obstacles[pos.x][pos.y - 1] != 2) {
                 facingDirection = FORWARD;
-                enemy.getDamage(5);
+                if (pos.x == enemy.getPos().x && pos.y == enemy.getPos().y + 1){
+                    enemy.getDamage(5);
                 System.out.println("Enemy was hitted");
                 getCurrentHP();
+            }
             }
             if (obstacles[pos.x + 1][pos.y] == 2) {
                 facingDirection = RIGHT;
-                enemy.getDamage(5);
-                System.out.println("Enemy was hitted");
-                getCurrentHP();
+                if ( pos.x == enemy.getPos().x - 1 && pos.y == enemy.getPos().y) {
+                    enemy.getDamage(5);
+                    System.out.println("Enemy was hitted");
+                    getCurrentHP();
+                }
             }
             if (obstacles[pos.x][pos.y + 1] == 2) {
                 facingDirection = BACKWARD;
-                enemy.getDamage(5);
-                System.out.println("Enemy was hitted");
-                getCurrentHP();
+                if ( pos.x == enemy.getPos().x && pos.y == enemy.getPos().y - 1) {
+                    enemy.getDamage(5);
+                    System.out.println("Enemy was hitted");
+                    getCurrentHP();
+                }
             }
             if (obstacles[pos.x - 1][pos.y] == 2) {
                 facingDirection = LEFT;
-                enemy.getDamage(5);
-                System.out.println("Enemy was hitted");
-                getCurrentHP();
+                if (pos.x == enemy.getPos().x + 1 && pos.y == enemy.getPos().y) {
+                    enemy.getDamage(5);
+                    Player.getDamage(5);
+                    System.out.println("Enemy was hitted");
+                    getCurrentHP();
+                }
             }
         }
     }
