@@ -9,6 +9,8 @@ import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
+
 
 
 public class Road {
@@ -19,20 +21,31 @@ public class Road {
     public Road(int x, int y) {
 
         loadImage();
-
-
         pos = new Point(x, y);
     }
     public static ArrayList<Road> fillRoad() {
         ArrayList<Road> roadList = new ArrayList<>();
+        boolean [] availableNext  = {false,false,false,false};
+        boolean isEmpty = false;
+        Random rand = new Random();
         for (int i = 0; i < CreateMap.COLUMNS; i++) {
             for (int j = 0; j < CreateMap.ROWS; j++) {
-                    roadList.add(new Road(i, j));
-
+//                if(CreateMap.MAS_MAP[CreateMap.COLUMNS][CreateMap.ROWS]==0){
+//                    isEmpty =true;
+//                }
+                int roadX = rand.nextInt(CreateMap.COLUMNS);
+                int roadY = rand.nextInt(CreateMap.ROWS);
+                if (CreateMap.MAS_MAP[roadX][roadY] == 0) {
+                    if(isEmpty) {
+                        roadList.add(new Road(i, j));
+                        availableNext[i] = true;
+                    }
+                }
             }
         }
         return roadList;
     }
+
 
     private void loadImage() {
         try {

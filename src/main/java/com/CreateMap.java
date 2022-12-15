@@ -53,7 +53,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
 //    private final ArrayList<Coin> coins;
 //    private final ArrayList<HealthPotion>healthPotions;
     private final ArrayList<Sea> seas;
-//    private final ArrayList<Road> roads;
+    private final ArrayList<Road> roads;
 //    private final ArrayList<Inventory> inventories;
 
 
@@ -76,6 +76,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         bosses = Boss.addBoss();
         grasses = Grass.fillGrass();
         houses = House.fillHouses();
+        roads = Road.fillRoad();
 
 
         seas = Sea.fillSea();
@@ -116,6 +117,9 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         // draw our graphics.
         for (Grass grass : grasses) {
             grass.draw(g, this);
+        }
+        for(Road road:roads){
+            road.draw(g,this);
         }
         for (Sea sea : seas) {
             sea.draw(g, this);

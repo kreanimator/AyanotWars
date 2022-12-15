@@ -152,6 +152,7 @@ public class Player {
         try {
             if (key == KeyEvent.VK_UP && obstacles[pos.x][pos.y - 1] != 2) {
                 facingDirection = FORWARD;
+
                 File playerImgFileUp = new File("src/main/resources/images/player/up/" + nameClass);
                 image = ImageIO.read(playerImgFileUp);
                 CreateMap.yOffset +=CreateMap.TILE_SIZE;
@@ -169,6 +170,10 @@ public class Player {
 
                 obstacles[pos.x][pos.y + 1] = 0;
                 obstacles[pos.x][pos.y] = 2;
+            }else if (key == KeyEvent.VK_UP && obstacles[pos.x][pos.y - 1] == 2){
+                facingDirection = FORWARD;
+                File playerImgFileUp = new File("src/main/resources/images/player/up/" + nameClass);
+                image = ImageIO.read(playerImgFileUp);
             }
         } catch (Exception ignored) {
 
@@ -194,17 +199,22 @@ public class Player {
                 }
                 obstacles[pos.x - 1][pos.y] = 0;
                 obstacles[pos.x][pos.y] = 2;
+            }else  if (key == KeyEvent.VK_RIGHT && obstacles[pos.x + 1][pos.y] == 2) {
+                facingDirection = RIGHT;
+                File playerImageFileRight = new File("src/main/resources/images/player/right/" + nameClass);
+                image = ImageIO.read(playerImageFileRight);
             }
         } catch (Exception ignored) {
 
         }
         try {
             if (key == KeyEvent.VK_DOWN && obstacles[pos.x][pos.y + 1] != 2) {
-                pos.translate(0, 1);
+                facingDirection = BACKWARD;
+
                 CreateMap.yOffset -= CreateMap.TILE_SIZE;
                 File playerImageFileDown = new File("src/main/resources/images/player/down/" + nameClass);
                 image = ImageIO.read(playerImageFileDown);
-                facingDirection = BACKWARD;
+                pos.translate(0, 1);
                 for (Enemy enemy : enemies) {
                     obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
                     enemy.move(obstacles);
@@ -217,6 +227,10 @@ public class Player {
                 }
                 obstacles[pos.x][pos.y - 1] = 0;
                 obstacles[pos.x][pos.y] = 2;
+            }else if (key == KeyEvent.VK_DOWN && obstacles[pos.x][pos.y + 1] == 2) {
+                facingDirection = BACKWARD;
+                File playerImageFileDown = new File("src/main/resources/images/player/down/" + nameClass);
+                image = ImageIO.read(playerImageFileDown);
             }
         } catch (Exception ignored) {
 
@@ -240,6 +254,10 @@ public class Player {
                 }
                 obstacles[pos.x + 1][pos.y] = 0;
                 obstacles[pos.x][pos.y] = 2;
+            }else if (key == KeyEvent.VK_LEFT && obstacles[pos.x - 1][pos.y] == 2) {
+                facingDirection = LEFT;
+                File playerImageFileLeft = new File("src/main/resources/images/player/left/" + nameClass);
+                image = ImageIO.read(playerImageFileLeft);
             }
         } catch (Exception ignored) {
 
