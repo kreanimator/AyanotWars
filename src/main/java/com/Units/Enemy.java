@@ -4,7 +4,6 @@ import com.CreateMap;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.File;
@@ -55,41 +54,49 @@ public class Enemy extends Unit {
         }
         return enemyList;
     }
-    public void attackEnemies(int [][] obstacles) {
+    public void attackEnemies() {
         for (Enemy enemy : enemies) {
-            if (obstacles[pos.x][pos.y - 1] != 2) {
-                facingDirection = FORWARD;
-                if (pos.x == enemy.getPos().x && pos.y == enemy.getPos().y + 1){
-                    enemy.getDamage(5);
+            if(pos.x == enemy.getPos().x && pos.y == enemy.getPos().y + 1&&
+                    pos.x == enemy.getPos().x - 1 && pos.y == enemy.getPos().y&&
+                    pos.x == enemy.getPos().x && pos.y == enemy.getPos().y - 1&&
+                    pos.x == enemy.getPos().x + 1 && pos.y == enemy.getPos().y){
+                enemy.getDamage(5);
                 System.out.println("Enemy was hitted");
                 getCurrentHP();
             }
-            }
-            if (obstacles[pos.x + 1][pos.y] == 2) {
-                facingDirection = RIGHT;
-                if ( pos.x == enemy.getPos().x - 1 && pos.y == enemy.getPos().y) {
-                    enemy.getDamage(5);
-                    System.out.println("Enemy was hitted");
-                    getCurrentHP();
-                }
-            }
-            if (obstacles[pos.x][pos.y + 1] == 2) {
-                facingDirection = BACKWARD;
-                if ( pos.x == enemy.getPos().x && pos.y == enemy.getPos().y - 1) {
-                    enemy.getDamage(5);
-                    System.out.println("Enemy was hitted");
-                    getCurrentHP();
-                }
-            }
-            if (obstacles[pos.x - 1][pos.y] == 2) {
-                facingDirection = LEFT;
-                if (pos.x == enemy.getPos().x + 1 && pos.y == enemy.getPos().y) {
-                    enemy.getDamage(5);
-                    Player.getDamage(5);
-                    System.out.println("Enemy was hitted");
-                    getCurrentHP();
-                }
-            }
+//            if (obstacles[pos.x][pos.y - 1] != 2) {
+//                facingDirection = FORWARD;
+//                if (pos.x == enemy.getPos().x && pos.y == enemy.getPos().y + 1){
+//                    enemy.getDamage(5);
+//                System.out.println("Enemy was hitted");
+//                getCurrentHP();
+//            }
+//            }
+//            if (obstacles[pos.x + 1][pos.y] == 2) {
+//                facingDirection = RIGHT;
+//                if ( pos.x == enemy.getPos().x - 1 && pos.y == enemy.getPos().y) {
+//                    enemy.getDamage(5);
+//                    System.out.println("Enemy was hitted");
+//                    getCurrentHP();
+//                }
+//            }
+//            if (obstacles[pos.x][pos.y + 1] == 2) {
+//                facingDirection = BACKWARD;
+//                if ( pos.x == enemy.getPos().x && pos.y == enemy.getPos().y - 1) {
+//                    enemy.getDamage(5);
+//                    System.out.println("Enemy was hitted");
+//                    getCurrentHP();
+//                }
+//            }
+//            if (obstacles[pos.x - 1][pos.y] == 2) {
+//                facingDirection = LEFT;
+//                if (pos.x == enemy.getPos().x + 1 && pos.y == enemy.getPos().y) {
+//                    enemy.getDamage(5);
+//                    Player.getDamage(5);
+//                    System.out.println("Enemy was hitted");
+//                    getCurrentHP();
+//                }
+//            }
         }
     }
 
@@ -141,7 +148,7 @@ public class Enemy extends Unit {
         try {
             if (obstacles[pos.x + dx][pos.y + dy] == 0) {
                 pos.translate(dx, dy);
-                attackEnemies(CreateMap.MAS_MAP);
+                attackEnemies();
                 try {
                     Random rand = new Random();
                     int randomNum = rand.nextInt((4 - 1) + 1) + 1;

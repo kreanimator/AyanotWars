@@ -80,9 +80,9 @@ public class Player {
         g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
         g2d.setColor(java.awt.Color.BLACK);
         g2d.setFont(new Font(Font.SERIF, Font.BOLD, 12));
-        int x = (pos.x * CreateMap.TILE_SIZE);
+        int x = (pos.x * CreateMap.TILE_SIZE) + CreateMap.xOffset;
 
-        int y = (pos.y * CreateMap.TILE_SIZE - 15);
+        int y = (pos.y * CreateMap.TILE_SIZE - 10)+CreateMap.yOffset;
         g2d.drawString(name, x, y);
     }
 
