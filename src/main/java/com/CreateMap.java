@@ -81,6 +81,19 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
 
         seas = Sea.fillSea();
         player = new Player(50,50);
+//        int[][] playerLocation = new int[][];
+//        playerLocation = (player.getPos());
+//        setLocation(playerLocation);
+//        getLocation(playerLocation);
+        GridBagLayout gbl = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
+//        c.gridx = player.getPos().x;
+//        c.gridy = player.getPos().y;
+        //c.anchor = GridBagConstraints.CENTER;
+        c.insets= new Insets((COLUMNS*TILE_SIZE)/player.getPos().y,(ROWS*TILE_SIZE)/player.getPos().x,
+                (COLUMNS*TILE_SIZE)/player.getPos().y,(ROWS*TILE_SIZE)/player.getPos().x);
+        setLayout(gbl);
+
         // initialize the game state
         // this timer will call the actionPerformed() method every DELAY ms
         int DELAY = 25;
@@ -89,6 +102,8 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         Timer timer = new Timer(DELAY, this);
         timer.start();
     }
+
+
 
 
     @Override
@@ -183,16 +198,18 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         // allow player to kill enemies
         ArrayList<Enemy> enemiesKilled = new ArrayList<>();
 
+
         for (Enemy enemy : enemies) {
-                if (enemy.isKilled()) {
-                    enemy.removeObstacles(MAS_MAP);
-                        player.addExperience(100);
-                        for (int i = 1; i < 20; i++) {
-                            player.addLevel(i);
-                        }
-                        enemiesKilled.add(enemy);
+            if (enemy.isKilled()) {
+                enemy.removeObstacles(MAS_MAP);
+
+                player.addExperience(100);
+                for (int i = 1; i < 20; i++) {
+                    player.addLevel(i);
                 }
+                enemiesKilled.add(enemy);
                 //TODO: Regeneration of enemies
+            }
         }
         // remove enemies from the board
         enemies.removeAll(enemiesKilled);

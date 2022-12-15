@@ -111,7 +111,7 @@ public class Enemy extends Unit {
     }
     public boolean removeObstacles(int [][] obstacles){
         if(isKilled && obstacles [pos.x][pos.y] == 2){
-           return obstacles[pos.x][pos.y] == 0;
+            return obstacles[pos.x][pos.y] == 0;
         }
         return false;
     }

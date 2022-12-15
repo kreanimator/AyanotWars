@@ -6,6 +6,7 @@ import com.Interfaces.PlayerChoose;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.text.html.ImageView;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -76,7 +77,7 @@ public class Player {
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
         g2d.setColor(java.awt.Color.BLACK);
-        g2d.setFont(new Font("Lato", Font.BOLD, 12));
+        g2d.setFont(new Font(Font.SERIF, Font.BOLD, 12));
         int x = (pos.x * CreateMap.TILE_SIZE);
 
         int y = (pos.y * CreateMap.TILE_SIZE - 15);
@@ -104,7 +105,7 @@ public class Player {
 
         attackRange = 1;
         loadImage();
-       pos = new Point(x , y);
+        pos = new Point(x , y);
         //pos = new Point(CreateMap.xOffset, CreateMap.yOffset);
         experience = 0;
     }
@@ -299,46 +300,46 @@ public class Player {
                     obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
                     enemy.move(obstacles);
                     obstacles[enemy.getPos().x][enemy.getPos().y] = 2;
-                        if (facingDirection == FORWARD && pos.x == enemy.getPos().x && pos.y == enemy.getPos().y + 1) {
+                    if (facingDirection == FORWARD && pos.x == enemy.getPos().x && pos.y == enemy.getPos().y + 1) {
 
-                            System.out.println("Attack up");
-                            enemy.getDamage(playerDamage());
-                            enemy.getCurrentHP();
-                            File playerAttackImgFileUp = new File("src/main/resources/images/player/attack/up/" + nameClass);
-                            image = ImageIO.read(playerAttackImgFileUp);
+                        System.out.println("Attack up");
+                        enemy.getDamage(playerDamage());
+                        enemy.getCurrentHP();
+                        File playerAttackImgFileUp = new File("src/main/resources/images/player/attack/up/" + nameClass);
+                        image = ImageIO.read(playerAttackImgFileUp);
 
-                        }
-
-                        if (facingDirection == BACKWARD && pos.x == enemy.getPos().x && pos.y == enemy.getPos().y - 1) {
-
-                            System.out.println("Attack down");
-                            enemy.getDamage(playerDamage());
-                            enemy.getCurrentHP();
-                            File playerAttackImgFileDown = new File("src/main/resources/images/player/attack/down/" + nameClass);
-                            image = ImageIO.read(playerAttackImgFileDown);
-
-
-                        }
-
-                        if (facingDirection == LEFT && pos.x == enemy.getPos().x + 1 && pos.y == enemy.getPos().y) {
-
-                            System.out.println("Attack Left");
-                            enemy.getDamage(playerDamage());
-                            enemy.getCurrentHP();
-                            File playerAttackImgFileLeft = new File("src/main/resources/images/player/attack/left/" + nameClass);
-                            image = ImageIO.read(playerAttackImgFileLeft);
-                        }
-
-                        if (facingDirection == RIGHT && pos.x == enemy.getPos().x - 1 && pos.y == enemy.getPos().y) {
-
-                            System.out.println("Attack Right");
-                            enemy.getDamage(playerDamage());
-                            enemy.getCurrentHP();
-                            File playerAttackImgFileRight = new File("src/main/resources/images/player/attack/right/" + nameClass);
-                            image = ImageIO.read(playerAttackImgFileRight);
-
-                        }
                     }
+
+                    if (facingDirection == BACKWARD && pos.x == enemy.getPos().x && pos.y == enemy.getPos().y - 1) {
+
+                        System.out.println("Attack down");
+                        enemy.getDamage(playerDamage());
+                        enemy.getCurrentHP();
+                        File playerAttackImgFileDown = new File("src/main/resources/images/player/attack/down/" + nameClass);
+                        image = ImageIO.read(playerAttackImgFileDown);
+
+
+                    }
+
+                    if (facingDirection == LEFT && pos.x == enemy.getPos().x + 1 && pos.y == enemy.getPos().y) {
+
+                        System.out.println("Attack Left");
+                        enemy.getDamage(playerDamage());
+                        enemy.getCurrentHP();
+                        File playerAttackImgFileLeft = new File("src/main/resources/images/player/attack/left/" + nameClass);
+                        image = ImageIO.read(playerAttackImgFileLeft);
+                    }
+
+                    if (facingDirection == RIGHT && pos.x == enemy.getPos().x - 1 && pos.y == enemy.getPos().y) {
+
+                        System.out.println("Attack Right");
+                        enemy.getDamage(playerDamage());
+                        enemy.getCurrentHP();
+                        File playerAttackImgFileRight = new File("src/main/resources/images/player/attack/right/" + nameClass);
+                        image = ImageIO.read(playerAttackImgFileRight);
+
+                    }
+                }
                 for (Boss boss : bosses) {
                     obstacles[boss.getPos().x][boss.getPos().y] = 0;
                     boss.move(obstacles);
@@ -444,6 +445,6 @@ public class Player {
         return pos;
     }
 
-}
 
+}
 
