@@ -1,5 +1,6 @@
 package com.Interfaces;
 
+import com.CreateMap;
 import com.Items.Item;
 import com.Units.Player;
 import com.Tiles.Patches;
@@ -29,15 +30,7 @@ public class Inventory extends JPanel {
 
         Toolkit.getDefaultToolkit().sync();
     }
-    public JButton addButton() {
-        JButton inventory = new JButton("Inventory");
-        inventory.setBounds(500,500, TILE_SIZE * 3, TILE_SIZE - 10);
-        inventory.setFont(new Font("Lato", Font.BOLD, 25));
-        inventory.setVisible(true);
-        inventory.setBackground(Color.getHSBColor(31, 18, 95));
-        //TODO: Realise inventory button.
-        return inventory;
-    }
+
 
     ArrayList<Patches> patches;
 

@@ -58,9 +58,12 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
 
 
     public CreateMap() {
+        Inventory inventory = new Inventory();
         // set the game board size
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
         setBackground(Color.blue);
+
+        //add(gameInterface.addButton());
 
 
 
@@ -89,7 +92,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         GridBagConstraints c = new GridBagConstraints();
 //        c.gridx = player.getPos().x;
 //        c.gridy = player.getPos().y;
-        //c.anchor = GridBagConstraints.CENTER;
+
         c.insets= new Insets((COLUMNS*TILE_SIZE)/player.getPos().y,(ROWS*TILE_SIZE)/player.getPos().x,
                 (COLUMNS*TILE_SIZE)/player.getPos().y,(ROWS*TILE_SIZE)/player.getPos().x);
         setLayout(gbl);

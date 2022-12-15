@@ -10,7 +10,7 @@ import javax.swing.*;
 
 public class GameInterface {
     int x, y;
-    private static Point pos=null;
+    static Point pos=null;
 
         public GameInterface() {
 
@@ -25,7 +25,16 @@ public class GameInterface {
                 (pos.x * CreateMap.TILE_SIZE)+CreateMap.xOffset,
                 (pos.y * CreateMap.TILE_SIZE)+CreateMap.yOffset,CreateMap.WIDTH,CreateMap.TILE_SIZE);
     }
-
+    public JButton addButton() {
+        JButton inventory = new JButton("Inventory");
+        inventory.setBounds(CreateMap.WIDTH-(CreateMap.WIDTH/10), GameInterface.pos.y + CreateMap.TILE_SIZE/2, CreateMap.TILE_SIZE * 3, CreateMap.TILE_SIZE - 10);
+        inventory.setFont(new Font("Lato", Font.BOLD, 25));
+        inventory.setVisible(true);
+        inventory.setFocusable(false);
+        inventory.setBackground(new Color(255,212,113));
+        //TODO: Realise inventory button.
+        return inventory;
+    }
         public static void drawActionPanel(Graphics g) {
 
 
@@ -70,12 +79,12 @@ public class GameInterface {
             // determine the y coordinate for the text
             // (note we add the ascent, as in java 2d 0 is top of the screen)
             g2d.drawString(hplvl, pos.x, (pos.y+ CreateMap.TILE_SIZE/2) + 2);
-
+            int widthhp = Player.getHP();
             //Drawing a frame for HP bar.
-            g2.drawLine(pos.x + 50, pos.y +9, pos.x + 150, pos.y +9);
-            g2.drawLine(pos.x + 50, pos.y+ 30, pos.x + 150, pos.y+ 30);
+            g2.drawLine(pos.x + 50, pos.y +9, pos.x + widthhp+50, pos.y +9);
+            g2.drawLine(pos.x + 50, pos.y+ 30, pos.x + widthhp+50, pos.y+ 30);
             g2.drawLine(pos.x + 49, pos.y + 9 , pos.x + 49, pos.y + 30);
-            g2.drawLine(pos.x + 150, pos.y + 9, pos.x + 150, pos.y + 30);
+            g2.drawLine(pos.x + (widthhp+50), pos.y + 9, pos.x + (widthhp+50), pos.y + 30);
             //Drawing a frame for EXP bar.
 
             g2.drawLine(pos.x + (CreateMap.WIDTH/2 + 50), pos.y +9, pos.x + (CreateMap.WIDTH/2 + 150), pos.y +9);
@@ -94,7 +103,7 @@ public class GameInterface {
                     RenderingHints.KEY_FRACTIONALMETRICS,
                     RenderingHints.VALUE_FRACTIONALMETRICS_ON);
 
-            int widthhp = Player.getHP();
+
             g2.fillRect(pos.x + 50, pos.y +10, widthhp, 20);
 
             g2.setColor(Color.GREEN);

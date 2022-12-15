@@ -36,8 +36,10 @@ public class Player {
 
     static Random rd = new Random();
 
-    static int x = rd.nextInt(CreateMap.COLUMNS);
-    static int y = rd.nextInt(CreateMap.ROWS);
+//    static int x = rd.nextInt(CreateMap.ROWS);
+//    static int y = rd.nextInt(CreateMap.COLUMNS)
+    static int x = CreateMap.ROWS/2;
+    static int y = CreateMap.COLUMNS/4;
 
 
     private static int experience;
@@ -435,7 +437,7 @@ public class Player {
         if (experience == 1000) {
             level += amount;
             experience = 0;
-            //hp = (int) (hp * 1.2); //TODO get out of rectangle width when increasing lvl
+            hp = (int) (hp * 1.2);
             damage = (int) (damage *1.2);
 
         }

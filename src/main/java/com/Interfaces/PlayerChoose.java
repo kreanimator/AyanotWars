@@ -121,8 +121,6 @@ public class PlayerChoose extends JPanel implements ActionListener {
         window.setTitle("Ayanot wars");
         window.toFront();
 
-//       window.add(Inventory.addButton());
-         //TODO: Fix the inventory button, cause it's ruins game.
 
     }
 
