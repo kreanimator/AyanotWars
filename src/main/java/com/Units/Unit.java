@@ -13,15 +13,15 @@ public abstract class Unit {
     }
 
 
-    public static int attack() {
-        return 0;
+    public static void attack() {
+
     }
 
-    void getDamage(int value) {
-        this.hp -= value;
-    }
+//    void getDamage(int value) {
+//        this.hp -= value;
+//    }
 
-    void increaseLevel(int value) {
+    void addLevel(int value) {
         this.exp += value;
         if (exp > 1000) {
             level++;

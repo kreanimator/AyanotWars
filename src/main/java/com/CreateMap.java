@@ -50,7 +50,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
     private final ArrayList<Boss> bosses;
     private final ArrayList<Skull> skulls;
     private final ArrayList<House> houses;
-//    private final ArrayList<Coin> coins;
+    //    private final ArrayList<Coin> coins;
 //    private final ArrayList<HealthPotion>healthPotions;
     private final ArrayList<Sea> seas;
     private final ArrayList<Road> roads;

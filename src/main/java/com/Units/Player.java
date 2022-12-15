@@ -36,7 +36,7 @@ public class Player {
 
     static Random rd = new Random();
 
-//    static int x = rd.nextInt(CreateMap.ROWS);
+    //    static int x = rd.nextInt(CreateMap.ROWS);
 //    static int y = rd.nextInt(CreateMap.COLUMNS)
     static int x = CreateMap.ROWS/2;
     static int y = CreateMap.COLUMNS/4;
