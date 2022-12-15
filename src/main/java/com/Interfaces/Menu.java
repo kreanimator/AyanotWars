@@ -13,14 +13,14 @@ public class Menu implements ActionListener {
     JLabel logo;
 
 
-    Font myFont = new Font("TimesRoman", Font.BOLD, 30);
+    Font myFont = new Font(Font.SERIF, Font.BOLD, 30);
 
     public Menu() {
 
 
         window = new JFrame();
 //        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setSize(900, 900);
+        window.setSize(1024, 576);
         window.setResizable(false);
         window.setLocationRelativeTo(null);
         window.setLayout(null);
@@ -29,20 +29,22 @@ public class Menu implements ActionListener {
 
 
         logo = new JLabel();
-        logo.setBounds(250, 30, 400, 100);
-        logo.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/logo.png"))));
+        logo.setBounds(0, 0, 1024, 576);
+        logo.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/background.gif"))));
 
 
         startButton = new JButton("Start");
         startButton.setFont(myFont);
-        startButton.setBounds(350, 425, 150, 60);
+        startButton.setBounds(417, 268, 150, 60);
         startButton.addActionListener(this);
         startButton.setFocusable(false);
+        startButton.setBackground(new Color(255,212,133));
 
 
-        window.add(logo);
+
         window.add(startButton);
         window.setVisible(true);
+        window.add(logo);
     }
 
     @Override

@@ -1,10 +1,6 @@
 package com.Interfaces;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.image.ImageObserver;
-
 import com.Units.*;
 import com.CreateMap;
 
@@ -41,7 +37,7 @@ public class GameInterface {
 
             // we need to cast the Graphics to Graphics2D to draw nicer text
             Graphics2D g2 = (Graphics2D) g;
-            g2.setColor(Color.getHSBColor(31, 18, 95));
+            g2.setColor(new Color(255,212,113));
             g2.fillRect(pos.x, pos.y, CreateMap.WIDTH, CreateMap.TILE_SIZE*2);
             Graphics2D g2d = (Graphics2D) g;
             g2d.setRenderingHint(
@@ -55,7 +51,7 @@ public class GameInterface {
                     RenderingHints.VALUE_FRACTIONALMETRICS_ON);
             // set the text color and font
             g2d.setColor(java.awt.Color.BLACK);
-            g2d.setFont(new Font("Lato", Font.BOLD, 25));
+            g2d.setFont(new Font(Font.SERIF, Font.BOLD, 25));
             // draw the score in the bottom center of the screen
             // https://stackoverflow.com/a/27740330/4655368
             FontMetrics metrics = g2d.getFontMetrics(g2d.getFont());

@@ -27,6 +27,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
     public static final int NUM_ROCKS = ((ROWS*COLUMNS)/30);
     public static final int NUM_TREES =  ((ROWS*COLUMNS)/30);
     public static final int NUM_SKULLS =  ((ROWS*COLUMNS)/40);
+    public static final int NUM_HOUSES = ((ROWS*COLUMNS)/60);
     public static final int NUM_BOSS = 1;
 
     public static final int WIDTH = 1280;
@@ -48,6 +49,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
     private final ArrayList<Grass> grasses;
     private final ArrayList<Boss> bosses;
     private final ArrayList<Skull> skulls;
+    private final ArrayList<House> houses;
 //    private final ArrayList<Coin> coins;
 //    private final ArrayList<HealthPotion>healthPotions;
     private final ArrayList<Sea> seas;
@@ -61,6 +63,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         setBackground(Color.blue);
 
 
+
         MAS_MAP[0][0] = 1;
         MAS_MAP[1][0] = 1;
         MAS_MAP[0][1] = 1;
@@ -72,10 +75,11 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         enemies = Enemy.populateEnemies();
         bosses = Boss.addBoss();
         grasses = Grass.fillGrass();
+        houses = House.fillHouses();
 
 
         seas = Sea.fillSea();
-        player = new Player();
+        player = new Player(50,50);
         // initialize the game state
         // this timer will call the actionPerformed() method every DELAY ms
         int DELAY = 25;
@@ -84,6 +88,8 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         Timer timer = new Timer(DELAY, this);
         timer.start();
     }
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
         // this method is called by the timer every DELAY ms.
@@ -125,6 +131,9 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         }
         for (Stone stone : stone) {
             stone.draw(g, this);
+        }
+        for (House house : houses) {
+            house.draw(g, this);
         }
         for (Tree tree : trees) {
             tree.draw(g, this);
@@ -178,7 +187,6 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
                             player.addLevel(i);
                         }
                         enemiesKilled.add(enemy);
-//                    }
                 }
                 //TODO: Regeneration of enemies
         }
@@ -190,9 +198,9 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
 //
 //        for (Inventory inventory: inventories) {
 //
-//                player.addExperience(100);
-//                for (int i = 1; i < 20; i++) {
-//                    player.addLevel(i);
+//
+//                for (int i = 1; i < inventory.COLUMNS; i++) {
+//                   for (int j = 1; j < inventory.ROWS; j++) {
 //                }
 //                itemsCollected.add(inventory);
 //        }
@@ -223,7 +231,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
 //        for (Enemy enemy : enemies) {
 //            Rectangle r2 = enemy.getBounds();
 //            if (r3.intersects(r2)) {
-//                System.out.println("Collision");
+//
 //
 //            }
 //        }

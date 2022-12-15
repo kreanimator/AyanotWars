@@ -18,17 +18,17 @@ public class Enemy extends Unit {
 
     private final Point pos;
     private int hp = 45;
-    int height = 50;
-    int width = 50;
+    int height;
+    int width;
 
 
 
     public Enemy(int x, int y,int height, int width) {
-
-        loadImage();
-        pos = new Point(x, y);
         this.height = height;
         this.width = width;
+        loadImage();
+        pos = new Point(x, y);
+
     }
     public static ArrayList<Enemy> populateEnemies() {
         ArrayList<Enemy> enemyList = new ArrayList<>();

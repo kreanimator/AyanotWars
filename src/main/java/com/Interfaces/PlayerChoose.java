@@ -16,75 +16,79 @@ public class PlayerChoose extends JPanel implements ActionListener {
     static JTextField name;
 
 
-    Font myFont = new Font("Lato", Font.BOLD, 30);
+    Font myFont = new Font(Font.SERIF, Font.BOLD, 30);
 
 
     public PlayerChoose() {
 
         chooseWindow = new JDialog();
         chooseWindow.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        chooseWindow.setSize(900, 900);
+        chooseWindow.setSize(1024, 576);
         chooseWindow.setResizable(false);
         chooseWindow.setLocationRelativeTo(null);
         chooseWindow.setLayout(null);
         chooseWindow.setTitle("Ayanot Wars");
 
         JLabel nameEnter = new JLabel();
-        nameEnter.setText("Enter your name: ");
+        nameEnter.setText("Name: ");
         nameEnter.setFont(myFont);
         nameEnter.setVisible(true);
-        nameEnter.setBounds(145, 200, 300, 60);
+        nameEnter.setBounds(550, 100, 300, 60);
 
 
         name = new JTextField();
-        name.setBounds(415, 200, 200, 60);
+        name.setBounds(550, 150, 200, 60);
         name.setVisible(true);
         name.setFont(myFont);
         name.addActionListener(this);
+        name.setBackground(new Color(255,212,133));
 
 
         logo = new JLabel();
-        logo.setBounds(250, 30, 400, 100);
-        logo.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/logo.png"))));
+        logo.setBounds(0, 0, 1024, 576);
+        logo.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/background.gif"))));
 
         warrior = new JButton("Warrior");
         warrior.setFont(myFont);
-        warrior.setBounds(325, 325, 200, 60);
+        warrior.setBounds(550, 225, 200, 60);
         warrior.addActionListener(this);
         warrior.setFocusable(false);
+        warrior.setBackground(new Color(255,212,133));
 
         warlock = new JButton("Warlock");
         warlock.setFont(myFont);
-        warlock.setBounds(325, 405, 200, 60);
+        warlock.setBounds(550, 300, 200, 60);
         warlock.addActionListener(this);
         warlock.setFocusable(false);
+        warlock.setBackground(new Color(255,212,133));
 
         mage = new JButton("Mage");
         mage.setFont(myFont);
-        mage.setBounds(325, 485, 200, 60);
+        mage.setBounds(550, 375, 200, 60);
         mage.addActionListener(this);
         mage.setFocusable(false);
+        mage.setBackground(new Color(255,212,133));
 
         iconWar = new JLabel();
-        iconWar.setBounds(250, 325, 60, 60);
+        iconWar.setBounds(485, 225, 60, 60);
         iconWar.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/warrior.png"))));
         iconWar.setHorizontalAlignment(SwingConstants.LEFT);
         iconWar.setVisible(true);
 
         iconWarl = new JLabel();
-        iconWarl.setBounds(250, 405, 60, 60);
+        iconWarl.setBounds(485, 300, 60, 60);
         iconWarl.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/warlock.png"))));
         iconWarl.setHorizontalAlignment(SwingConstants.LEFT);
         iconWarl.setVisible(true);
 
         iconMag = new JLabel();
-        iconMag.setBounds(250, 485, 60, 60);
+        iconMag.setBounds(485, 375, 60, 60);
         iconMag.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/icons/mage.png"))));
         iconMag.setHorizontalAlignment(SwingConstants.LEFT);
         iconMag.setVisible(true);
 
 
-        chooseWindow.add(logo);
+
         chooseWindow.add(warrior);
         chooseWindow.add(mage);
         chooseWindow.add(warlock);
@@ -92,7 +96,9 @@ public class PlayerChoose extends JPanel implements ActionListener {
         chooseWindow.add(iconWarl);
         chooseWindow.add(iconMag);
         chooseWindow.add(name);
+
         chooseWindow.add(nameEnter);
+        chooseWindow.add(logo);
         chooseWindow.setVisible(true);
 
 

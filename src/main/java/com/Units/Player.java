@@ -93,9 +93,10 @@ public class Player {
         return new Rectangle(pos.x, pos.y, width, height);
     }
 
-    public Player() {
+    public Player(int width, int height) {
 
-
+        this.width=width;
+        this.height=height;
 
 //        this.x = (CreateMap.ROWS/2) -(width/2);
 //        this.y = (CreateMap.COLUMNS/2) -(height/2);
@@ -357,7 +358,6 @@ public class Player {
                         boss.getCurrentHP();
                         File playerAttackImgFileRight = new File("src/main/resources/images/player/attack/right/" + nameClass);
                         image = ImageIO.read(playerAttackImgFileRight);
-                        System.out.println(playerAttackImgFileRight);
                     }
                 }
             }
@@ -416,7 +416,7 @@ public class Player {
         if (experience == 1000) {
             level += amount;
             experience = 0;
-            //hp = (int) (hp * 1.2); //TODO get out of rectangle whin increasing lvl
+            //hp = (int) (hp * 1.2); //TODO get out of rectangle width when increasing lvl
             damage = (int) (damage *1.2);
 
         }
