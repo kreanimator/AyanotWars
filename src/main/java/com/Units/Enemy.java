@@ -20,6 +20,7 @@ public class Enemy extends Unit {
     private int hp = 45;
     int height;
     int width;
+    ArrayList <Enemy> enemies;
 
 
 
@@ -47,6 +48,9 @@ public class Enemy extends Unit {
             }
         }
         return enemyList;
+    }
+    public void attackEnemies(){
+
     }
 
 
