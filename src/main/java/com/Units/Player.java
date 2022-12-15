@@ -30,9 +30,7 @@ public class Player {
     int height = 50;
     int width = 50;
 
-    public static String getNameClass() {
-        return nameClass;
-    }
+
 
     static Random rd = new Random();
 
@@ -51,7 +49,9 @@ public class Player {
     private int facingDirection;
     ArrayList<Enemy> enemies;
 
-
+    public static String getNameClass() {
+        return nameClass;
+    }
     public static void setPlayerClass(String playerClass) {
 
         if (Objects.equals(playerClass, "warrior")) {

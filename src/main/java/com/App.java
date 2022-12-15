@@ -14,4 +14,5 @@ public class App {
     //TODO: 15.12.2022 Realize enemy player chasing method.
     //TODO: 15.12.2022 Realize drop & inventory.
     //TODO: 15.12.2022 Realize spells.
+    //TODO: 15.12.2022 Solve problem with obstacles when enemies die.
 }

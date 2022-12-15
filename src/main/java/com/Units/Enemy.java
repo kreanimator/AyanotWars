@@ -4,6 +4,7 @@ import com.CreateMap;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.File;
@@ -20,6 +21,11 @@ public class Enemy extends Unit {
     private int hp = 45;
     int height;
     int width;
+    private final static int FORWARD = 0;
+    private final static int BACKWARD = 1;
+    private final static int LEFT = 2;
+    private final static int RIGHT = 3;
+    private int facingDirection;
     ArrayList <Enemy> enemies;
 
 
@@ -49,8 +55,33 @@ public class Enemy extends Unit {
         }
         return enemyList;
     }
-    public void attackEnemies(){
-
+    public void attackEnemies(int [][] obstacles) {
+        for (Enemy enemy : enemies) {
+            if (obstacles[pos.x][pos.y - 1] == 2) {
+                facingDirection = FORWARD;
+                enemy.getDamage(5);
+                System.out.println("Enemy was hitted");
+                getCurrentHP();
+            }
+            if (obstacles[pos.x + 1][pos.y] == 2) {
+                facingDirection = RIGHT;
+                enemy.getDamage(5);
+                System.out.println("Enemy was hitted");
+                getCurrentHP();
+            }
+            if (obstacles[pos.x][pos.y + 1] == 2) {
+                facingDirection = BACKWARD;
+                enemy.getDamage(5);
+                System.out.println("Enemy was hitted");
+                getCurrentHP();
+            }
+            if (obstacles[pos.x - 1][pos.y] == 2) {
+                facingDirection = LEFT;
+                enemy.getDamage(5);
+                System.out.println("Enemy was hitted");
+                getCurrentHP();
+            }
+        }
     }
 
 
@@ -101,6 +132,7 @@ public class Enemy extends Unit {
         try {
             if (obstacles[pos.x + dx][pos.y + dy] == 0) {
                 pos.translate(dx, dy);
+                attackEnemies(CreateMap.MAS_MAP);
                 try {
                     Random rand = new Random();
                     int randomNum = rand.nextInt((4 - 1) + 1) + 1;
