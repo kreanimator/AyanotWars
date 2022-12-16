@@ -176,6 +176,9 @@ public class Enemy extends Unit {
         } catch (Exception ignored) {
         }
     }
+    public void chase(){
+
+    }
     public void removeObstacles(int [][] obstacles){
         obstacles[pos.x][pos.y] = 0;
     }
