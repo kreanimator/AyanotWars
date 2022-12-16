@@ -59,7 +59,7 @@ public class Enemy extends Unit {
             if(enemy.pos.x == enemy.getPos().x && enemy.pos.y == enemy.getPos().y + 1){
                 facingDirection=FORWARD;
                 enemy.getDamage(5);
-                System.out.println("Enemy was hitted");
+                System.out.println("Enemy was hitted dfgdg");
                 getCurrentHP();
             }
             if (enemy.pos.x == enemy.getPos().x - 1 && enemy.pos.y == enemy.getPos().y){
