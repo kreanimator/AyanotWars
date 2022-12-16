@@ -56,10 +56,26 @@ public class Enemy extends Unit {
     }
     public void attackEnemies() {
         for (Enemy enemy : enemies) {
-            if(pos.x == enemy.getPos().x && pos.y == enemy.getPos().y + 1&&
-                    pos.x == enemy.getPos().x - 1 && pos.y == enemy.getPos().y&&
-                    pos.x == enemy.getPos().x && pos.y == enemy.getPos().y - 1&&
-                    pos.x == enemy.getPos().x + 1 && pos.y == enemy.getPos().y){
+            if(enemy.pos.x == enemy.getPos().x && enemy.pos.y == enemy.getPos().y + 1){
+                facingDirection=FORWARD;
+                enemy.getDamage(5);
+                System.out.println("Enemy was hitted");
+                getCurrentHP();
+            }
+            if (enemy.pos.x == enemy.getPos().x - 1 && enemy.pos.y == enemy.getPos().y){
+                facingDirection=RIGHT;
+                enemy.getDamage(5);
+                System.out.println("Enemy was hitted");
+                getCurrentHP();
+            }
+            if(enemy.pos.x == enemy.getPos().x && enemy.pos.y == enemy.getPos().y - 1){
+                facingDirection = BACKWARD;
+                enemy.getDamage(5);
+                System.out.println("Enemy was hitted");
+                getCurrentHP();
+            }
+            if(enemy.pos.x == enemy.getPos().x + 1 && enemy.pos.y == enemy.getPos().y){
+                facingDirection=LEFT;
                 enemy.getDamage(5);
                 System.out.println("Enemy was hitted");
                 getCurrentHP();
@@ -107,7 +123,6 @@ public class Enemy extends Unit {
 
 
     public void getDamage(int value) {
-
         this.hp -= value;
     }
     public void getCurrentHP(){
