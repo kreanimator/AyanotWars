@@ -14,13 +14,15 @@ public class Inventory extends JPanel {
     public static final int TILE_SIZE = 49;
     public static final int ROWS = 7;
     public static final int COLUMNS = 7;
-
     public Inventory() {
 
         new Dimension(TILE_SIZE * COLUMNS, TILE_SIZE * ROWS);
         patches = fillPatches();
 
     }
+
+
+
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);

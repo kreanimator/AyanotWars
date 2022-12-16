@@ -40,8 +40,6 @@ public class Menu implements ActionListener {
         startButton.setFocusable(false);
         startButton.setBackground(new Color(255,212,133));
 
-
-
         window.add(startButton);
         window.setVisible(true);
         window.add(logo);

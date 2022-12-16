@@ -3,6 +3,7 @@ package com.Units;
 import com.CreateMap;
 import com.Interfaces.Inventory;
 import com.Interfaces.PlayerChoose;
+import com.Interfaces.QuestDialog;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -294,7 +295,16 @@ public class Player {
             }
         } catch (Exception ignored) {
 
+        }if (key == KeyEvent.VK_E) {
+            if (facingDirection == FORWARD && pos.x == Npc.getPos().x && pos.y == Npc.getPos().y + 1 ||
+                    facingDirection == BACKWARD && pos.x == Npc.getPos().x && pos.y == Npc.getPos().y - 1||
+                    facingDirection == RIGHT && pos.x == Npc.getPos().x -1 && pos.y == Npc.getPos().y||
+                    facingDirection == LEFT && pos.x == Npc.getPos().x +1 && pos.y == Npc.getPos().y )
+            {
+                QuestDialog questDialog = new QuestDialog();
+            }
         }
+
         try {
             if (key == KeyEvent.VK_SPACE) {
 

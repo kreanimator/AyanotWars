@@ -59,7 +59,7 @@ public class Enemy extends Unit {
             if(enemy.pos.x == enemy.getPos().x && enemy.pos.y == enemy.getPos().y + 1){
                 facingDirection=FORWARD;
                 enemy.getDamage(5);
-                System.out.println("Enemy was hitted dfgdg");
+                System.out.println("Enemy was hitted");
                 getCurrentHP();
             }
             if (enemy.pos.x == enemy.getPos().x - 1 && enemy.pos.y == enemy.getPos().y){
@@ -163,7 +163,7 @@ public class Enemy extends Unit {
         try {
             if (obstacles[pos.x + dx][pos.y + dy] == 0) {
                 pos.translate(dx, dy);
-                attackEnemies();
+                //attackEnemies();
                 try {
                     Random rand = new Random();
                     int randomNum = rand.nextInt((4 - 1) + 1) + 1;
@@ -176,23 +176,16 @@ public class Enemy extends Unit {
         } catch (Exception ignored) {
         }
     }
-    public boolean removeObstacles(int [][] obstacles){
-        if(isKilled && obstacles [pos.x][pos.y] == 2){
-            return obstacles[pos.x][pos.y] == 0;
-        }
-        return false;
+    public void removeObstacles(int [][] obstacles){
+        obstacles[pos.x][pos.y] = 0;
     }
 
     public boolean isAlive() {
         return hp > 0;
     }
-
-
     public boolean isKilled() {
         return hp <= 0;
     }
-
-
     public void draw(Graphics g, ImageObserver observer) {
 
         g.drawImage(
@@ -219,7 +212,6 @@ public class Enemy extends Unit {
         int width = hp;
         g2.fillRect(x, (pos.y * CreateMap.TILE_SIZE - 10)+CreateMap.yOffset, width, 5);
     }
-
     public Point getPos() {
         return pos;
     }

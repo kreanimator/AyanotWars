@@ -6,6 +6,7 @@ import com.Items.HealthPotion;
 import com.Tiles.*;
 import com.Units.Boss;
 import com.Units.Enemy;
+import com.Units.Npc;
 import com.Units.Player;
 import com.Interfaces.*;
 import javax.swing.*;
@@ -40,6 +41,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
 
     // objects that appear on the game board
     Player player;
+    Npc npc;
     public static int xOffset =0;
     public static int yOffset = 0;
     private final GameInterface gameInterface = new GameInterface();
@@ -84,7 +86,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
 
         seas = Sea.fillSea();
         player = new Player(50,50);
-//        int[][] playerLocation = new int[][];
+        npc = new Npc(MAS_MAP);
 //        playerLocation = (player.getPos());
 //        setLocation(playerLocation);
 //        getLocation(playerLocation);
@@ -174,6 +176,8 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
             boss.drawHealthBar(g);
         }
         player.draw(g, this);
+        npc.draw(g,this);
+        npc.setNpcName(g);
         player.setPlayerName(g);
         GameInterface.drawActionPanel(g);
         // this smooths out animations on some systems
