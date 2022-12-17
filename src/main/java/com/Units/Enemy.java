@@ -53,69 +53,56 @@ public class Enemy extends Unit {
         }
         return enemyList;
     }
+    public void chase(Player player, Enemy enemy) {
+//
+            if (pos.y > player.getPos().y + 1 && pos.y > enemy.getPos().y + 1){
+                facingDirection = FORWARD;
+            }
+
+            if (pos.y < player.getPos().y - 1 && pos.y > enemy.getPos().y - 1) {
+                facingDirection = BACKWARD;
+            }
+
+
+            if (pos.x > player.getPos().x + 1&& pos.y > enemy.getPos().x + 1) {
+                facingDirection = LEFT;
+
+            }
+            if (pos.x < player.getPos().x - 1&& pos.y > enemy.getPos().x - 1) {
+                facingDirection = RIGHT;
+            }
+
+        }
+
+
 
     public void attackEnemies(int [][] obstacles) {
         for (Enemy enemy : enemies) {
-            obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
-            enemy.move(obstacles);
-            obstacles[enemy.getPos().x][enemy.getPos().y] = 2;
-            if (enemy.pos.x == enemy.getPos().x && enemy.pos.y == enemy.getPos().y + 1) {
-                facingDirection = FORWARD;
+            if (facingDirection == FORWARD) {
+
                 enemy.getDamage(5);
                 System.out.println("Enemy was hitted");
                 getCurrentHP();
             }
-            if (enemy.pos.x == enemy.getPos().x - 1 && enemy.pos.y == enemy.getPos().y) {
-                facingDirection = RIGHT;
+            if (facingDirection == RIGHT) {
+
                 enemy.getDamage(5);
                 System.out.println("Enemy was hitted");
                 getCurrentHP();
             }
-            if (enemy.pos.x == enemy.getPos().x && enemy.pos.y == enemy.getPos().y - 1) {
-                facingDirection = BACKWARD;
+            if (facingDirection ==BACKWARD) {
+
                 enemy.getDamage(5);
                 System.out.println("Enemy was hitted");
                 getCurrentHP();
             }
-            if (enemy.pos.x == enemy.getPos().x + 1 && enemy.pos.y == enemy.getPos().y) {
-                facingDirection = LEFT;
+            if (facingDirection == LEFT) {
+
                 enemy.getDamage(5);
                 System.out.println("Enemy was hitted");
                 getCurrentHP();
             }
-//            if (obstacles[pos.x][pos.y - 1] != 2) {
-//                facingDirection = FORWARD;
-//                if (pos.x == enemy.getPos().x && pos.y == enemy.getPos().y + 1){
-//                    enemy.getDamage(5);
-//                System.out.println("Enemy was hitted");
-//                getCurrentHP();
-//            }
-//            }
-//            if (obstacles[pos.x + 1][pos.y] == 2) {
-//                facingDirection = RIGHT;
-//                if ( pos.x == enemy.getPos().x - 1 && pos.y == enemy.getPos().y) {
-//                    enemy.getDamage(5);
-//                    System.out.println("Enemy was hitted");
-//                    getCurrentHP();
-//                }
-//            }
-//            if (obstacles[pos.x][pos.y + 1] == 2) {
-//                facingDirection = BACKWARD;
-//                if ( pos.x == enemy.getPos().x && pos.y == enemy.getPos().y - 1) {
-//                    enemy.getDamage(5);
-//                    System.out.println("Enemy was hitted");
-//                    getCurrentHP();
-//                }
-//            }
-//            if (obstacles[pos.x - 1][pos.y] == 2) {
-//                facingDirection = LEFT;
-//                if (pos.x == enemy.getPos().x + 1 && pos.y == enemy.getPos().y) {
-//                    enemy.getDamage(5);
-//                    Player.getDamage(5);
-//                    System.out.println("Enemy was hitted");
-//                    getCurrentHP();
-//                }
-//            }
+
         }
     }
 
@@ -181,22 +168,7 @@ public class Enemy extends Unit {
         }
     }
 
-    public void chase() {
 
-        int dx = 1;
-        int dy = 1;
-        for (Enemy enemy : enemies) {
-            for (int i = 0; i < CreateMap.ROWS; i++) {
-                for (int j = 0; j < CreateMap.COLUMNS; j++) {
-                    if ((pos.x - enemy.getPos().x) *(enemy.getPos().x - pos.x) + ((enemy.getPos().y - pos.y) * (enemy.getPos().y - pos.y) * (enemy.getPos().y - pos.y))==0)
-                    {
-                        pos.translate(dx, dy);
-                    }
-                }
-            }
-        }
-
-    }
 
     public void removeObstacles(int[][] obstacles) {
         obstacles[pos.x][pos.y] = 0;
