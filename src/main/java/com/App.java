@@ -15,4 +15,5 @@ public class App {
     //TODO: 15.12.2022 Realize drop & inventory.
     //TODO: 15.12.2022 Realize spells.
     // TODO: 15.12.2022 AttackEnemy does not work.
+    //TODO: 17.12.2022 Realize grassborder algorithm.
 }
