@@ -31,6 +31,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
     public static final int NUM_HOUSES = ((ROWS*COLUMNS)/60);
     public static final int NUM_BOSS = 1;
 
+
     public static final int WIDTH = 1280;
     public static final int HEIGHT = 700;
     public static int[][] MAS_MAP = new int[COLUMNS][ROWS];
@@ -64,6 +65,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         // set the game board size
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
         setBackground(Color.blue);
+
 
         //add(gameInterface.addButton());
 
@@ -180,6 +182,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         npc.setNpcName(g);
         player.setPlayerName(g);
         GameInterface.drawActionPanel(g);
+        GameInterface.draw(g,this);
         // this smooths out animations on some systems
         Toolkit.getDefaultToolkit().sync();
     }

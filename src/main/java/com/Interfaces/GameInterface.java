@@ -1,29 +1,50 @@
 package com.Interfaces;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Objects;
+
 import com.Units.*;
 import com.CreateMap;
 
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 
 public class GameInterface {
-    int x, y;
+    static BufferedImage down,hbright;
     static Point pos=null;
 
         public GameInterface() {
 
             int x = CreateMap.xOffset-20;
             int y = CreateMap.yOffset+CreateMap.HEIGHT-CreateMap.TILE_SIZE;
+            getImage();
 
             pos = new Point(x, y);
         }
-    public void draw(Graphics g) {
+        public void getImage(){
+            try{
+                down = ImageIO.read(Objects.requireNonNull(GameInterface.class.getResourceAsStream("/images/interfaces/down1.png")));
+                //hbright = ImageIO.read(Objects.requireNonNull(GameInterface.class.getResourceAsStream("/images/interfaces/healthbar/right.png")));
 
-        g.drawRect(
-                (pos.x * CreateMap.TILE_SIZE)+CreateMap.xOffset,
-                (pos.y * CreateMap.TILE_SIZE)+CreateMap.yOffset,CreateMap.WIDTH,CreateMap.TILE_SIZE);
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+    public static void draw(Graphics g, ImageObserver observer) {
+
+
+        //g.drawImage(down, pos.x , pos.y-50,observer);
+
+//        g.drawImage(hbright, (pos.x * CreateMap.TILE_SIZE) + CreateMap.xOffset,
+//                (pos.y * CreateMap.TILE_SIZE) + CreateMap.yOffset, observer);
     }
     public JButton addButton() {
         JButton inventory = new JButton("Inventory");
@@ -37,6 +58,17 @@ public class GameInterface {
     }
         public static void drawActionPanel(Graphics g) {
 
+            Font myFont = null;
+            try {
+                InputStream inputStream = new BufferedInputStream(
+                        new FileInputStream("src/main/resources/font/GravityBold8.ttf"));
+
+                myFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
+
+
+            } catch (FontFormatException | IOException e) {
+                e.printStackTrace();
+            }
 
             // set the text to be displayed
             String text = "EXP: ";
@@ -46,8 +78,8 @@ public class GameInterface {
 
             // we need to cast the Graphics to Graphics2D to draw nicer text
             Graphics2D g2 = (Graphics2D) g;
-            g2.setColor(new Color(255,212,113));
-            g2.fillRect(pos.x, pos.y, CreateMap.WIDTH, CreateMap.TILE_SIZE*2);
+//            g2.setColor(new Color(255,212,113));
+//            g2.fillRect(pos.x, pos.y, CreateMap.WIDTH, CreateMap.TILE_SIZE*2);
             Graphics2D g2d = (Graphics2D) g;
             g2d.setRenderingHint(
                     RenderingHints.KEY_TEXT_ANTIALIASING,
@@ -60,10 +92,10 @@ public class GameInterface {
                     RenderingHints.VALUE_FRACTIONALMETRICS_ON);
             // set the text color and font
             g2d.setColor(java.awt.Color.BLACK);
-            g2d.setFont(new Font(Font.SERIF, Font.BOLD, 25));
+            assert myFont != null;
+            g2d.setFont(myFont.deriveFont(Font.BOLD,15f));
             // draw the score in the bottom center of the screen
             // https://stackoverflow.com/a/27740330/4655368
-            FontMetrics metrics = g2d.getFontMetrics(g2d.getFont());
             // the text will be contained within this rectangle.
             // here I've sized it to be the entire bottom row of board tiles
 //            Rectangle rect = new Rectangle(CreateMap.xOffset, CreateMap.TILE_SIZE * (CreateMap.ROWS - 1),

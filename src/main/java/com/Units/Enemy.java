@@ -25,21 +25,20 @@ public class Enemy extends Unit {
     private final static int LEFT = 2;
     private final static int RIGHT = 3;
     private int facingDirection;
-    ArrayList <Enemy> enemies;
+    ArrayList<Enemy> enemies;
 
 
-
-    public Enemy(int x, int y,int height, int width) {
+    public Enemy(int x, int y, int height, int width) {
         this.height = height;
         this.width = width;
         loadImage();
         pos = new Point(x, y);
 
     }
+
     public static ArrayList<Enemy> populateEnemies() {
         ArrayList<Enemy> enemyList = new ArrayList<>();
         Random rand = new Random();
-
         // create the given number of enemies in random positions on the board.
         // note that there is not check here to prevent two coins from occupying the same
         // spot, nor to prevent coins from spawning in the same spot as the player
@@ -54,28 +53,32 @@ public class Enemy extends Unit {
         }
         return enemyList;
     }
-    public void attackEnemies() {
+
+    public void attackEnemies(int [][] obstacles) {
         for (Enemy enemy : enemies) {
-            if(enemy.pos.x == enemy.getPos().x && enemy.pos.y == enemy.getPos().y + 1){
-                facingDirection=FORWARD;
+            obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
+            enemy.move(obstacles);
+            obstacles[enemy.getPos().x][enemy.getPos().y] = 2;
+            if (enemy.pos.x == enemy.getPos().x && enemy.pos.y == enemy.getPos().y + 1) {
+                facingDirection = FORWARD;
                 enemy.getDamage(5);
                 System.out.println("Enemy was hitted");
                 getCurrentHP();
             }
-            if (enemy.pos.x == enemy.getPos().x - 1 && enemy.pos.y == enemy.getPos().y){
-                facingDirection=RIGHT;
+            if (enemy.pos.x == enemy.getPos().x - 1 && enemy.pos.y == enemy.getPos().y) {
+                facingDirection = RIGHT;
                 enemy.getDamage(5);
                 System.out.println("Enemy was hitted");
                 getCurrentHP();
             }
-            if(enemy.pos.x == enemy.getPos().x && enemy.pos.y == enemy.getPos().y - 1){
+            if (enemy.pos.x == enemy.getPos().x && enemy.pos.y == enemy.getPos().y - 1) {
                 facingDirection = BACKWARD;
                 enemy.getDamage(5);
                 System.out.println("Enemy was hitted");
                 getCurrentHP();
             }
-            if(enemy.pos.x == enemy.getPos().x + 1 && enemy.pos.y == enemy.getPos().y){
-                facingDirection=LEFT;
+            if (enemy.pos.x == enemy.getPos().x + 1 && enemy.pos.y == enemy.getPos().y) {
+                facingDirection = LEFT;
                 enemy.getDamage(5);
                 System.out.println("Enemy was hitted");
                 getCurrentHP();
@@ -125,7 +128,8 @@ public class Enemy extends Unit {
     public void getDamage(int value) {
         this.hp -= value;
     }
-    public void getCurrentHP(){
+
+    public void getCurrentHP() {
         System.out.println(hp);
     }
 
@@ -133,7 +137,7 @@ public class Enemy extends Unit {
         try {
             Random rand = new Random();
             int randomNum = rand.nextInt((4 - 1) + 1) + 1;
-            File enemyImageFile = new File("src/main/resources/images/enemies/"+randomNum+".png");
+            File enemyImageFile = new File("src/main/resources/images/enemies/" + randomNum + ".png");
             image = ImageIO.read(enemyImageFile);
         } catch (IOException exc) {
             System.out.println("Error opening image file: " + exc.getMessage());
@@ -163,11 +167,11 @@ public class Enemy extends Unit {
         try {
             if (obstacles[pos.x + dx][pos.y + dy] == 0) {
                 pos.translate(dx, dy);
-                //attackEnemies();
+                attackEnemies(CreateMap.MAS_MAP);
                 try {
                     Random rand = new Random();
                     int randomNum = rand.nextInt((4 - 1) + 1) + 1;
-                    File enemyImageFile = new File("src/main/resources/images/enemies/"+randomNum+".png");
+                    File enemyImageFile = new File("src/main/resources/images/enemies/" + randomNum + ".png");
                     image = ImageIO.read(enemyImageFile);
                 } catch (IOException exc) {
                     System.out.println("Error opening image file: " + exc.getMessage());
@@ -176,25 +180,42 @@ public class Enemy extends Unit {
         } catch (Exception ignored) {
         }
     }
-    public void chase(){
+
+    public void chase() {
+
+        int dx = 1;
+        int dy = 1;
+        for (Enemy enemy : enemies) {
+            for (int i = 0; i < CreateMap.ROWS; i++) {
+                for (int j = 0; j < CreateMap.COLUMNS; j++) {
+                    if ((pos.x - enemy.getPos().x) *(enemy.getPos().x - pos.x) + ((enemy.getPos().y - pos.y) * (enemy.getPos().y - pos.y) * (enemy.getPos().y - pos.y))==0)
+                    {
+                        pos.translate(dx, dy);
+                    }
+                }
+            }
+        }
 
     }
-    public void removeObstacles(int [][] obstacles){
+
+    public void removeObstacles(int[][] obstacles) {
         obstacles[pos.x][pos.y] = 0;
     }
 
     public boolean isAlive() {
         return hp > 0;
     }
+
     public boolean isKilled() {
         return hp <= 0;
     }
+
     public void draw(Graphics g, ImageObserver observer) {
 
         g.drawImage(
                 image,
-                (pos.x * CreateMap.TILE_SIZE)+CreateMap.xOffset,
-                (pos.y * CreateMap.TILE_SIZE)+CreateMap.yOffset,
+                (pos.x * CreateMap.TILE_SIZE) + CreateMap.xOffset,
+                (pos.y * CreateMap.TILE_SIZE) + CreateMap.yOffset,
                 observer
         );
     }
@@ -211,10 +232,11 @@ public class Enemy extends Unit {
         g2.setRenderingHint(
                 RenderingHints.KEY_FRACTIONALMETRICS,
                 RenderingHints.VALUE_FRACTIONALMETRICS_ON);
-        int x = (pos.x * CreateMap.TILE_SIZE)+CreateMap.xOffset;
+        int x = (pos.x * CreateMap.TILE_SIZE) + CreateMap.xOffset;
         int width = hp;
-        g2.fillRect(x, (pos.y * CreateMap.TILE_SIZE - 10)+CreateMap.yOffset, width, 5);
+        g2.fillRect(x, (pos.y * CreateMap.TILE_SIZE - 10) + CreateMap.yOffset, width, 5);
     }
+
     public Point getPos() {
         return pos;
     }

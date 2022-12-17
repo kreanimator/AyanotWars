@@ -4,6 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Objects;
 
 public class Menu implements ActionListener {
@@ -16,6 +20,18 @@ public class Menu implements ActionListener {
     Font myFont = new Font(Font.SERIF, Font.BOLD, 30);
 
     public Menu() {
+
+        Font myFont = null;
+        try {
+            InputStream inputStream = new BufferedInputStream(
+                    new FileInputStream("src/main/resources/font/GravityBold8.ttf"));
+
+            myFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
+
+
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
+        }
 
 
         window = new JFrame();
@@ -34,7 +50,8 @@ public class Menu implements ActionListener {
 
 
         startButton = new JButton("Start");
-        startButton.setFont(myFont);
+        assert myFont != null;
+        startButton.setFont(myFont.deriveFont(Font.BOLD,25f));
         startButton.setBounds(417, 268, 150, 60);
         startButton.addActionListener(this);
         startButton.setFocusable(false);
@@ -43,6 +60,7 @@ public class Menu implements ActionListener {
         window.add(startButton);
         window.setVisible(true);
         window.add(logo);
+        window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     @Override

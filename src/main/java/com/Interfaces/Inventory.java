@@ -7,23 +7,27 @@ import com.Tiles.Patches;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
-public class Inventory extends JPanel {
+public class Inventory extends JPanel implements ActionListener,KeyListener {
     ArrayList<Item> items;
     public static final int TILE_SIZE = 49;
     public static final int ROWS = 7;
     public static final int COLUMNS = 7;
+
     public Inventory() {
 
         new Dimension(TILE_SIZE * COLUMNS, TILE_SIZE * ROWS);
         patches = fillPatches();
 
+
+
+
     }
-
-
-
-
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         for (Patches patch : patches) {
@@ -46,4 +50,27 @@ public class Inventory extends JPanel {
         return patchesList;
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        int key = e.getKeyCode();
+        if (key == KeyEvent.VK_I) {
+
+        }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
 }

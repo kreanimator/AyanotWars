@@ -41,8 +41,9 @@ public class Stone {
 
     private void loadImage() {
         try {
-
-            File enemyImageFile = new File("src/main/resources/images/stone.png");
+            Random rand = new Random();
+            int randomNum = rand.nextInt((4 - 1) + 1) + 1;
+            File enemyImageFile = new File("src/main/resources/images/tiles/rocks/"+randomNum+".png");
             image = ImageIO.read(enemyImageFile);
         } catch (IOException exc) {
             System.out.println("Error opening image file: " + exc.getMessage());

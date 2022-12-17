@@ -7,8 +7,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.Random;
 
 public class Npc {
@@ -20,6 +19,7 @@ public class Npc {
     private static final Point pos = new Point(x,y);
 
     public Npc(int [][] obstacles) {
+
         
         loadImage();
         Point pos1 = pos;
@@ -28,7 +28,17 @@ public class Npc {
     }
     public void setNpcName(Graphics g) {
         // set the text to be displayed
+        Font myFont = null;
+        try {
+            InputStream inputStream = new BufferedInputStream(
+                    new FileInputStream("src/main/resources/font/GravityBold8.ttf"));
 
+            myFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
+
+
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
+        }
         String name = "Nick";
 
         // we need to cast the Graphics to Graphics2D to draw nicer text
@@ -36,8 +46,9 @@ public class Npc {
         g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
-        g2d.setColor(java.awt.Color.BLACK);
-        g2d.setFont(new Font(Font.SERIF, Font.BOLD, 12));
+        g2d.setColor(Color.WHITE);
+        assert myFont != null;
+        g2d.setFont(myFont.deriveFont(Font.BOLD,10f));
         int x = (pos.x * CreateMap.TILE_SIZE)+10 + CreateMap.xOffset;
 
         int y = (pos.y * CreateMap.TILE_SIZE - 10)+CreateMap.yOffset;

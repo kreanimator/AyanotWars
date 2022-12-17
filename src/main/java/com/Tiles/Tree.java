@@ -27,8 +27,8 @@ public class Tree {
         ArrayList<Tree> treeList = new ArrayList<>();
         Random rand = new Random();
         for (int i = 0; i < CreateMap.NUM_TREES; ) {
-            int treeX = rand.nextInt(CreateMap.COLUMNS);
-            int treeY = rand.nextInt(CreateMap.ROWS);
+            int treeX = rand.nextInt(CreateMap.COLUMNS-1);
+            int treeY = rand.nextInt(CreateMap.ROWS-1);
             if (CreateMap.MAS_MAP[treeX][treeY] == 0) {
                 CreateMap.MAS_MAP[treeX][treeY] = 2;
                 treeList.add(new Tree(treeX, treeY));
@@ -40,8 +40,9 @@ public class Tree {
 
     private void loadImage() {
         try {
-
-            File enemyImageFile = new File("src/main/resources/images/tree.png");
+            Random rand = new Random();
+            int randomNum = rand.nextInt((4 - 1) + 1) + 1;
+            File enemyImageFile = new File("src/main/resources/images/tiles/trees/"+randomNum+".png");
             image = ImageIO.read(enemyImageFile);
         } catch (IOException exc) {
             System.out.println("Error opening image file: " + exc.getMessage());

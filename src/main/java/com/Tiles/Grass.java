@@ -33,7 +33,7 @@ public class Grass {
     private void loadImage() {
         try {
 
-            File enemyImageFile = new File("src/main/resources/images/grass.png");
+            File enemyImageFile = new File("src/main/resources/images/grass2.png");
             image = ImageIO.read(enemyImageFile);
         } catch (IOException exc) {
             System.out.println("Error opening image file: " + exc.getMessage());
