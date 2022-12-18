@@ -18,7 +18,7 @@ import javax.swing.*;
 
 
 public class GameInterface {
-    static BufferedImage down,hbright;
+    static BufferedImage gh;
     static Point pos=null;
 
         public GameInterface() {
@@ -31,8 +31,7 @@ public class GameInterface {
         }
         public void getImage(){
             try{
-                down = ImageIO.read(Objects.requireNonNull(GameInterface.class.getResourceAsStream("/images/interfaces/down1.png")));
-                //hbright = ImageIO.read(Objects.requireNonNull(GameInterface.class.getResourceAsStream("/images/interfaces/healthbar/right.png")));
+                gh = ImageIO.read(Objects.requireNonNull(GameInterface.class.getResourceAsStream("/images/items/goblinhead.png")));
 
             }catch(IOException e){
                 e.printStackTrace();
@@ -41,9 +40,9 @@ public class GameInterface {
     public static void draw(Graphics g, ImageObserver observer) {
 
 
-        //g.drawImage(down, pos.x , pos.y-50,observer);
+        g.drawImage(gh, pos.x , pos.y-650,observer);
 
-//        g.drawImage(hbright, (pos.x * CreateMap.TILE_SIZE) + CreateMap.xOffset,
+//        g.drawImage(gh, (pos.x * CreateMap.TILE_SIZE) + CreateMap.xOffset,
 //                (pos.y * CreateMap.TILE_SIZE) + CreateMap.yOffset, observer);
     }
     public JButton addButton() {
@@ -75,6 +74,7 @@ public class GameInterface {
             String textLvl = "Level " + Player.getLevel();
             String hplvl = "HP: ";
             String inv = "For inventory press 'i'";
+            String killed = " = " + Enemy.getQuantityKilled();
 
             // we need to cast the Graphics to Graphics2D to draw nicer text
             Graphics2D g2 = (Graphics2D) g;
@@ -105,12 +105,14 @@ public class GameInterface {
             // draw the string
             g2d.drawString(text, pos.x + (CreateMap.WIDTH/2)-30, pos.y + CreateMap.TILE_SIZE/2);
 
+
             // determine the y coordinate for the text
             // (note we add the ascent, as in java 2d 0 is top of the screen)
             g2d.drawString(textLvl, pos.x + CreateMap.WIDTH/3, (pos.y + CreateMap.TILE_SIZE/2));
             // determine the y coordinate for the text
             // (note we add the ascent, as in java 2d 0 is top of the screen)
             g2d.drawString(hplvl, pos.x, (pos.y+ CreateMap.TILE_SIZE/2) + 2);
+            g2d.drawString(killed, pos.x+50, pos.y-615);
             int widthhp = Player.getHP();
             //Drawing a frame for HP bar.
             g2.drawLine(pos.x + 50, pos.y +9, pos.x + widthhp+50, pos.y +9);

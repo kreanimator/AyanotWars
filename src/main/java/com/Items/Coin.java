@@ -1,7 +1,6 @@
 package com.Items;
 
 import com.CreateMap;
-import com.Units.Enemy;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -14,6 +13,17 @@ public class Coin extends Item {
     BufferedImage image;
 
 
+
+    static String name = "Coin";
+    private final Point pos;
+
+    public int quantity;
+
+    public Coin(int x, int y){
+        super(x,y);
+        loadImage();
+        pos = new Point(x, y);
+    }
     public void loadImage() {
         try {
             File coinImageFile = new File("src/main/resources/images/coin.png");
@@ -23,6 +33,21 @@ public class Coin extends Item {
         }
     }
 
-    public void draw(Graphics g, CreateMap createMap) {
+    public void draw(Graphics g, ImageObserver observer) {
+        g.drawImage(
+
+                image,
+                (pos.x * CreateMap.TILE_SIZE) + CreateMap.xOffset,
+                (pos.y * CreateMap.TILE_SIZE) + CreateMap.yOffset,
+                observer
+        );
+    }
+    @Override
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public static String getName() {
+        return name;
     }
 }

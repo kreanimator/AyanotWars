@@ -1,6 +1,7 @@
 package com.Tiles;
 
 import com.CreateMap;
+import com.Units.Player;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

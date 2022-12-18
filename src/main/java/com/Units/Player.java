@@ -35,12 +35,17 @@ public class Player {
     int width = 50;
     public int spriteCounter = 0;
     public int spriteNumber = 1;
+//    public static int screenX = CreateMap.WIDTH/2 - (CreateMap.TILE_SIZE/2);
+//    public static int screenY = CreateMap.HEIGHT/2-(CreateMap.TILE_SIZE/2);
+
+    //TODO: for proper camera realization its needed to realize player screenY & screenX and connect them with map offset,
+    //TODO: Also it should be done for all tiles etc.
 
 
     static Random rd = new Random();
 
-    //    static int x = rd.nextInt(CreateMap.ROWS);
-//    static int y = rd.nextInt(CreateMap.COLUMNS)
+//    static int x = rd.nextInt(CreateMap.ROWS)* CreateMap.TILE_SIZE;
+//    static int y = rd.nextInt(CreateMap.COLUMNS)*CreateMap.TILE_SIZE;
     static int x = CreateMap.ROWS / 2;
     static int y = CreateMap.COLUMNS / 4;
 
@@ -53,6 +58,7 @@ public class Player {
     private int attackRange;
     public int facingDirection;
     ArrayList<Enemy> enemies;
+    Inventory inventory = new Inventory();
 
     public static String getNameClass() {
         return nameClass;
@@ -234,6 +240,8 @@ public class Player {
 
             g.drawImage(image, (pos.x * CreateMap.TILE_SIZE) + CreateMap.xOffset,
                     (pos.y * CreateMap.TILE_SIZE) + CreateMap.yOffset, observer);
+//        g.drawImage(image, screenX + CreateMap.xOffset,
+//                screenY + CreateMap.yOffset, observer);
 
         }
 
@@ -310,14 +318,21 @@ public class Player {
 
     static JDialog inventoryWindow = new JDialog();
 
+
     public void initWindow() {
 
         inventoryWindow.setSize(Inventory.ROWS * Inventory.TILE_SIZE + 14, Inventory.COLUMNS * Inventory.TILE_SIZE + 35);
+        //inventoryWindow.setUndecorated(true);
         inventoryWindow.setLocationRelativeTo(null);
         inventoryWindow.setVisible(true);
         inventoryWindow.setResizable(false);
         inventoryWindow.setTitle("Inventory");
+        inventoryWindow.add(inventory);
+        inventoryWindow.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+
+
     }
+
 
     public int[][] keyPressed(KeyEvent e, int[][] obstacles, ArrayList<Enemy> enemies, ArrayList<Boss> bosses) {
 
@@ -328,6 +343,7 @@ public class Player {
 
 
             CreateMap.yOffset += CreateMap.TILE_SIZE;
+            //screenY -= CreateMap.TILE_SIZE;
             pos.translate(0, -1);
             for (Enemy enemy : enemies) {
                 obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
@@ -347,6 +363,7 @@ public class Player {
         }
         if (key == KeyEvent.VK_RIGHT && obstacles[pos.x + 1][pos.y] != 2) {
             facingDirection = RIGHT;
+            //screenX += CreateMap.TILE_SIZE;
             CreateMap.xOffset -= CreateMap.TILE_SIZE;
 
             pos.translate(1, 0);
@@ -373,6 +390,7 @@ public class Player {
             facingDirection = BACKWARD;
 
             CreateMap.yOffset -= CreateMap.TILE_SIZE;
+            //screenY -= CreateMap.TILE_SIZE;
             pos.translate(0, 1);
             for (Enemy enemy : enemies) {
                 obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
@@ -394,6 +412,7 @@ public class Player {
         if (key == KeyEvent.VK_LEFT && obstacles[pos.x - 1][pos.y] != 2) {
             facingDirection = LEFT;
             CreateMap.xOffset += CreateMap.TILE_SIZE;
+            //screenX += CreateMap.TILE_SIZE;
             pos.translate(-1, 0);
 
             for (Enemy enemy : enemies) {
@@ -425,8 +444,10 @@ public class Player {
         }
 
         if (key == KeyEvent.VK_I) {
-            Inventory inventory = new Inventory();
-            inventoryWindow.add(inventory);
+
+
+            inventoryWindow.setVisible(true);
+
             inventoryWindow.addKeyListener(new KeyListener() {
                 @Override
                 public void keyTyped(KeyEvent e) {
@@ -437,7 +458,7 @@ public class Player {
                     int key = e.getKeyCode();
                     try {
                         if (key == KeyEvent.VK_I) {
-                            inventoryWindow.dispose();
+                            inventoryWindow.setVisible(false);
                         }
                     } catch (Exception ignored) {
                     }

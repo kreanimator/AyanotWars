@@ -25,9 +25,13 @@ public class Enemy extends Unit {
     private final static int LEFT = 2;
     private final static int RIGHT = 3;
     private int facingDirection;
+
+
+
+    private static int quantityKilled;
     ArrayList<Enemy> enemies;
 
-
+    //Enemy initialisation.
     public Enemy(int x, int y, int height, int width) {
         this.height = height;
         this.width = width;
@@ -41,7 +45,7 @@ public class Enemy extends Unit {
         Random rand = new Random();
         // create the given number of enemies in random positions on the board.
         // note that there is not check here to prevent two coins from occupying the same
-        // spot, nor to prevent coins from spawning in the same spot as the player
+        // spot, nor to prevent enemies from spawning in the same spot as the player
         for (int i = 0; i < CreateMap.NUM_ENEMIES; ) {
             int enemyX = rand.nextInt(CreateMap.COLUMNS);
             int enemyY = rand.nextInt(CreateMap.ROWS);
@@ -53,29 +57,72 @@ public class Enemy extends Unit {
         }
         return enemyList;
     }
-    public void chase(Player player, Enemy enemy) {
-//
-            if (pos.y > player.getPos().y + 1 && pos.y > enemy.getPos().y + 1){
+    //Algorithm for enemy chasing player
+    public void chase(Player player) {
+
+        for (Enemy enemy:enemies) {
+            if (pos.y >= player.getPos().y + 1 && pos.y >= enemy.getPos().y + 1) {
                 facingDirection = FORWARD;
+                enemy.pos.x += (enemy.pos.y - player.getPos().y) * 0.25;
             }
 
-            if (pos.y < player.getPos().y - 1 && pos.y > enemy.getPos().y - 1) {
+            if (pos.y <= player.getPos().y - 1 && pos.y >= enemy.getPos().y - 1) {
                 facingDirection = BACKWARD;
+                enemy.pos.x += (enemy.pos.y - player.getPos().y) * 0.25;
             }
 
 
-            if (pos.x > player.getPos().x + 1&& pos.y > enemy.getPos().x + 1) {
+            if (pos.x >= player.getPos().x + 1 && pos.y >= enemy.getPos().x + 1) {
                 facingDirection = LEFT;
+                enemy.pos.x += (enemy.pos.x - player.getPos().x) * 0.25;
 
             }
-            if (pos.x < player.getPos().x - 1&& pos.y > enemy.getPos().x - 1) {
+            if (pos.x < player.getPos().x - 1 && pos.y > enemy.getPos().x - 1) {
                 facingDirection = RIGHT;
+                enemy.pos.x += (enemy.pos.x - player.getPos().x) * 0.25;
             }
-
         }
 
+        }
+    public static int addQuantityKilled(int amount) {
+
+            quantityKilled+=amount;
+
+        return amount;
+    }
+    public static int getQuantityKilled() {
+        return quantityKilled;
+
+    }
+    public void chaseEnemies() {
+
+        for (Enemy enemy:enemies) {
+            if (pos.y >= enemy.getPos().y + 1 && pos.y >= enemy.getPos().y + 1) {
+                facingDirection = FORWARD;
+                enemy.pos.x += (enemy.pos.y - enemy.getPos().y) * 0.25;
+            }
+
+            if (pos.y <= enemy.getPos().y - 1 && pos.y >= enemy.getPos().y - 1) {
+                facingDirection = BACKWARD;
+                enemy.pos.x += (enemy.pos.y - enemy.getPos().y) * 0.25;
+            }
 
 
+            if (pos.x >= enemy.getPos().x + 1 && pos.y >= enemy.getPos().x + 1) {
+                facingDirection = LEFT;
+                enemy.pos.x += (enemy.pos.x - enemy.getPos().x) * 0.25;
+
+            }
+            if (pos.x < enemy.getPos().x - 1 && pos.y > enemy.getPos().x - 1) {
+                facingDirection = RIGHT;
+                enemy.pos.x += (enemy.pos.x - enemy.getPos().x) * 0.25;
+            }
+        }
+
+    }
+
+
+    //Enemies attacking method
     public void attackEnemies(int [][] obstacles) {
         for (Enemy enemy : enemies) {
             if (facingDirection == FORWARD) {
@@ -106,20 +153,20 @@ public class Enemy extends Unit {
         }
     }
 
-
+    //Method for getting bounds for rectangle - rectangle collision. Not realised.
     public Rectangle getBounds() {
         return new Rectangle(pos.x, pos.y, width, height);
     }
 
-
+    //Receiving damage.
     public void getDamage(int value) {
         this.hp -= value;
     }
-
+    //Current HP status.
     public void getCurrentHP() {
         System.out.println(hp);
     }
-
+    //Method for loading images.
     private void loadImage() {
         try {
             Random rand = new Random();
@@ -130,7 +177,7 @@ public class Enemy extends Unit {
             System.out.println("Error opening image file: " + exc.getMessage());
         }
     }
-
+    //Prevent enemy for getting out of bounds.
     public void tick() {
 
 
@@ -146,7 +193,7 @@ public class Enemy extends Unit {
         }
 
     }
-
+    //Move initialisation.
     public void move(int[][] obstacles) {
 
         int dx = (int) Math.floor(Math.random() * (1 + 1 + 1) - 1);
@@ -169,7 +216,7 @@ public class Enemy extends Unit {
     }
 
 
-
+    //Remove obstacles when enemy die.
     public void removeObstacles(int[][] obstacles) {
         obstacles[pos.x][pos.y] = 0;
     }
@@ -181,7 +228,7 @@ public class Enemy extends Unit {
     public boolean isKilled() {
         return hp <= 0;
     }
-
+    //Java2d graphics rendering
     public void draw(Graphics g, ImageObserver observer) {
 
         g.drawImage(

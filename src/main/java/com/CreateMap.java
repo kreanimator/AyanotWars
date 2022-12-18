@@ -31,7 +31,8 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
     public static final int NUM_HOUSES = ((ROWS*COLUMNS)/60);
     public static final int NUM_BOSS = 1;
 
-
+    public static final int worldWidth = TILE_SIZE * ROWS;
+    public static final int worldHeight = TILE_SIZE * COLUMNS;
     public static final int WIDTH = 1280;
     public static final int HEIGHT = 700;
     public static int[][] MAS_MAP = new int[COLUMNS][ROWS];
@@ -61,7 +62,6 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
 
 
     public CreateMap() {
-        Inventory inventory = new Inventory();
         // set the game board size
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
         setBackground(Color.blue);
@@ -88,6 +88,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
 
         seas = Sea.fillSea();
         player = new Player(50,50);
+
         npc = new Npc(MAS_MAP);
 //        playerLocation = (player.getPos());
 //        setLocation(playerLocation);
@@ -97,8 +98,8 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
 //        c.gridx = player.getPos().x;
 //        c.gridy = player.getPos().y;
 
-        c.insets= new Insets((COLUMNS*TILE_SIZE)/player.getPos().y,(ROWS*TILE_SIZE)/player.getPos().x,
-                (COLUMNS*TILE_SIZE)/player.getPos().y,(ROWS*TILE_SIZE)/player.getPos().x);
+//        c.insets= new Insets((COLUMNS*TILE_SIZE)/player.getPos().y,(ROWS*TILE_SIZE)/player.getPos().x,
+//                (COLUMNS*TILE_SIZE)/player.getPos().y,(ROWS*TILE_SIZE)/player.getPos().x);
         setLayout(gbl);
 
         // initialize the game state
@@ -118,7 +119,6 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         // this method is called by the timer every DELAY ms.
         // use this space to update the state of your game or animation
         // before the graphics are redrawn.
-
         // prevent the player from disappearing off the board
         player.tick();
         gameInterface.tick();
@@ -149,12 +149,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         for (Skull skull: skulls){
             skull.draw(g,this);
         }
-        for (Enemy enemy : enemies) {
-            enemy.draw(g, this);
-            enemy.tick();
-            enemy.drawHealthBar(g);
 
-        }
         for (Stone stone : stone) {
             stone.draw(g, this);
         }
@@ -171,7 +166,13 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
 //            healthPotion.draw(g, this);
 //        }
 
+        for (Enemy enemy : enemies) {
+            enemy.draw(g, this);
+            enemy.tick();
 
+            enemy.drawHealthBar(g);
+
+        }
         for (Boss boss : bosses) {
             boss.draw(g, this);
             boss.tick();
@@ -212,10 +213,11 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         for (Enemy enemy : enemies) {
             if (enemy.isKilled()) {
                 enemy.removeObstacles(MAS_MAP);
-
+                Enemy.addQuantityKilled(1);
                 player.addExperience(100);
                 for (int i = 1; i < 20; i++) {
                     player.addLevel(i);
+
                 }
                 enemiesKilled.add(enemy);
                 //TODO: Regeneration of enemies
@@ -228,7 +230,6 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
 //        ArrayList<Inventory> itemsCollected = new ArrayList<>();
 //
 //        for (Inventory inventory: inventories) {
-//
 //
 //                for (int i = 1; i < inventory.COLUMNS; i++) {
 //                   for (int j = 1; j < inventory.ROWS; j++) {

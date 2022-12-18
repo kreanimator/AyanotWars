@@ -6,7 +6,7 @@ public abstract class Unit {
     protected double hp = 0;
     int level = 0;
     double damage = 0;
-    boolean isKilled;
+    static boolean isKilled;
 
     public Unit() {
 
