@@ -50,8 +50,8 @@ public class HealthPotion extends Item {
         g.drawImage(
 
                 image,
-                (pos.x * CreateMap.TILE_SIZE) + CreateMap.xOffset,
-                (pos.y * CreateMap.TILE_SIZE) + CreateMap.yOffset,
+                (pos.x * CreateMap.TILE_SIZE - (CreateMap.TILE_SIZE/2)) + CreateMap.xOffset,
+                (pos.y * CreateMap.TILE_SIZE - (CreateMap.TILE_SIZE/2)) + CreateMap.yOffset,
                 observer
         );
     }

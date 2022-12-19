@@ -4,6 +4,7 @@ import com.CreateMap;
 import com.Interfaces.Inventory;
 import com.Interfaces.PlayerChoose;
 import com.Interfaces.QuestDialog;
+import com.PlayerType.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -154,9 +155,9 @@ public class Player {
         g2d.setColor(Color.WHITE);
         assert myFont != null;
         g2d.setFont(myFont.deriveFont(Font.BOLD, 10f));
-        int x = (pos.x * CreateMap.TILE_SIZE) + CreateMap.xOffset;
+        int x = ((pos.x * CreateMap.TILE_SIZE)-CreateMap.TILE_SIZE/2) + CreateMap.xOffset;
 
-        int y = (pos.y * CreateMap.TILE_SIZE - 10) + CreateMap.yOffset;
+        int y = ((pos.y * CreateMap.TILE_SIZE - 10)-CreateMap.TILE_SIZE/2) + CreateMap.yOffset;
         g2d.drawString(name, x, y);
     }
 
@@ -238,8 +239,9 @@ public class Player {
         }
 
 
-            g.drawImage(image, (pos.x * CreateMap.TILE_SIZE) + CreateMap.xOffset,
-                    (pos.y * CreateMap.TILE_SIZE) + CreateMap.yOffset, observer);
+        g.drawImage(image, ((pos.x * CreateMap.TILE_SIZE)-(CreateMap.TILE_SIZE/2))+CreateMap.xOffset,
+                (pos.y * CreateMap.TILE_SIZE-(CreateMap.TILE_SIZE/2))+CreateMap.yOffset, observer);
+
 //        g.drawImage(image, screenX + CreateMap.xOffset,
 //                screenY + CreateMap.yOffset, observer);
 
@@ -324,9 +326,13 @@ public class Player {
         inventoryWindow.setSize(Inventory.ROWS * Inventory.TILE_SIZE + 14, Inventory.COLUMNS * Inventory.TILE_SIZE + 35);
         //inventoryWindow.setUndecorated(true);
         inventoryWindow.setLocationRelativeTo(null);
+
+
         inventoryWindow.setVisible(true);
         inventoryWindow.setResizable(false);
-        inventoryWindow.setTitle("Inventory");
+        inventoryWindow.setForeground(new Color(0,0,0,0));
+
+        //inventoryWindow.setTitle("Inventory");
         inventoryWindow.add(inventory);
         inventoryWindow.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
@@ -433,7 +439,7 @@ public class Player {
             facingDirection = LEFT;
         }
         spriteCounter++;
-        if (spriteCounter > 10) {
+        if (spriteCounter > 0) {
             if (spriteNumber == 1) {
                 spriteNumber = 2;
             } else if (spriteNumber == 2) {
@@ -446,7 +452,10 @@ public class Player {
         if (key == KeyEvent.VK_I) {
 
 
+            inventoryWindow.setUndecorated(true);
+
             inventoryWindow.setVisible(true);
+            inventoryWindow.setBackground(new Color(0,0,0,100));
 
             inventoryWindow.addKeyListener(new KeyListener() {
                 @Override
@@ -458,7 +467,10 @@ public class Player {
                     int key = e.getKeyCode();
                     try {
                         if (key == KeyEvent.VK_I) {
-                            inventoryWindow.setVisible(false);
+
+                            inventoryWindow.dispose();
+                            //inventoryWindow.setUndecorated(true);
+
                         }
                     } catch (Exception ignored) {
                     }
@@ -469,7 +481,11 @@ public class Player {
 
                 }
             });
+
             SwingUtilities.invokeLater(this::initWindow);
+        }
+        if (key == KeyEvent.VK_ESCAPE) {
+            System.exit(1);
         }
 
 
@@ -566,6 +582,7 @@ public class Player {
 
         return obstacles;
     }
+
 
 
     public void attack() { //TODO: Attack method

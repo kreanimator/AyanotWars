@@ -55,9 +55,10 @@ public class Menu implements ActionListener {
         startButton.setBounds(417, 268, 150, 60);
         startButton.addActionListener(this);
         startButton.setFocusable(false);
-        startButton.setBackground(new Color(255,212,133));
+        startButton.setBackground(new Color(255,212,133,100));
 
         window.add(startButton);
+        window.setUndecorated(true);
         window.setVisible(true);
         window.add(logo);
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

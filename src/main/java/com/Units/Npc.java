@@ -1,7 +1,6 @@
 package com.Units;
 
 import com.CreateMap;
-import com.Interfaces.PlayerChoose;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -16,16 +15,17 @@ public class Npc {
     static int x = random.nextInt(CreateMap.ROWS);
 
     static int y = random.nextInt(CreateMap.COLUMNS);
-    private static final Point pos = new Point(x,y);
+    private static final Point pos = new Point(x, y);
 
-    public Npc(int [][] obstacles) {
+    public Npc(int[][] obstacles) {
 
-        
+
         loadImage();
         Point pos1 = pos;
         obstacles[pos.x][pos.y] = 2;
 
     }
+
     public void setNpcName(Graphics g) {
         // set the text to be displayed
         Font myFont = null;
@@ -48,17 +48,18 @@ public class Npc {
         g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
         g2d.setColor(Color.WHITE);
         assert myFont != null;
-        g2d.setFont(myFont.deriveFont(Font.BOLD,10f));
-        int x = (pos.x * CreateMap.TILE_SIZE)+10 + CreateMap.xOffset;
+        g2d.setFont(myFont.deriveFont(Font.BOLD, 10f));
+        int x = (pos.x * CreateMap.TILE_SIZE - (CreateMap.TILE_SIZE / 2)) + 10 + CreateMap.xOffset;
 
-        int y = (pos.y * CreateMap.TILE_SIZE - 10)+CreateMap.yOffset;
+        int y = (pos.y * CreateMap.TILE_SIZE - (CreateMap.TILE_SIZE / 2) - 10) + CreateMap.yOffset;
         g2d.drawString(name, x, y);
     }
+
     private void loadImage() {
         try {
             Random rand = new Random();
-            int randomNum = rand.nextInt((3 - 1) + 1) +1;
-            File enemyImageFile = new File("src/main/resources/images/npc/"+randomNum+".png");
+            int randomNum = rand.nextInt((3 - 1) + 1) + 1;
+            File enemyImageFile = new File("src/main/resources/images/npc/" + randomNum + ".png");
             image = ImageIO.read(enemyImageFile);
         } catch (IOException exc) {
             System.out.println("Error opening image file: " + exc.getMessage());
@@ -69,11 +70,12 @@ public class Npc {
 
         g.drawImage(
                 image,
-                (pos.x * CreateMap.TILE_SIZE)+CreateMap.xOffset,
-                (pos.y * CreateMap.TILE_SIZE)+CreateMap.yOffset,
+                (pos.x * CreateMap.TILE_SIZE - (CreateMap.TILE_SIZE / 2)) + CreateMap.xOffset,
+                (pos.y * CreateMap.TILE_SIZE - (CreateMap.TILE_SIZE / 2)) + CreateMap.yOffset,
                 observer
         );
     }
+
     public static Point getPos() {
         return pos;
     }

@@ -14,7 +14,7 @@ public class GoblinHead extends Item{
 
     static BufferedImage image;
 
-     String name = "goblinhead";
+    String name = "goblinhead";
     private final Point pos;
     public int quantity = Enemy.NUM_ENEMIES;
 
@@ -34,8 +34,8 @@ public class GoblinHead extends Item{
     public void draw(Graphics g, ImageObserver observer) {
         g.drawImage(
                 image,
-                (pos.x * CreateMap.TILE_SIZE) + CreateMap.xOffset,
-                (pos.y * CreateMap.TILE_SIZE) + CreateMap.yOffset,
+                (pos.x * CreateMap.TILE_SIZE - (CreateMap.TILE_SIZE/2)) + CreateMap.xOffset,
+                (pos.y * CreateMap.TILE_SIZE - (CreateMap.TILE_SIZE/2)) + CreateMap.yOffset,
                 observer
         );
     }

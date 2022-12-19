@@ -56,11 +56,16 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
 
 
 
+    static ArrayList<Item> collectedItems;
+    Inventory inventory;
+
+
 
     public CreateMap() {
         // set the game board size
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
         setBackground(Color.blue);
+
 
 
         //add(gameInterface.addButton());
@@ -86,10 +91,10 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         player = new Player(50,50);
         npc = new Npc(MAS_MAP);
 
-        GridBagLayout gbl = new GridBagLayout();
-
-
-        setLayout(gbl);
+//        GridBagLayout gbl = new GridBagLayout();
+//
+//
+//        setLayout(gbl);
 
         // initialize the game state
         // this timer will call the actionPerformed() method every DELAY ms
@@ -168,6 +173,8 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         player.setPlayerName(g);
         GameInterface.drawActionPanel(g);
         GameInterface.draw(g,this);
+
+        QuestDialog.draw(g);
         // this smooths out animations on some systems
         Toolkit.getDefaultToolkit().sync();
     }
@@ -182,6 +189,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
     public void keyPressed(KeyEvent e) {
         // react to key down events
         MAS_MAP = player.keyPressed(e, MAS_MAP, enemies, bosses);
+
     }
 
     @Override
@@ -198,6 +206,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
             if (enemy.isKilled()) {
                 enemy.removeObstacles(MAS_MAP);
                 Enemy.addQuantityKilled(1);
+
                 player.addExperience(100);
                 for (int i = 1; i < 20; i++) {
                     player.addLevel(i);
@@ -217,14 +226,18 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         for (Item item : items) {
             if (player.getPos().equals(item.getPos())) {
                 collectedItems.add(item);
+                inventory.setItemId(item.getName());
                 System.out.println("Item collected " + item.getName());
+                System.out.println(" itemId " + inventory.setItemId(item.getName()));
             }
         }
 
         // remove collected items from the board
         items.removeAll(collectedItems);
     }
-
+    public static ArrayList<Item> getCollectedItems() {
+        return collectedItems;
+    }
 
     private void killBosses() {
         ArrayList<Boss> bossesKilled = new ArrayList<>();

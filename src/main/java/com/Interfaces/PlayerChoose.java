@@ -41,6 +41,7 @@ public class PlayerChoose extends JPanel implements ActionListener {
         chooseWindow.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         chooseWindow.setSize(1024, 576);
         chooseWindow.setResizable(false);
+        chooseWindow.setUndecorated(true);
         chooseWindow.setLocationRelativeTo(null);
         chooseWindow.setLayout(null);
         chooseWindow.setTitle("Ayanot Wars");
@@ -58,7 +59,7 @@ public class PlayerChoose extends JPanel implements ActionListener {
         name.setVisible(true);
         name.setFont(myFont.deriveFont(Font.BOLD,20f));
         name.addActionListener(this);
-        name.setBackground(new Color(255, 212, 133));
+        name.setBackground(new Color(255, 212, 133,100));
 
 
         logo = new JLabel();
@@ -70,21 +71,21 @@ public class PlayerChoose extends JPanel implements ActionListener {
         warrior.setBounds(550, 225, 200, 60);
         warrior.addActionListener(this);
         warrior.setFocusable(false);
-        warrior.setBackground(new Color(255, 212, 133));
+        warrior.setBackground(new Color(255, 212, 133,100));
 
         warlock = new JButton("Warlock");
         warlock.setFont(myFont.deriveFont(Font.BOLD,25f));
         warlock.setBounds(550, 300, 200, 60);
         warlock.addActionListener(this);
         warlock.setFocusable(false);
-        warlock.setBackground(new Color(255, 212, 133));
+        warlock.setBackground(new Color(255, 212, 133,100));
 
         mage = new JButton("Mage");
         mage.setFont(myFont.deriveFont(Font.BOLD,25f));
         mage.setBounds(550, 375, 200, 60);
         mage.addActionListener(this);
         mage.setFocusable(false);
-        mage.setBackground(new Color(255, 212, 133));
+        mage.setBackground(new Color(255, 212, 133,100));
 
         iconWar = new JLabel();
         iconWar.setBounds(485, 225, 60, 60);
@@ -128,6 +129,7 @@ public class PlayerChoose extends JPanel implements ActionListener {
         window.setSize(900, 700);
         window.pack();
         window.setLocationRelativeTo(null);
+
         window.setVisible(true);
         //window.setExtendedState(JFrame.MAXIMIZED_BOTH);
         window.setResizable(false);
@@ -155,6 +157,7 @@ public class PlayerChoose extends JPanel implements ActionListener {
             CreateMap createMap = new CreateMap();
             window.add(createMap);
             window.addKeyListener(createMap);
+            window.setUndecorated(true);
             SwingUtilities.invokeLater(this::initWindow);
 
             chooseWindow.dispose();

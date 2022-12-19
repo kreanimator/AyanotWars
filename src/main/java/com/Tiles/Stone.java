@@ -28,8 +28,8 @@ public class Stone {
         ArrayList<Stone> stoneList = new ArrayList<>();
         Random rand = new Random();
         for (int i = 0; i < NUM_ROCKS; ) {
-            int rockX = rand.nextInt(CreateMap.COLUMNS);
-            int rockY = rand.nextInt(CreateMap.ROWS);
+            int rockX = rand.nextInt(CreateMap.COLUMNS-1);
+            int rockY = rand.nextInt(CreateMap.ROWS-1);
             if (CreateMap.MAS_MAP[rockX][rockY] == 0) {
                 CreateMap.MAS_MAP[rockX][rockY] = 2;
                 stoneList.add(new Stone(rockX, rockY));
@@ -52,8 +52,8 @@ public class Stone {
 
     public void draw(Graphics g, ImageObserver observer) {
 
-        g.drawImage(image, (pos.x * CreateMap.TILE_SIZE)+CreateMap.xOffset,
-                (pos.y * CreateMap.TILE_SIZE)+CreateMap.yOffset, observer);
+        g.drawImage(image, ((pos.x * CreateMap.TILE_SIZE)-(CreateMap.TILE_SIZE/2))+CreateMap.xOffset,
+                (pos.y * CreateMap.TILE_SIZE-(CreateMap.TILE_SIZE/2))+CreateMap.yOffset, observer);
     }
 
     public Point getPos() {

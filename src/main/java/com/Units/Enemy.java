@@ -1,9 +1,7 @@
 package com.Units;
 
 import com.CreateMap;
-import com.Items.Coin;
-import com.Items.HealthPotion;
-import com.Items.Item;
+import com.Items.*;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -128,7 +126,7 @@ public class Enemy extends Unit {
 
 
     //Enemies attacking method
-    public void attackEnemies(int [][] obstacles) {
+    public void attackEnemies() {
         for (Enemy enemy : enemies) {
             if (facingDirection == FORWARD) {
 
@@ -206,7 +204,7 @@ public class Enemy extends Unit {
         try {
             if (obstacles[pos.x + dx][pos.y + dy] == 0) {
                 pos.translate(dx, dy);
-                attackEnemies(CreateMap.MAS_MAP);
+                attackEnemies();
                 try {
                     Random rand = new Random();
                     int randomNum = rand.nextInt((4 - 1) + 1) + 1;
@@ -238,15 +236,15 @@ public class Enemy extends Unit {
 
         g.drawImage(
                 image,
-                (pos.x * CreateMap.TILE_SIZE) + CreateMap.xOffset,
-                (pos.y * CreateMap.TILE_SIZE) + CreateMap.yOffset,
+                (pos.x * CreateMap.TILE_SIZE -(CreateMap.TILE_SIZE/2)) + CreateMap.xOffset,
+                (pos.y * CreateMap.TILE_SIZE-(CreateMap.TILE_SIZE/2)) + CreateMap.yOffset,
                 observer
         );
     }
 
     public void drawHealthBar(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(java.awt.Color.RED);
+        g2.setColor(new Color(248, 4, 4));
         g2.setRenderingHint(
                 RenderingHints.KEY_TEXT_ANTIALIASING,
                 RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
@@ -258,7 +256,7 @@ public class Enemy extends Unit {
                 RenderingHints.VALUE_FRACTIONALMETRICS_ON);
         int x = (pos.x * CreateMap.TILE_SIZE) + CreateMap.xOffset;
         int width = hp;
-        g2.fillRect(x, (pos.y * CreateMap.TILE_SIZE - 10) + CreateMap.yOffset, width, 5);
+        g2.fillRect(x-CreateMap.TILE_SIZE/2, (pos.y * CreateMap.TILE_SIZE - (CreateMap.TILE_SIZE/2)-10) + CreateMap.yOffset, width, 5);
     }
 
     public Point getPos() {

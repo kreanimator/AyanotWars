@@ -7,7 +7,7 @@ public class App {
         new Menu();
     }
     // TODO: 07.12.2022 COLLISION
-    // TODO: 10.12.2022 Checking Git Work
+    // TODO: 10.12.2022 Checking Git Work. DONE
     //TODO: 15.12.2022 Random generation of the road. Random generation of one tile after another.
     //TODO: 15.12.2022 Enemies attack method. Attacking player and each other.
     //TODO: 15.12.2022 Inheritance of playerclass to player generation.

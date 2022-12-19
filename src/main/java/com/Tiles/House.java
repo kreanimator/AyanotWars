@@ -28,8 +28,8 @@ public class House {
         ArrayList<House> houseList = new ArrayList<>();
         Random rand = new Random();
         for (int i = 0; i < NUM_HOUSES; ) {
-            int houseX = rand.nextInt(CreateMap.COLUMNS);
-            int houseY = rand.nextInt(CreateMap.ROWS);
+            int houseX = rand.nextInt(CreateMap.COLUMNS-1);
+            int houseY = rand.nextInt(CreateMap.ROWS-1);
             if (CreateMap.MAS_MAP[houseX][houseY] == 0) {
                 CreateMap.MAS_MAP[houseX][houseY] = 2;
                 houseList.add(new House(houseX, houseY));
@@ -53,8 +53,8 @@ public class House {
 
     public void draw(Graphics g, ImageObserver observer) {
 
-        g.drawImage(image, (pos.x * CreateMap.TILE_SIZE)+CreateMap.xOffset,
-                (pos.y * CreateMap.TILE_SIZE)+CreateMap.yOffset, observer);
+        g.drawImage(image, ((pos.x * CreateMap.TILE_SIZE)-(CreateMap.TILE_SIZE/2))+CreateMap.xOffset,
+                (pos.y * CreateMap.TILE_SIZE-(CreateMap.TILE_SIZE/2))+CreateMap.yOffset, observer);
     }
 
     public Point getPos() {

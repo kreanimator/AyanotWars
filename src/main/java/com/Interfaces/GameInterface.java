@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 
+import com.PlayerType.Warrior;
+import com.Skills.PowerUp;
 import com.Units.*;
 import com.CreateMap;
 
@@ -18,7 +20,7 @@ import javax.swing.*;
 
 
 public class GameInterface {
-    static BufferedImage gh;
+    static BufferedImage gh,spellicon;
     static Point pos=null;
 
         public GameInterface() {
@@ -32,19 +34,20 @@ public class GameInterface {
         public void getImage(){
             try{
                 gh = ImageIO.read(Objects.requireNonNull(GameInterface.class.getResourceAsStream("/images/items/goblinhead.png")));
-
+                if(Objects.equals(Player.getNameClass(), "warrior")){
+                    spellicon= ImageIO.read(Objects.requireNonNull(GameInterface.class.getResourceAsStream("/images/skills/warrior.png")));
+                }
+                if(Objects.equals(Player.getNameClass(), "warlock")){
+                    spellicon= ImageIO.read(Objects.requireNonNull(GameInterface.class.getResourceAsStream("/images/skills/warlock.png")));
+                }
+                if(Objects.equals(Player.getNameClass(), "mage")){
+                    spellicon= ImageIO.read(Objects.requireNonNull(GameInterface.class.getResourceAsStream("/images/skills/mage.png")));
+                }
             }catch(IOException e){
                 e.printStackTrace();
             }
         }
-    public static void draw(Graphics g, ImageObserver observer) {
 
-
-        g.drawImage(gh, pos.x , pos.y-650,observer);
-
-//        g.drawImage(gh, (pos.x * CreateMap.TILE_SIZE) + CreateMap.xOffset,
-//                (pos.y * CreateMap.TILE_SIZE) + CreateMap.yOffset, observer);
-    }
     public JButton addButton() {
         JButton inventory = new JButton("Inventory");
         inventory.setBounds(CreateMap.WIDTH-(CreateMap.WIDTH/10), GameInterface.pos.y + CreateMap.TILE_SIZE/2, CreateMap.TILE_SIZE * 3, CreateMap.TILE_SIZE - 10);
@@ -54,6 +57,18 @@ public class GameInterface {
         inventory.setBackground(new Color(255,212,113));
         //TODO: Realise inventory button.
         return inventory;
+    }
+    public static void draw(Graphics g, ImageObserver observer) {
+
+
+        g.drawImage(gh, pos.x , pos.y-650,observer);
+        g.drawImage(spellicon, pos.x + (CreateMap.TILE_SIZE *7) , pos.y - (CreateMap.TILE_SIZE/6),observer);
+        g.setColor(new Color(0,0,0,200));
+        g.fillRect(pos.x + (CreateMap.TILE_SIZE *7) , pos.y - (CreateMap.TILE_SIZE/6),CreateMap.TILE_SIZE, CreateMap.TILE_SIZE);
+
+
+//        g.drawImage(gh, (pos.x * CreateMap.TILE_SIZE) + CreateMap.xOffset,
+//                (pos.y * CreateMap.TILE_SIZE) + CreateMap.yOffset, observer);
     }
         public static void drawActionPanel(Graphics g) {
 
@@ -153,7 +168,11 @@ public class GameInterface {
 
             int width = Player.getExperience() / 10;
             g2.fillRect((pos.x + CreateMap.WIDTH/2) +50, pos.y +10, width, 20);
+
+
+
         }
+
     public void tick() {
 
 

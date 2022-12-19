@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class ManaPotion extends Item {
 
-        String name = "healthpotion";
+        String name = "manapotion";
         public int quantity;
         private final Point pos;
 
@@ -25,17 +25,17 @@ public class ManaPotion extends Item {
 
 
 
-    public static ArrayList<com.Items.HealthPotion> fillPotions() {
-            ArrayList<com.Items.HealthPotion> potionList = new ArrayList<>();
-            Random rand = new Random();
-            for (int i = 0; i < 10; ) {
-                int potionX = rand.nextInt(CreateMap.COLUMNS);
-                int potionY = rand.nextInt(CreateMap.ROWS);
-                potionList.add(new com.Items.HealthPotion(potionX, potionY));
-                i++;
-            }
-            return potionList;
-        }
+//    public static ArrayList<com.Items.HealthPotion> fillPotions() {
+//            ArrayList<com.Items.HealthPotion> potionList = new ArrayList<>();
+//            Random rand = new Random();
+//            for (int i = 0; i < 10; ) {
+//                int potionX = rand.nextInt(CreateMap.COLUMNS);
+//                int potionY = rand.nextInt(CreateMap.ROWS);
+//                potionList.add(new com.Items.HealthPotion(potionX, potionY));
+//                i++;
+//            }
+//            return potionList;
+//        }
         public static void loadImage() {
             try {
 
@@ -55,8 +55,8 @@ public class ManaPotion extends Item {
             g.drawImage(
 
                     image,
-                    (pos.x * CreateMap.TILE_SIZE) + CreateMap.xOffset,
-                    (pos.y * CreateMap.TILE_SIZE) + CreateMap.yOffset,
+                    (pos.x * CreateMap.TILE_SIZE - (CreateMap.TILE_SIZE/2)) + CreateMap.xOffset,
+                    (pos.y * CreateMap.TILE_SIZE - (CreateMap.TILE_SIZE/2)) + CreateMap.yOffset,
                     observer
             );
         }

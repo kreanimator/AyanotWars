@@ -91,10 +91,11 @@ public class Boss {
     public void draw(Graphics g, ImageObserver observer) {
 
 
+
         g.drawImage(
                 image,
-                (pos.x * CreateMap.TILE_SIZE)+CreateMap.xOffset,
-                (pos.y * CreateMap.TILE_SIZE)+CreateMap.yOffset,
+                (pos.x * CreateMap.TILE_SIZE -(CreateMap.TILE_SIZE/2)) + CreateMap.xOffset,
+                (pos.y * CreateMap.TILE_SIZE-(CreateMap.TILE_SIZE/2)) + CreateMap.yOffset,
                 observer
         );
     }
@@ -126,9 +127,9 @@ public class Boss {
         g2.setRenderingHint(
                 RenderingHints.KEY_FRACTIONALMETRICS,
                 RenderingHints.VALUE_FRACTIONALMETRICS_ON);
-        int x = (pos.x * CreateMap.TILE_SIZE)+CreateMap.xOffset;
+        int x = (pos.x * CreateMap.TILE_SIZE) + CreateMap.xOffset;
         int width = hp/10;
-        g2.fillRect(x, (pos.y * CreateMap.TILE_SIZE - 10)+CreateMap.yOffset, width, 5);
+        g2.fillRect(x-CreateMap.TILE_SIZE/2, (pos.y * CreateMap.TILE_SIZE - (CreateMap.TILE_SIZE/2)-10) + CreateMap.yOffset, width, 5);
     }
 
     public Point getPos() {
