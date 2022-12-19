@@ -13,6 +13,7 @@ import java.util.Random;
 
 public class House {
     private BufferedImage image;
+    public static final int NUM_HOUSES = ((CreateMap.ROWS*CreateMap.COLUMNS)/60);
 
     private final Point pos;
 
@@ -26,7 +27,7 @@ public class House {
     public static ArrayList<House> fillHouses() {
         ArrayList<House> houseList = new ArrayList<>();
         Random rand = new Random();
-        for (int i = 0; i < CreateMap.NUM_HOUSES; ) {
+        for (int i = 0; i < NUM_HOUSES; ) {
             int houseX = rand.nextInt(CreateMap.COLUMNS);
             int houseY = rand.nextInt(CreateMap.ROWS);
             if (CreateMap.MAS_MAP[houseX][houseY] == 0) {

@@ -1,6 +1,9 @@
 package com.Units;
 
 import com.CreateMap;
+import com.Items.Coin;
+import com.Items.HealthPotion;
+import com.Items.Item;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -25,11 +28,12 @@ public class Enemy extends Unit {
     private final static int LEFT = 2;
     private final static int RIGHT = 3;
     private int facingDirection;
+    public static final int NUM_ENEMIES =  ((CreateMap.ROWS*CreateMap.COLUMNS)/30);
 
 
 
     private static int quantityKilled;
-    ArrayList<Enemy> enemies;
+    static ArrayList<Enemy> enemies;
 
     //Enemy initialisation.
     public Enemy(int x, int y, int height, int width) {
@@ -46,7 +50,7 @@ public class Enemy extends Unit {
         // create the given number of enemies in random positions on the board.
         // note that there is not check here to prevent two coins from occupying the same
         // spot, nor to prevent enemies from spawning in the same spot as the player
-        for (int i = 0; i < CreateMap.NUM_ENEMIES; ) {
+        for (int i = 0; i < NUM_ENEMIES; ) {
             int enemyX = rand.nextInt(CreateMap.COLUMNS);
             int enemyY = rand.nextInt(CreateMap.ROWS);
             if (CreateMap.MAS_MAP[enemyX][enemyY] == 0) {
@@ -57,6 +61,7 @@ public class Enemy extends Unit {
         }
         return enemyList;
     }
+
     //Algorithm for enemy chasing player
     public void chase(Player player) {
 
@@ -259,5 +264,6 @@ public class Enemy extends Unit {
     public Point getPos() {
         return pos;
     }
+
 
 }

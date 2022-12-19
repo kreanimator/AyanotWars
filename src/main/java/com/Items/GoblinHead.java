@@ -1,6 +1,7 @@
 package com.Items;
 
 import com.CreateMap;
+import com.Units.Enemy;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -8,27 +9,23 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.IOException;
 import java.util.Objects;
-import java.util.Random;
 
-public class Coin extends Item {
+public class GoblinHead extends Item{
+
     static BufferedImage image;
 
-
-
-    String name = "coin";
+     String name = "goblinhead";
     private final Point pos;
-    Random rand = new Random();
-    public int quantity;
+    public int quantity = Enemy.NUM_ENEMIES;
 
-    public Coin(int x, int y){
-        super(x,y);
-        loadImage();
-        pos = new Point(x, y);
+    public GoblinHead(int x, int y) {
+        super(x, y);
+        pos = new Point(x,y);
     }
     public static void loadImage() {
         try {
 
-            image = ImageIO.read(Objects.requireNonNull(Coin.class.getResourceAsStream("/images/items/coin.png")));
+            image = ImageIO.read(Objects.requireNonNull(Coin.class.getResourceAsStream("/images/items/goblinhead.png")));
         } catch (IOException exc) {
             System.out.println("Error opening image file: " + exc.getMessage());
         }
@@ -36,7 +33,6 @@ public class Coin extends Item {
 
     public void draw(Graphics g, ImageObserver observer) {
         g.drawImage(
-
                 image,
                 (pos.x * CreateMap.TILE_SIZE) + CreateMap.xOffset,
                 (pos.y * CreateMap.TILE_SIZE) + CreateMap.yOffset,
@@ -52,3 +48,4 @@ public class Coin extends Item {
         return name;
     }
 }
+

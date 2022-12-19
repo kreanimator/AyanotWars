@@ -15,6 +15,7 @@ public class Tree {
     private BufferedImage image;
 
     private final Point pos;
+    public static final int NUM_TREES =  ((CreateMap.ROWS*CreateMap.COLUMNS)/30);
 
     public Tree(int x, int y) {
 
@@ -26,7 +27,7 @@ public class Tree {
     public static ArrayList<Tree> fillTrees() {
         ArrayList<Tree> treeList = new ArrayList<>();
         Random rand = new Random();
-        for (int i = 0; i < CreateMap.NUM_TREES; ) {
+        for (int i = 0; i < NUM_TREES; ) {
             int treeX = rand.nextInt(CreateMap.COLUMNS-1);
             int treeY = rand.nextInt(CreateMap.ROWS-1);
             if (CreateMap.MAS_MAP[treeX][treeY] == 0) {

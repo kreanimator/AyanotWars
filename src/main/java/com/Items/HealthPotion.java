@@ -4,16 +4,12 @@ import com.CreateMap;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
-import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class HealthPotion extends Item {
-
-
-
-    static String name = "healthpotion";
+     String name = "healthpotion";
     public int quantity;
     private final Point pos;
 
@@ -21,17 +17,29 @@ public class HealthPotion extends Item {
         super(x,y);
         loadImage();
         pos = new Point(x, y);
+
     }
-    public void loadImage() {
+//    public static ArrayList<HealthPotion> fillPotions() {
+//        ArrayList<HealthPotion> potionList = new ArrayList<>();
+//        Random rand = new Random();
+//        for (int i = 0; i < 10; ) {
+//            int potionX = rand.nextInt(CreateMap.COLUMNS);
+//            int potionY = rand.nextInt(CreateMap.ROWS);
+//            potionList.add(new HealthPotion(potionX, potionY));
+//            i++;
+//        }
+//        return potionList;
+//    }
+    public static void loadImage() {
         try {
-            File healthpotionImageFile = new File("src/main/resources/images/healthpotion.png");
-            System.out.println("File IO is OK");
-            BufferedImage image = ImageIO.read(healthpotionImageFile);
+
+            image = ImageIO.read(Objects.requireNonNull(HealthPotion.class.getResourceAsStream("/images/items/healthpotion.png")));
         } catch (IOException exc) {
             System.out.println("Error opening image file: " + exc.getMessage());
         }
     }
-    public static String getName() {
+
+    public String getName() {
         return name;
     }
     @Override

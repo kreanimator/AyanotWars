@@ -16,6 +16,7 @@ public class Skull {
     private BufferedImage image;
 
     private final Point pos;
+    public static final int NUM_SKULLS =  ((CreateMap.ROWS*CreateMap.COLUMNS)/40);
 
     public Skull(int x, int y) {
 
@@ -27,7 +28,7 @@ public class Skull {
     public static ArrayList<Skull> fillSkulls() {
         ArrayList<Skull> skullList = new ArrayList<>();
         Random rand = new Random();
-        for (int i = 0; i < CreateMap.NUM_SKULLS; ) {
+        for (int i = 0; i < NUM_SKULLS; ) {
             int skullX = rand.nextInt(CreateMap.COLUMNS);
             int skullY = rand.nextInt(CreateMap.ROWS);
             if (CreateMap.MAS_MAP[skullX][skullY] == 0) {

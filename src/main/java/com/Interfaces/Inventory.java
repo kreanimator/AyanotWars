@@ -1,6 +1,8 @@
 package com.Interfaces;
 
+import com.CreateMap;
 import com.Items.Item;
+import com.Tiles.Grass;
 import com.Tiles.Patches;
 
 import javax.swing.*;
@@ -11,16 +13,18 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Objects;
+import com.Units.*;
 
 public class Inventory extends JPanel implements ActionListener,KeyListener {
-    ArrayList<Item> items;
+
     public static final int TILE_SIZE = 49;
     public static final int ROWS = 7;
     public static final int COLUMNS = 7;
     int inventorySize = ROWS*COLUMNS;
     JButton [] slot;
     String yourChoice;
-    String itemId = Item.getName();
+    String itemId = "";
+    ArrayList<Inventory> inventories;
 
     public Inventory() {
 
@@ -42,6 +46,7 @@ public class Inventory extends JPanel implements ActionListener,KeyListener {
 
 
     }
+
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 //        for (Patches patch : patches) {
@@ -52,17 +57,7 @@ public class Inventory extends JPanel implements ActionListener,KeyListener {
     }
 
 
-//    ArrayList<Patches> patches;
-//
-//    private ArrayList<Patches> fillPatches() {
-//        ArrayList<Patches> patchesList = new ArrayList<>();
-//        for (int i = 0; i < COLUMNS; i++) {
-//            for (int j = 0; j < ROWS; j++) {
-//                patchesList.add(new Patches(i, j));
-//            }
-//        }
-//        return patchesList;
-//    }
+
 
 
 

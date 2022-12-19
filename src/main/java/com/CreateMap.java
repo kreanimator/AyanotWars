@@ -1,8 +1,6 @@
 package com;
 
-import com.Items.Coin;
-import com.Items.Drop;
-import com.Items.HealthPotion;
+import com.Items.*;
 import com.Tiles.*;
 import com.Units.Boss;
 import com.Units.Enemy;
@@ -24,18 +22,15 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
     public static final int ROWS = 30;
     public static final int COLUMNS = 30;
     // controls how many enemies appear on the board
-    public static final int NUM_ENEMIES =  ((ROWS*COLUMNS)/30);
-    public static final int NUM_ROCKS = ((ROWS*COLUMNS)/30);
-    public static final int NUM_TREES =  ((ROWS*COLUMNS)/30);
-    public static final int NUM_SKULLS =  ((ROWS*COLUMNS)/40);
-    public static final int NUM_HOUSES = ((ROWS*COLUMNS)/60);
     public static final int NUM_BOSS = 1;
 
-    public static final int worldWidth = TILE_SIZE * ROWS;
-    public static final int worldHeight = TILE_SIZE * COLUMNS;
+//    public static final int worldWidth = TILE_SIZE * ROWS;
+//    public static final int worldHeight = TILE_SIZE * COLUMNS;
     public static final int WIDTH = 1280;
     public static final int HEIGHT = 700;
     public static int[][] MAS_MAP = new int[COLUMNS][ROWS];
+    public static int xOffset =0;
+    public static int yOffset = 0;
 
     // suppress serialization warning
     @Serial
@@ -44,8 +39,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
     // objects that appear on the game board
     Player player;
     Npc npc;
-    public static int xOffset =0;
-    public static int yOffset = 0;
+
     private final GameInterface gameInterface = new GameInterface();
     private final ArrayList<Enemy> enemies;
     private final ArrayList<Stone> stone;
@@ -54,11 +48,13 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
     private final ArrayList<Boss> bosses;
     private final ArrayList<Skull> skulls;
     private final ArrayList<House> houses;
-    //    private final ArrayList<Coin> coins;
-//    private final ArrayList<HealthPotion>healthPotions;
+//        private final ArrayList<Coin> coins;
+//   private final ArrayList<HealthPotion>healthPotions;
     private final ArrayList<Sea> seas;
     private final ArrayList<Road> roads;
-//    private final ArrayList<Inventory> inventories;
+    private final ArrayList<Item> items;
+
+
 
 
     public CreateMap() {
@@ -84,22 +80,15 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         grasses = Grass.fillGrass();
         houses = House.fillHouses();
         roads = Road.fillRoad();
-
-
         seas = Sea.fillSea();
+        items = Item.fillItems();
+       // healthPotions = HealthPotion.fillPotions();
         player = new Player(50,50);
-
         npc = new Npc(MAS_MAP);
-//        playerLocation = (player.getPos());
-//        setLocation(playerLocation);
-//        getLocation(playerLocation);
-        GridBagLayout gbl = new GridBagLayout();
-        GridBagConstraints c = new GridBagConstraints();
-//        c.gridx = player.getPos().x;
-//        c.gridy = player.getPos().y;
 
-//        c.insets= new Insets((COLUMNS*TILE_SIZE)/player.getPos().y,(ROWS*TILE_SIZE)/player.getPos().x,
-//                (COLUMNS*TILE_SIZE)/player.getPos().y,(ROWS*TILE_SIZE)/player.getPos().x);
+        GridBagLayout gbl = new GridBagLayout();
+
+
         setLayout(gbl);
 
         // initialize the game state
@@ -110,9 +99,6 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         Timer timer = new Timer(DELAY, this);
         timer.start();
     }
-
-
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -125,6 +111,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         // give the player experience for killing enemies
         killEnemies();
         killBosses();
+        collectItems();
         repaint();
         // calling repaint() will trigger paintComponent() to run again,
         // which will refresh/redraw the graphics.
@@ -140,6 +127,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         for (Grass grass : grasses) {
             grass.draw(g, this);
         }
+
         for(Road road:roads){
             road.draw(g,this);
         }
@@ -156,27 +144,23 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         for (House house : houses) {
             house.draw(g, this);
         }
+
         for (Tree tree : trees) {
             tree.draw(g, this);
         }
-//        for (Coin coin : coins) {
-//            coin.draw(g, this);
-//        }
-//        for (HealthPotion healthPotion : healthPotions) {
-//            healthPotion.draw(g, this);
-//        }
 
         for (Enemy enemy : enemies) {
             enemy.draw(g, this);
             enemy.tick();
-
             enemy.drawHealthBar(g);
-
         }
         for (Boss boss : bosses) {
             boss.draw(g, this);
             boss.tick();
             boss.drawHealthBar(g);
+        }
+        for (Item item : items) {
+            item.draw(g, this);
         }
         player.draw(g, this);
         npc.draw(g,this);
@@ -226,18 +210,21 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         // remove enemies from the board
         enemies.removeAll(enemiesKilled);
     }
-//    private void collectItems() {
-//        ArrayList<Inventory> itemsCollected = new ArrayList<>();
-//
-//        for (Inventory inventory: inventories) {
-//
-//                for (int i = 1; i < inventory.COLUMNS; i++) {
-//                   for (int j = 1; j < inventory.ROWS; j++) {
-//                }
-//                itemsCollected.add(inventory);
-//        }
-//        enemies.removeAll(itemsCollected);
-//    }
+
+    private void collectItems() {
+        //ArrayList<Inventory> itemsInInventory = new ArrayList<>();
+        ArrayList<Item> collectedItems = new ArrayList<>();
+        for (Item item : items) {
+            if (player.getPos().equals(item.getPos())) {
+                collectedItems.add(item);
+                System.out.println("Item collected " + item.getName());
+            }
+        }
+
+        // remove collected items from the board
+        items.removeAll(collectedItems);
+    }
+
 
     private void killBosses() {
         ArrayList<Boss> bossesKilled = new ArrayList<>();
@@ -254,6 +241,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         }
         bosses.removeAll(bossesKilled);
     }
+
 
 //    public void checkCollisions() { //TODO
 //

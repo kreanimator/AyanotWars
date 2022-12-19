@@ -14,7 +14,7 @@ import java.util.Random;
 public class Stone {
 
     private BufferedImage image;
-
+    public static final int NUM_ROCKS = ((CreateMap.ROWS*CreateMap.COLUMNS)/30);
     private final Point pos;
 
     public Stone(int x, int y) {
@@ -27,7 +27,7 @@ public class Stone {
     public static ArrayList<Stone> fillStones() {
         ArrayList<Stone> stoneList = new ArrayList<>();
         Random rand = new Random();
-        for (int i = 0; i < CreateMap.NUM_ROCKS; ) {
+        for (int i = 0; i < NUM_ROCKS; ) {
             int rockX = rand.nextInt(CreateMap.COLUMNS);
             int rockY = rand.nextInt(CreateMap.ROWS);
             if (CreateMap.MAS_MAP[rockX][rockY] == 0) {
