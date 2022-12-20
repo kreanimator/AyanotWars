@@ -141,12 +141,15 @@ public class GameInterface {
 
             g2d.drawString(killed, pos.x+50, pos.y-615);
             g2d.drawString(collected, pos.x+50, pos.y-565);
+            //Getting a changeble width for HP bar
             int widthhp = Player.getHP();
+            //Getting a changeble width for MP bar
+            int widthmp = Player.getMp();
             //Drawing a frame for MP bar.
-            g2.drawLine(pos.x + 50, pos.y +9, pos.x + widthhp+50, pos.y +9);
-            g2.drawLine(pos.x + 50, pos.y+ 30, pos.x + widthhp+50, pos.y+ 30);
+            g2.drawLine(pos.x + 50, pos.y +9, pos.x + widthmp+50, pos.y +9);
+            g2.drawLine(pos.x + 50, pos.y+ 30, pos.x + widthmp+50, pos.y+ 30);
             g2.drawLine(pos.x + 49, pos.y + 9 , pos.x + 49, pos.y + 30);
-            g2.drawLine(pos.x + (widthhp+50), pos.y + 9, pos.x + (widthhp+50), pos.y + 30);
+            g2.drawLine(pos.x + (widthmp+50), pos.y + 9, pos.x + (widthmp+50), pos.y + 30);
             //Drawing a frame for EXP bar.
 
             g2.drawLine(pos.x + (CreateMap.WIDTH/2 + 50), pos.y +9, pos.x + (CreateMap.WIDTH/2 + 150), pos.y +9);
@@ -163,7 +166,7 @@ public class GameInterface {
 
             g2d.drawString(inv, pos.x + (CreateMap.WIDTH-(CreateMap.WIDTH/3)), pos.y + CreateMap.TILE_SIZE/2);
             g2d.drawString(mplvl, pos.x, (pos.y+ CreateMap.TILE_SIZE/2) + 2);
-            int widthmp = Player.getMp();
+
             //Drawing health bar
             g2.setColor(java.awt.Color.RED);
             g2.setRenderingHint(
@@ -191,7 +194,7 @@ public class GameInterface {
                     RenderingHints.VALUE_FRACTIONALMETRICS_ON);
 
 
-            g2.fillRect(pos.x + 50, pos.y +10, widthhp, 20);
+            g2.fillRect(pos.x + 50, pos.y +10, widthmp, 20);
             //Drawing experience bar
             g2.setColor(Color.GREEN);
             g2.setRenderingHint(

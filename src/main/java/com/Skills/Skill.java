@@ -6,12 +6,7 @@ import javax.swing.plaf.ColorUIResource;
 import java.util.Objects;
 
 public class Skill {
-
-
     static int cooldown = 50;
-
-
-
     static boolean isActivated = false;
 
 
