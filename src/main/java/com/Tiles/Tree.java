@@ -13,7 +13,6 @@ import java.util.Random;
 
 public class Tree {
     private BufferedImage image;
-
     private final Point pos;
     public static final int NUM_TREES =  ((CreateMap.ROWS*CreateMap.COLUMNS)/30);
 

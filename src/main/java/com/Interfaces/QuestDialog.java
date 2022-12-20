@@ -54,13 +54,13 @@ public class QuestDialog implements ActionListener {
         confirm.addActionListener(this);
         confirm.setForeground(new Color(255, 255, 255, 255));
         assert myFont != null;
-        confirm.setFont(myFont.deriveFont(BOLD,8f));
+        confirm.setFont(myFont.deriveFont(BOLD,10f));
         decline = new JButton("Fuck off sick bustard!");
         decline.setFocusable(false);
         decline.setBounds(0,250,500,50);
         decline.setVisible(true);
         decline.setBackground(new Color(0,0,0,0));
-        decline.setFont(myFont.deriveFont(BOLD,8f));
+        decline.setFont(myFont.deriveFont(BOLD,10f));
         decline.addActionListener(this);
         decline.setForeground(new Color(255, 255, 255, 255));
 
@@ -72,10 +72,10 @@ public class QuestDialog implements ActionListener {
         area.setEditable(false);
         area.setForeground(new Color(255, 255, 255, 255));
 
-        area.setText("              Well stranger! I see you didn't solve all tasks\n             I've gave you..." +
-                "Ok lazy bastard, as you ve might\n " +
-                "             seen, there are a lot of goblins are sneaking\n " +
-                "              around,bring me their heads and I'll treat you\n              like a king!");
+        area.setText("              Well stranger! I see you didn't solve all tasks\n\n             I've gave you..." +
+                "Ok lazy bastard, as you ve might\n\n " +
+                "             seen, there are a lot of goblins are sneaking\n\n " +
+                "              around,bring me their heads and I'll treat you\n\n              like a king!");
         assert myFont!= null;
         area.setFont(myFont.deriveFont(BOLD,10f));
         back.setBounds(0, 0, 50, 50);

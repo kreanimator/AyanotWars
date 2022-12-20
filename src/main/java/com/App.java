@@ -15,6 +15,6 @@ public class App {
     //TODO: 15.12.2022 Realize drop & inventory. 20.12 Partly done
     //TODO: 15.12.2022 Realize spells. 20.12 Partly done
     // TODO: 15.12.2022 AttackEnemy does not work.(For enemy attacking player or other enemies)
-    //TODO: 17.12.2022 Realize grassborder algorithm.
+    //TODO: 17.12.2022 Realize grass border algorithm.
     //TODO: 20.12.2022 Realize counter and stopper for skill cooldown , also a trigger for perk activation.
 }

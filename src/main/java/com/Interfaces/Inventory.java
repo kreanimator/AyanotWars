@@ -1,9 +1,6 @@
 package com.Interfaces;
 
-
 import com.Items.Item;
-import com.Units.Player;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,7 +11,7 @@ import java.util.Objects;
 
 public class Inventory extends JPanel implements ActionListener, KeyListener {
 
-    public static final int TILE_SIZE = 49;
+    public static final int TILE_SIZE = 50;
     public static final int ROWS = 7;
     public static final int COLUMNS = 7;
     int inventorySize = ROWS * COLUMNS;
@@ -43,7 +40,6 @@ public class Inventory extends JPanel implements ActionListener, KeyListener {
             slot[i].setEnabled(true);
             slot[i].setActionCommand("Item" + i);
             add(slot[i]);
-
         }
     }
 

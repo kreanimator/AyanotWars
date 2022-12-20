@@ -2,7 +2,6 @@ package com.Items;
 
 import com.CreateMap;
 
-import com.Units.Enemy;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
@@ -12,15 +11,11 @@ import java.util.Random;
 public class Item {
 
 
-
     static BufferedImage image;
     static Random rand = new Random();
-    private static final int NUM_ITEMS = rand.nextInt(10,30);
-
+    private static final int NUM_ITEMS = rand.nextInt(10, 30);
     public String name = "";
-
     private final Point pos;
-
     public static int quantity;
     boolean isCollected;
 
@@ -28,18 +23,20 @@ public class Item {
         loadImage();
         pos = new Point(x, y);
     }
-    public int addQuantityCollected(int amount) {
 
-        quantity+=amount;
+    public void addQuantityCollected(int amount) {
 
-        return amount;
+        quantity += amount;
+
     }
+
     public static int getQuantityCollected() {
 
         return quantity;
 
     }
-    public boolean isCollected(){
+
+    public boolean isCollected() {
         return false;
     }
 
@@ -59,35 +56,35 @@ public class Item {
                 }
             }
         }
-            return itemList;
-        }
+        return itemList;
+    }
 
 
-
-   public static void loadImage()  {
-     }
-
+    public static void loadImage() {
+    }
 
 
     public void draw(Graphics g, ImageObserver observer) {
-      g.drawImage(
+        g.drawImage(
 
-              image,
-              (pos.x * CreateMap.TILE_SIZE - (CreateMap.TILE_SIZE/2)) + CreateMap.xOffset,
-              (pos.y * CreateMap.TILE_SIZE - (CreateMap.TILE_SIZE/2)) + CreateMap.yOffset,
-              observer
-      );
-   }
-   public String getName() {
-      return this.name;
-   }
+                image,
+                (pos.x * CreateMap.TILE_SIZE - (CreateMap.TILE_SIZE / 2)) + CreateMap.xOffset,
+                (pos.y * CreateMap.TILE_SIZE - (CreateMap.TILE_SIZE / 2)) + CreateMap.yOffset,
+                observer
+        );
+    }
 
-   public int getQuantity() {
-      return quantity;
-   }
-   public Point getPos() {
-      return pos;
-   }
+    public String getName() {
+        return this.name;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public Point getPos() {
+        return pos;
+    }
 
 
 }

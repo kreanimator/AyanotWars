@@ -35,11 +35,9 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
     // suppress serialization warning
     @Serial
     private static final long serialVersionUID = 490905409104883233L;
-
     // objects that appear on the game board
     Player player;
     Npc npc;
-
     private final GameInterface gameInterface = new GameInterface();
     private final ArrayList<Enemy> enemies;
     private final ArrayList<Stone> stone;
@@ -103,7 +101,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
 
         // initialize the game state
         // this timer will call the actionPerformed() method every DELAY ms
-        int DELAY = 25;
+        int DELAY = 75;
         // keep a reference to the timer object that triggers actionPerformed() in
         // case we need access to it in another method
         Timer timer = new Timer(DELAY, this);

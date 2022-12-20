@@ -53,7 +53,6 @@ public class Player {
 
     private static int experience;
     public static int hp = 100;
-
     public static int mp = 100;
     private static int level = 1;
     private static String playerClass = "";
@@ -198,7 +197,6 @@ public class Player {
                 if (spriteNumber == 3) {
                     image = up3;
                 }
-                break;
             }
             case BACKWARD -> {
                 if (spriteNumber == 1) {
@@ -210,7 +208,6 @@ public class Player {
                 if (spriteNumber == 3) {
                     image = down3;
                 }
-                break;
             }
             case LEFT -> {
                 if (spriteNumber == 1) {
@@ -222,7 +219,6 @@ public class Player {
                 if (spriteNumber == 3) {
                     image = left3;
                 }
-                break;
             }
 
             case RIGHT -> {
@@ -235,7 +231,6 @@ public class Player {
                 if (spriteNumber == 3) {
                     image = right3;
                 }
-                break;
 
             }
         }
