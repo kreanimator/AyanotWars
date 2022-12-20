@@ -1,6 +1,7 @@
 package com.UnusedIdeas;
 
 import com.CreateMap;
+import com.Items.*;
 
 import java.awt.*;
 import java.io.BufferedInputStream;
@@ -42,4 +43,18 @@ public class UnusedIdeas {
 //        g.drawString(dialogText3, x + CreateMap.TILE_SIZE/2, y + CreateMap.TILE_SIZE+75);
 //        g.drawString(dialogText4, x + CreateMap.TILE_SIZE/2, y + CreateMap.TILE_SIZE+100);
 //    }
+//public void add(Item item) {
+//    if (item instanceof HealthPotion){
+//        itemId = "healthpotion";
+//    }
+//    if (item instanceof Coin){
+//        itemId = "coin";
+//    }
+//    if (item instanceof ManaPotion){
+//        itemId = "manapotion";
+//    }
+//    if (item instanceof GoblinHead){
+//        itemId = "goblinhead";
+//    }
+//}
 }

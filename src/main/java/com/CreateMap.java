@@ -48,8 +48,6 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
     private final ArrayList<Boss> bosses;
     private final ArrayList<Skull> skulls;
     private final ArrayList<House> houses;
-//        private final ArrayList<Coin> coins;
-//   private final ArrayList<HealthPotion>healthPotions;
     private final ArrayList<Sea> seas;
     private final ArrayList<Road> roads;
     private final ArrayList<Item> items;
@@ -67,19 +65,12 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         setBackground(Color.blue);
 
 
-
-        //add(gameInterface.addButton());
-
-
-
         MAS_MAP[0][0] = 1;
         MAS_MAP[1][0] = 1;
         MAS_MAP[0][1] = 1;
-
         skulls = Skull.fillSkulls();
         stone = Stone.fillStones();
         trees = Tree.fillTrees();
-
         enemies = Enemy.populateEnemies();
         bosses = Boss.addBoss();
         grasses = Grass.fillGrass();
@@ -87,14 +78,10 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         roads = Road.fillRoad();
         seas = Sea.fillSea();
         items = Item.fillItems();
-       // healthPotions = HealthPotion.fillPotions();
         player = new Player(50,50);
         npc = new Npc(MAS_MAP);
 
-//        GridBagLayout gbl = new GridBagLayout();
-//
-//
-//        setLayout(gbl);
+
 
         // initialize the game state
         // this timer will call the actionPerformed() method every DELAY ms
@@ -132,7 +119,6 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         for (Grass grass : grasses) {
             grass.draw(g, this);
         }
-
         for(Road road:roads){
             road.draw(g,this);
         }
@@ -142,18 +128,15 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         for (Skull skull: skulls){
             skull.draw(g,this);
         }
-
         for (Stone stone : stone) {
             stone.draw(g, this);
         }
         for (House house : houses) {
             house.draw(g, this);
         }
-
         for (Tree tree : trees) {
             tree.draw(g, this);
         }
-
         for (Enemy enemy : enemies) {
             enemy.draw(g, this);
             enemy.tick();
@@ -184,14 +167,11 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
     public void keyTyped(KeyEvent e) {
         // this is not used but must be defined as part of the KeyListener interface
     }
-
     @Override
     public void keyPressed(KeyEvent e) {
         // react to key down events
         MAS_MAP = player.keyPressed(e, MAS_MAP, enemies, bosses);
-
     }
-
     @Override
     public void keyReleased(KeyEvent e) {
         // react to key up events
@@ -200,8 +180,6 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
     private void killEnemies() {
         // allow player to kill enemies
         ArrayList<Enemy> enemiesKilled = new ArrayList<>();
-
-
         for (Enemy enemy : enemies) {
             if (enemy.isKilled()) {
                 enemy.removeObstacles(MAS_MAP);
@@ -210,7 +188,6 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
                 player.addExperience(100);
                 for (int i = 1; i < 20; i++) {
                     player.addLevel(i);
-
                 }
                 enemiesKilled.add(enemy);
                 //TODO: Regeneration of enemies
@@ -221,20 +198,24 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
     }
 
     private void collectItems() {
-        //ArrayList<Inventory> itemsInInventory = new ArrayList<>();
+        //ArrayList<Object> itemsInInventory = new ArrayList<>();
         ArrayList<Item> collectedItems = new ArrayList<>();
+
         for (Item item : items) {
             if (player.getPos().equals(item.getPos())) {
                 collectedItems.add(item);
+                item.addQuantityCollected(1);
                 Inventory.setItemId(item.getName());
+                //itemsInInventory.add(item);
                 System.out.println("Item collected " + item.getName());
-                System.out.println(" itemId " + inventory.setItemId(item.getName()));
+                System.out.println(" itemId " + Inventory.setItemId(item.getName()));
             }
         }
 
         // remove collected items from the board
         items.removeAll(collectedItems);
     }
+
     public static ArrayList<Item> getCollectedItems() {
         return collectedItems;
     }
@@ -243,7 +224,6 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         ArrayList<Boss> bossesKilled = new ArrayList<>();
 
         for (Boss boss : bosses) {
-
             if (boss.isKilled()) {
                 player.addExperience(500);
                 for (int i = 1; i < 20; i++) {
@@ -254,8 +234,6 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         }
         bosses.removeAll(bossesKilled);
     }
-
-
 //    public void checkCollisions() { //TODO
 //
 //        Rectangle r3 = player.getBounds();

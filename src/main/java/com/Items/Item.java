@@ -21,16 +21,26 @@ public class Item {
 
     private final Point pos;
 
-    public int quantity;
-
-
-
-
-
+    public static int quantity;
+    boolean isCollected;
 
     public Item(int x, int y) {
         loadImage();
         pos = new Point(x, y);
+    }
+    public int addQuantityCollected(int amount) {
+
+        quantity+=amount;
+
+        return amount;
+    }
+    public static int getQuantityCollected() {
+
+        return quantity;
+
+    }
+    public boolean isCollected(){
+        return false;
     }
 
 

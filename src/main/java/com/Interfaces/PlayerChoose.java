@@ -118,6 +118,26 @@ public class PlayerChoose extends JPanel implements ActionListener {
         chooseWindow.add(nameEnter);
         chooseWindow.add(logo);
         chooseWindow.setVisible(true);
+        chooseWindow.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                int key = e.getKeyCode();
+
+                if (key == KeyEvent.VK_ESCAPE){
+                    System.exit(1);
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
 
 
     }
@@ -140,6 +160,8 @@ public class PlayerChoose extends JPanel implements ActionListener {
 
         window.setTitle("Ayanot wars");
         window.toFront();
+
+
 
 
     }

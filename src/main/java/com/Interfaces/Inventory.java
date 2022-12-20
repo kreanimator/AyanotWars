@@ -1,7 +1,8 @@
 package com.Interfaces;
 
-import com.CreateMap;
-import com.Items.Item;
+
+import com.Items.*;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,8 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.ImageObserver;
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class Inventory extends JPanel implements ActionListener,KeyListener {
@@ -21,10 +20,6 @@ public class Inventory extends JPanel implements ActionListener,KeyListener {
     int inventorySize = ROWS*COLUMNS;
     JButton [] slot;
     String yourChoice;
-
-
-
-
     String itemId = "";
     Item item;
     public Inventory() {
@@ -52,7 +47,6 @@ public class Inventory extends JPanel implements ActionListener,KeyListener {
         }
     }
 
-
     public static String setItemId(String itemId) {
        return itemId;
     }
@@ -61,12 +55,11 @@ public class Inventory extends JPanel implements ActionListener,KeyListener {
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-//        for (Patches patch : patches) {
-//            patch.draw(g, this);
-//        }
+
 
         Toolkit.getDefaultToolkit().sync();
     }
+
 
 //    public void draw(Graphics g, ImageObserver observer) {
 //        g.drawImage(
@@ -78,15 +71,13 @@ public class Inventory extends JPanel implements ActionListener,KeyListener {
 //        );
 //    }
 
-
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
         String yourChoice = e.getActionCommand();
         for (int i = 0; i < inventorySize; i++) {
             if(Objects.equals(itemId, "healthbar")) {
                 slot[i].setIcon((new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/images/items/healthpotion.png")))));
+                slot[i].getItemListeners();
             }
             if(Objects.equals(itemId, "manapotion")) {
                 slot[i].setIcon((new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/images/items/manapotion.png")))));
@@ -106,8 +97,6 @@ public class Inventory extends JPanel implements ActionListener,KeyListener {
             }
         }
 
-
-
     @Override
     public void keyTyped(KeyEvent e) {
 
@@ -117,7 +106,6 @@ public class Inventory extends JPanel implements ActionListener,KeyListener {
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
         if (key == KeyEvent.VK_I) {
-
             setVisible(false);
         }
     }
@@ -126,4 +114,6 @@ public class Inventory extends JPanel implements ActionListener,KeyListener {
     public void keyReleased(KeyEvent e) {
 
     }
+
+
 }

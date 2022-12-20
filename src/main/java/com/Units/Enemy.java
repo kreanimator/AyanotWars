@@ -88,9 +88,7 @@ public class Enemy extends Unit {
 
         }
     public static int addQuantityKilled(int amount) {
-
             quantityKilled+=amount;
-
         return amount;
     }
     public static int getQuantityKilled() {

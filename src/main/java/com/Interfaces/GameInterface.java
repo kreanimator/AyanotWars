@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 
+import com.Items.Item;
 import com.PlayerType.Warrior;
 import com.Skills.PowerUp;
 import com.Units.*;
@@ -20,8 +21,9 @@ import javax.swing.*;
 
 
 public class GameInterface {
-    static BufferedImage gh,spellicon;
+    static BufferedImage gh,spellicon,bag;
     static Point pos=null;
+    static Item item;
 
         public GameInterface() {
 
@@ -34,6 +36,7 @@ public class GameInterface {
         public void getImage(){
             try{
                 gh = ImageIO.read(Objects.requireNonNull(GameInterface.class.getResourceAsStream("/images/items/goblinhead.png")));
+                bag = ImageIO.read(Objects.requireNonNull(GameInterface.class.getResourceAsStream("/images/items/bag.png")));
                 if(Objects.equals(Player.getNameClass(), "warrior")){
                     spellicon= ImageIO.read(Objects.requireNonNull(GameInterface.class.getResourceAsStream("/images/skills/warrior.png")));
                 }
@@ -62,6 +65,7 @@ public class GameInterface {
 
 
         g.drawImage(gh, pos.x , pos.y-650,observer);
+        g.drawImage(bag,pos.x, pos.y-600,observer);
         g.drawImage(spellicon, pos.x + (CreateMap.TILE_SIZE *7) , pos.y - (CreateMap.TILE_SIZE/6),observer);
         g.setColor(new Color(0,0,0,200));
         g.fillRect(pos.x + (CreateMap.TILE_SIZE *7) , pos.y - (CreateMap.TILE_SIZE/6),CreateMap.TILE_SIZE, CreateMap.TILE_SIZE);
@@ -90,6 +94,7 @@ public class GameInterface {
             String hplvl = "HP: ";
             String inv = "For inventory press 'i'";
             String killed = " = " + Enemy.getQuantityKilled();
+            String collected = " = " + Item.getQuantityCollected();
 
             // we need to cast the Graphics to Graphics2D to draw nicer text
             Graphics2D g2 = (Graphics2D) g;
@@ -128,6 +133,7 @@ public class GameInterface {
             // (note we add the ascent, as in java 2d 0 is top of the screen)
             g2d.drawString(hplvl, pos.x, (pos.y+ CreateMap.TILE_SIZE/2) + 2);
             g2d.drawString(killed, pos.x+50, pos.y-615);
+            g2d.drawString(collected, pos.x+50, pos.y-565);
             int widthhp = Player.getHP();
             //Drawing a frame for HP bar.
             g2.drawLine(pos.x + 50, pos.y +9, pos.x + widthhp+50, pos.y +9);
