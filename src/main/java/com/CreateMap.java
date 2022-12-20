@@ -12,7 +12,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.Serial;
 import java.util.ArrayList;
-
+import java.util.Arrays;
 
 
 public class CreateMap extends JPanel implements ActionListener, KeyListener {
@@ -68,6 +68,27 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         MAS_MAP[0][0] = 1;
         MAS_MAP[1][0] = 1;
         MAS_MAP[0][1] = 1;
+        MAS_MAP[ROWS-1][COLUMNS-1] =1;
+        MAS_MAP[ROWS-2][COLUMNS-1] =1;
+        MAS_MAP[ROWS-1][COLUMNS-2] =1;
+        for (int i = 0; i<ROWS;i++) {
+            for (int j = 0; j < COLUMNS; j++) {
+                if (MAS_MAP[i][j] == MAS_MAP [1][1]){
+                    MAS_MAP[i][i]=1;
+                    MAS_MAP[j][j]=1;
+                }
+            }
+        }
+        for (int i = ROWS-2; i>0;i--) {
+            for (int j = COLUMNS-2; j >0 ; j--) {
+                if (MAS_MAP[i][j] == MAS_MAP [ROWS-1][COLUMNS-1] ){
+                    MAS_MAP[i][i]=1;
+                    MAS_MAP[j][j]=1;
+                }
+            }
+        }
+        System.out.println(Arrays.deepToString(MAS_MAP).replace("], ", "]\n"));
+
         skulls = Skull.fillSkulls();
         stone = Stone.fillStones();
         trees = Tree.fillTrees();

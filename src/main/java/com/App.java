@@ -16,4 +16,5 @@ public class App {
     //TODO: 15.12.2022 Realize spells.
     // TODO: 15.12.2022 AttackEnemy does not work.
     //TODO: 17.12.2022 Realize grassborder algorithm.
+    //TODO: 20.12.2022 Realize counter and stopper for skill cooldown , also a trigger for perk activation.
 }

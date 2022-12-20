@@ -5,6 +5,7 @@ import com.Interfaces.Inventory;
 import com.Interfaces.PlayerChoose;
 import com.Interfaces.QuestDialog;
 import com.PlayerType.*;
+import com.Skills.Skill;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -487,6 +488,11 @@ public class Player {
         if (key == KeyEvent.VK_ESCAPE) {
             System.exit(1);
         }
+        if (key == KeyEvent.VK_S) {
+            Skill skill = new Skill();
+
+        }
+
 
 
         if (key == KeyEvent.VK_E) {

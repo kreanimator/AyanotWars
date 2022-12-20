@@ -12,6 +12,7 @@ import java.util.Objects;
 import com.Items.Item;
 import com.PlayerType.Warrior;
 import com.Skills.PowerUp;
+import com.Skills.Skill;
 import com.Units.*;
 import com.CreateMap;
 
@@ -24,6 +25,7 @@ public class GameInterface {
     static BufferedImage gh,spellicon,bag;
     static Point pos=null;
     static Item item;
+
 
         public GameInterface() {
 
@@ -64,16 +66,19 @@ public class GameInterface {
     public static void draw(Graphics g, ImageObserver observer) {
 
 
-        g.drawImage(gh, pos.x , pos.y-650,observer);
-        g.drawImage(bag,pos.x, pos.y-600,observer);
-        g.drawImage(spellicon, pos.x + (CreateMap.TILE_SIZE *7) , pos.y - (CreateMap.TILE_SIZE/6),observer);
-        g.setColor(new Color(0,0,0,200));
-        g.fillRect(pos.x + (CreateMap.TILE_SIZE *7) , pos.y - (CreateMap.TILE_SIZE/6),CreateMap.TILE_SIZE, CreateMap.TILE_SIZE);
-
+        g.drawImage(gh, pos.x, pos.y - 650, observer);
+        g.drawImage(bag, pos.x, pos.y - 600, observer);
+        g.drawImage(spellicon, pos.x + (CreateMap.TILE_SIZE * 7), pos.y - (CreateMap.TILE_SIZE / 6), observer);
+        g.setColor(new Color(0, 0, 0, 200));
+        int height = Skill.getCooldown();
+        if (Skill.isActivated()) {
+            g.fillRect(pos.x + (CreateMap.TILE_SIZE * 7), pos.y - (CreateMap.TILE_SIZE / 6), CreateMap.TILE_SIZE, height);
+        }
+    }
 
 //        g.drawImage(gh, (pos.x * CreateMap.TILE_SIZE) + CreateMap.xOffset,
 //                (pos.y * CreateMap.TILE_SIZE) + CreateMap.yOffset, observer);
-    }
+
         public static void drawActionPanel(Graphics g) {
 
             Font myFont = null;

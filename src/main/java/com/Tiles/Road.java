@@ -25,32 +25,20 @@ public class Road {
     }
     public static ArrayList<Road> fillRoad() {
         ArrayList<Road> roadList = new ArrayList<>();
-        boolean [] availableNext  = {false,false,false,false};
-        boolean isEmpty = false;
-        Random rand = new Random();
         for (int i = 0; i < CreateMap.COLUMNS; i++) {
             for (int j = 0; j < CreateMap.ROWS; j++) {
-//                if(CreateMap.MAS_MAP[CreateMap.COLUMNS][CreateMap.ROWS]==0){
-//                    isEmpty =true;
-//                }
-                int roadX = rand.nextInt(CreateMap.COLUMNS);
-                int roadY = rand.nextInt(CreateMap.ROWS);
-                if (CreateMap.MAS_MAP[roadX][roadY] == 0) {
-                    if(isEmpty) {
-                        roadList.add(new Road(i, j));
-                        availableNext[i] = true;
-                    }
+                if (CreateMap.MAS_MAP[i][j] == 1) {
+                    roadList.add(new Road(i, j));
                 }
             }
-        }
-        return roadList;
+        }return roadList;
     }
 
 
     private void loadImage() {
         try {
 
-            File enemyImageFile = new File("src/main/resources/images/road.png");
+            File enemyImageFile = new File("src/main/resources/images/tiles/road.png");
             image = ImageIO.read(enemyImageFile);
         } catch (IOException exc) {
             System.out.println("Error opening image file: " + exc.getMessage());
@@ -59,8 +47,13 @@ public class Road {
 
     public void draw(Graphics g, ImageObserver observer) {
 
-        g.drawImage(image, (pos.x * CreateMap.TILE_SIZE)+CreateMap.xOffset,
-                (pos.y * CreateMap.TILE_SIZE)+CreateMap.yOffset, observer);
+        g.drawImage(
+
+                image,
+                (pos.x * CreateMap.TILE_SIZE - (CreateMap.TILE_SIZE/2)) + CreateMap.xOffset,
+                (pos.y * CreateMap.TILE_SIZE - (CreateMap.TILE_SIZE/2)) + CreateMap.yOffset,
+                observer
+        );
     }
 
     public Point getPos() {
