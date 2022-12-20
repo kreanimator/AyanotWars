@@ -10,15 +10,13 @@ public class Fireball extends Skill {
     static int cooldown = 50;
     boolean isUsed;
 
-    public Fireball(int hp, int duration) {
+    public Fireball() {
         if (isUsed) {
             this.hp = hp * 2;
             this.duration -= duration;
         }
     }
-    public void cooldownStart(){
-        this.cooldown--;
-    }
+
     public int getHp() {
         return hp;
     }

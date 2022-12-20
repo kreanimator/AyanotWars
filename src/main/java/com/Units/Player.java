@@ -54,6 +54,8 @@ public class Player {
 
     private static int experience;
     public static int hp = 100;
+
+    public static int mp = 100;
     private static int level = 1;
     private static String playerClass = "";
     public int damage = 15;
@@ -524,8 +526,6 @@ public class Player {
                         System.out.println("Attack down");
                         enemy.getDamage(playerDamage());
                         enemy.getCurrentHP();
-
-
                     }
 
                     if (facingDirection == LEFT && pos.x == enemy.getPos().x + 1 && pos.y == enemy.getPos().y) {
@@ -541,8 +541,6 @@ public class Player {
                         System.out.println("Attack Right");
                         enemy.getDamage(playerDamage());
                         enemy.getCurrentHP();
-
-
                     }
                 }
                 for (Boss boss : bosses) {
@@ -589,8 +587,6 @@ public class Player {
         return obstacles;
     }
 
-
-
     public void attack() { //TODO: Attack method
         for (Enemy enemy : enemies) {
             enemy.getDamage(playerDamage());
@@ -629,6 +625,9 @@ public class Player {
     public static int getHP() {
         return hp;
     }
+    public static int getMp() {
+        return mp;
+    }
 
     public void addExperience(int amount) {
         experience += amount;
@@ -640,7 +639,6 @@ public class Player {
             experience = 0;
             hp = (int) (hp * 1.2);
             damage = (int) (damage * 1.2);
-
         }
     }
 

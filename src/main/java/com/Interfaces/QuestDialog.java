@@ -1,6 +1,7 @@
 package com.Interfaces;
 
 import com.CreateMap;
+import com.Events.Quest;
 import com.Units.Npc;
 
 import javax.swing.*;
@@ -99,6 +100,8 @@ public class QuestDialog implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==confirm){
             questDialog.setVisible(false);
+            Quest quest = new Quest();
+            quest.isTaken();
         }
         if(e.getSource()==decline){
             questDialog.setVisible(false);

@@ -1,7 +1,6 @@
 package com.Units;
 
 import com.CreateMap;
-import com.Items.*;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -28,15 +27,16 @@ public class Enemy extends Unit {
     private int facingDirection;
     public static final int NUM_ENEMIES =  ((CreateMap.ROWS*CreateMap.COLUMNS)/30);
 
-
+    Enemy enemy;
 
     private static int quantityKilled;
-    static ArrayList<Enemy> enemies;
+
 
     //Enemy initialisation.
     public Enemy(int x, int y, int height, int width) {
         this.height = height;
         this.width = width;
+
         loadImage();
         pos = new Point(x, y);
 
@@ -63,7 +63,6 @@ public class Enemy extends Unit {
     //Algorithm for enemy chasing player
     public void chase(Player player) {
 
-        for (Enemy enemy:enemies) {
             if (pos.y >= player.getPos().y + 1 && pos.y >= enemy.getPos().y + 1) {
                 facingDirection = FORWARD;
                 enemy.pos.x += (enemy.pos.y - player.getPos().y) * 0.25;
@@ -73,8 +72,6 @@ public class Enemy extends Unit {
                 facingDirection = BACKWARD;
                 enemy.pos.x += (enemy.pos.y - player.getPos().y) * 0.25;
             }
-
-
             if (pos.x >= player.getPos().x + 1 && pos.y >= enemy.getPos().x + 1) {
                 facingDirection = LEFT;
                 enemy.pos.x += (enemy.pos.x - player.getPos().x) * 0.25;
@@ -86,10 +83,9 @@ public class Enemy extends Unit {
             }
         }
 
-        }
-    public static int addQuantityKilled(int amount) {
+
+    public static void addQuantityKilled(int amount) {
             quantityKilled+=amount;
-        return amount;
     }
     public static int getQuantityKilled() {
         return quantityKilled;
@@ -97,7 +93,7 @@ public class Enemy extends Unit {
     }
     public void chaseEnemies() {
 
-        for (Enemy enemy:enemies) {
+
             if (pos.y >= enemy.getPos().y + 1 && pos.y >= enemy.getPos().y + 1) {
                 facingDirection = FORWARD;
                 enemy.pos.x += (enemy.pos.y - enemy.getPos().y) * 0.25;
@@ -120,39 +116,38 @@ public class Enemy extends Unit {
             }
         }
 
-    }
+
 
 
     //Enemies attacking method
     public void attackEnemies() {
-        for (Enemy enemy : enemies) {
-            if (facingDirection == FORWARD) {
+            if (facingDirection == FORWARD && pos.x == enemy.getPos().x && pos.y == enemy.getPos().y + 1) {
 
                 enemy.getDamage(5);
-                System.out.println("Enemy was hitted");
+                System.out.println("Enemy was hitted front");
                 getCurrentHP();
             }
-            if (facingDirection == RIGHT) {
+            if (facingDirection == RIGHT && pos.x == enemy.getPos().x - 1 && pos.y == enemy.getPos().y) {
 
                 enemy.getDamage(5);
-                System.out.println("Enemy was hitted");
+                System.out.println("Enemy was hitted right");
                 getCurrentHP();
             }
-            if (facingDirection ==BACKWARD) {
+            if (facingDirection == BACKWARD && pos.x == enemy.getPos().x && pos.y == enemy.getPos().y - 1) {
 
                 enemy.getDamage(5);
-                System.out.println("Enemy was hitted");
+                System.out.println("Enemy was hitted backw");
                 getCurrentHP();
             }
-            if (facingDirection == LEFT) {
+            if (facingDirection == LEFT && pos.x == enemy.getPos().x + 1 && pos.y == enemy.getPos().y) {
 
                 enemy.getDamage(5);
-                System.out.println("Enemy was hitted");
+                System.out.println("Enemy was hitted left");
                 getCurrentHP();
             }
 
         }
-    }
+
 
     //Method for getting bounds for rectangle - rectangle collision. Not realised.
     public Rectangle getBounds() {
@@ -202,7 +197,7 @@ public class Enemy extends Unit {
         try {
             if (obstacles[pos.x + dx][pos.y + dy] == 0) {
                 pos.translate(dx, dy);
-                attackEnemies();
+                //attackEnemies();
                 try {
                     Random rand = new Random();
                     int randomNum = rand.nextInt((4 - 1) + 1) + 1;

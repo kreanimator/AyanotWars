@@ -97,6 +97,7 @@ public class GameInterface {
             String text = "EXP: ";
             String textLvl = "Level " + Player.getLevel();
             String hplvl = "HP: ";
+            String mplvl = "MP: ";
             String inv = "For inventory press 'i'";
             String killed = " = " + Enemy.getQuantityKilled();
             String collected = " = " + Item.getQuantityCollected();
@@ -136,11 +137,12 @@ public class GameInterface {
             g2d.drawString(textLvl, pos.x + CreateMap.WIDTH/3, (pos.y + CreateMap.TILE_SIZE/2));
             // determine the y coordinate for the text
             // (note we add the ascent, as in java 2d 0 is top of the screen)
-            g2d.drawString(hplvl, pos.x, (pos.y+ CreateMap.TILE_SIZE/2) + 2);
+            g2d.drawString(hplvl,  pos.x, (pos.y+ CreateMap.TILE_SIZE)- CreateMap.TILE_SIZE);
+
             g2d.drawString(killed, pos.x+50, pos.y-615);
             g2d.drawString(collected, pos.x+50, pos.y-565);
             int widthhp = Player.getHP();
-            //Drawing a frame for HP bar.
+            //Drawing a frame for MP bar.
             g2.drawLine(pos.x + 50, pos.y +9, pos.x + widthhp+50, pos.y +9);
             g2.drawLine(pos.x + 50, pos.y+ 30, pos.x + widthhp+50, pos.y+ 30);
             g2.drawLine(pos.x + 49, pos.y + 9 , pos.x + 49, pos.y + 30);
@@ -151,8 +153,33 @@ public class GameInterface {
             g2.drawLine(pos.x + (CreateMap.WIDTH/2 + 50), pos.y+ 30, pos.x + (CreateMap.WIDTH/2 + 150), pos.y+ 30);
             g2.drawLine(pos.x + (CreateMap.WIDTH/2 + 49), pos.y + 9 , pos.x + (CreateMap.WIDTH/2 + 49), pos.y + 30);
             g2.drawLine(pos.x + (CreateMap.WIDTH/2 + 150), pos.y + 9, pos.x + (CreateMap.WIDTH/2 + 150), pos.y + 30);
+
+            //Drawing a frame for HP bar
+
+            g2.drawLine(pos.x + 49, pos.y +3, pos.x + widthhp+50, pos.y+3 );
+            g2.drawLine(pos.x + 50, pos.y-18, pos.x + widthhp+50, pos.y-18);
+            g2.drawLine(pos.x + 49, pos.y + 3 , pos.x + 49, pos.y -18);
+            g2.drawLine(pos.x + (widthhp+50), pos.y + 3, pos.x + (widthhp+50), pos.y -18);
+
             g2d.drawString(inv, pos.x + (CreateMap.WIDTH-(CreateMap.WIDTH/3)), pos.y + CreateMap.TILE_SIZE/2);
+            g2d.drawString(mplvl, pos.x, (pos.y+ CreateMap.TILE_SIZE/2) + 2);
+            int widthmp = Player.getMp();
+            //Drawing health bar
             g2.setColor(java.awt.Color.RED);
+            g2.setRenderingHint(
+                    RenderingHints.KEY_TEXT_ANTIALIASING,
+                    RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+            g2.setRenderingHint(
+                    RenderingHints.KEY_RENDERING,
+                    RenderingHints.VALUE_RENDER_QUALITY);
+            g2.setRenderingHint(
+                    RenderingHints.KEY_FRACTIONALMETRICS,
+                    RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+
+            g2.fillRect(pos.x + 50, pos.y -17, widthhp, 20);
+            //Drawing mana bar
+
+            g2.setColor(Color.BLUE);
             g2.setRenderingHint(
                     RenderingHints.KEY_TEXT_ANTIALIASING,
                     RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
@@ -165,7 +192,7 @@ public class GameInterface {
 
 
             g2.fillRect(pos.x + 50, pos.y +10, widthhp, 20);
-
+            //Drawing experience bar
             g2.setColor(Color.GREEN);
             g2.setRenderingHint(
                     RenderingHints.KEY_TEXT_ANTIALIASING,

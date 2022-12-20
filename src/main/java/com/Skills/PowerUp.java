@@ -9,12 +9,9 @@ public class PowerUp extends Skill{
     int duration = 60;
      static int cooldown = 50;
 
-    public PowerUp(int damage, int duration) {
+    public PowerUp() {
         this.damage = damage * 2;
         this.duration -= duration;
-    }
-    public void cooldownStart(){
-        this.cooldown--;
     }
     public int getDamage() {
         return damage;

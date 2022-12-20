@@ -61,7 +61,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
     public CreateMap() {
         // set the game board size
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
-        setBackground(Color.blue);
+        setBackground(new Color(3, 60, 178, 221));
 
 
 //        MAS_MAP[0][0] = 1;
@@ -167,6 +167,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         for (Enemy enemy : enemies) {
             enemy.draw(g, this);
             enemy.tick();
+            //enemy.attackEnemies();
             enemy.drawHealthBar(g);
         }
         for (Boss boss : bosses) {
