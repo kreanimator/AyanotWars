@@ -4,7 +4,6 @@ import com.CreateMap;
 import com.Interfaces.Inventory;
 import com.Interfaces.PlayerChoose;
 import com.Interfaces.QuestDialog;
-import com.PlayerType.*;
 import com.Skills.Skill;
 
 import javax.imageio.ImageIO;
@@ -26,7 +25,7 @@ public class Player {
 
     private static String nameClass = "";
     private BufferedImage up1, up2, up3, down1, down2, down3, right1, right2, right3, left1, left2, left3;
-//    private BufferedImage atkup1, atkup2, atkup3, atkup4, atkdown1, atkdown2, atkdown3,atkdown4,
+    //    private BufferedImage atkup1, atkup2, atkup3, atkup4, atkdown1, atkdown2, atkdown3,atkdown4,
 //            atckleft1, atckleft2, atckleft3, atckleft4, atkright1,atkright2,atkright3,atkright4;
     private final Point pos;
     private final static int FORWARD = 0;
@@ -46,7 +45,7 @@ public class Player {
 
     static Random rd = new Random();
 
-//    static int x = rd.nextInt(CreateMap.ROWS)* CreateMap.TILE_SIZE;
+    //    static int x = rd.nextInt(CreateMap.ROWS)* CreateMap.TILE_SIZE;
 //    static int y = rd.nextInt(CreateMap.COLUMNS)*CreateMap.TILE_SIZE;
     static int x = CreateMap.ROWS / 2;
     static int y = CreateMap.COLUMNS / 4;
@@ -158,9 +157,9 @@ public class Player {
         g2d.setColor(Color.WHITE);
         assert myFont != null;
         g2d.setFont(myFont.deriveFont(Font.BOLD, 10f));
-        int x = ((pos.x * CreateMap.TILE_SIZE)-CreateMap.TILE_SIZE/2) + CreateMap.xOffset;
+        int x = ((pos.x * CreateMap.TILE_SIZE) - CreateMap.TILE_SIZE / 2) + CreateMap.xOffset;
 
-        int y = ((pos.y * CreateMap.TILE_SIZE - 10)-CreateMap.TILE_SIZE/2) + CreateMap.yOffset;
+        int y = ((pos.y * CreateMap.TILE_SIZE - 10) - CreateMap.TILE_SIZE / 2) + CreateMap.yOffset;
         g2d.drawString(name, x, y);
     }
 
@@ -197,7 +196,7 @@ public class Player {
                     image = up2;
                 }
                 if (spriteNumber == 3) {
-                    image = up1;
+                    image = up3;
                 }
                 break;
             }
@@ -242,19 +241,18 @@ public class Player {
         }
 
 
-        g.drawImage(image, ((pos.x * CreateMap.TILE_SIZE)-(CreateMap.TILE_SIZE/2))+CreateMap.xOffset,
-                (pos.y * CreateMap.TILE_SIZE-(CreateMap.TILE_SIZE/2))+CreateMap.yOffset, observer);
+        g.drawImage(image, ((pos.x * CreateMap.TILE_SIZE) - (CreateMap.TILE_SIZE / 2)) + CreateMap.xOffset,
+                (pos.y * CreateMap.TILE_SIZE - (CreateMap.TILE_SIZE / 2)) + CreateMap.yOffset, observer);
 
 //        g.drawImage(image, screenX + CreateMap.xOffset,
 //                screenY + CreateMap.yOffset, observer);
 
-        }
+    }
 
 //    public void drawatk(Graphics g, ImageObserver observer) {
 //
 //        BufferedImage imageatk = null;
 //
-//        if (facingDirection == 4) {
 //                if (facingDirection==FORWARD){
 //                    if (spriteNumber == 1) {
 //                        imageatk = atkup1;
@@ -330,7 +328,7 @@ public class Player {
         inventoryWindow.setLocationRelativeTo(null);
         inventoryWindow.setVisible(true);
         inventoryWindow.setResizable(false);
-        inventoryWindow.setForeground(new Color(0,0,0,0));
+        inventoryWindow.setForeground(new Color(0, 0, 0, 0));
         inventoryWindow.add(inventory);
         inventoryWindow.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
     }
@@ -445,7 +443,7 @@ public class Player {
 
             inventoryWindow.setUndecorated(true);
             inventoryWindow.setVisible(true);
-            inventoryWindow.setBackground(new Color(0,0,0,100));
+            inventoryWindow.setBackground(new Color(0, 0, 0, 100));
             inventoryWindow.addKeyListener(new KeyListener() {
                 @Override
                 public void keyTyped(KeyEvent e) {
@@ -461,6 +459,7 @@ public class Player {
                     } catch (Exception ignored) {
                     }
                 }
+
                 @Override
                 public void keyReleased(KeyEvent e) {
                 }
@@ -598,6 +597,7 @@ public class Player {
     public static int getHP() {
         return hp;
     }
+
     public static int getMp() {
         return mp;
     }
@@ -618,7 +618,5 @@ public class Player {
     public Point getPos() {
         return pos;
     }
-
-
 }
 

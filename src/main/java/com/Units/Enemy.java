@@ -35,7 +35,6 @@ public class Enemy extends Unit {
 
         loadImage();
         pos = new Point(x, y);
-
     }
 
     public static ArrayList<Enemy> populateEnemies() {
@@ -55,7 +54,6 @@ public class Enemy extends Unit {
         }
         return enemyList;
     }
-
     //Algorithm for enemy chasing player
     public void chase(Player player) {
 
@@ -63,7 +61,6 @@ public class Enemy extends Unit {
             facingDirection = FORWARD;
             enemy.pos.x += (enemy.pos.y - player.getPos().y) * 0.25;
         }
-
         if (pos.y <= player.getPos().y - 1 && pos.y >= enemy.getPos().y - 1) {
             facingDirection = BACKWARD;
             enemy.pos.x += (enemy.pos.y - player.getPos().y) * 0.25;
@@ -71,23 +68,18 @@ public class Enemy extends Unit {
         if (pos.x >= player.getPos().x + 1 && pos.y >= enemy.getPos().x + 1) {
             facingDirection = LEFT;
             enemy.pos.x += (enemy.pos.x - player.getPos().x) * 0.25;
-
         }
         if (pos.x < player.getPos().x - 1 && pos.y > enemy.getPos().x - 1) {
             facingDirection = RIGHT;
             enemy.pos.x += (enemy.pos.x - player.getPos().x) * 0.25;
         }
     }
-
     public static void addQuantityKilled(int amount) {
         quantityKilled += amount;
     }
-
     public static int getQuantityKilled() {
         return quantityKilled;
-
     }
-
     public void chaseEnemies() {
 
 
@@ -109,7 +101,6 @@ public class Enemy extends Unit {
             enemy.pos.x += (enemy.pos.x - enemy.getPos().x) * 0.25;
         }
     }
-
 
     //Enemies attacking method
     public void attackEnemies() {
@@ -171,7 +162,6 @@ public class Enemy extends Unit {
     //Prevent enemy for getting out of bounds.
     public void tick() {
 
-
         if (pos.x < 0) {
             pos.x = 0;
         } else if (pos.x >= CreateMap.COLUMNS) {
@@ -182,7 +172,6 @@ public class Enemy extends Unit {
         } else if (pos.y >= CreateMap.ROWS) {
             pos.y = (CreateMap.ROWS + 1) + CreateMap.yOffset;
         }
-
     }
 
     //Move initialisation.
@@ -231,7 +220,6 @@ public class Enemy extends Unit {
                 observer
         );
     }
-
     public void drawHealthBar(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(new Color(248, 4, 4));

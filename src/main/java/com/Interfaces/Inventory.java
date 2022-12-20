@@ -76,7 +76,6 @@ public class Inventory extends JPanel implements ActionListener, KeyListener {
             if (Objects.equals(itemId, "coin")) {
                 slot[i].setIcon((new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/images/items/coin.png")))));
             }
-
         }
         for (int i = 0; i < inventorySize; i++) {
             if (Objects.equals(yourChoice, "Item" + i)) {
