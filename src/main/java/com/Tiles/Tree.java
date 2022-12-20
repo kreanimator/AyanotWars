@@ -30,7 +30,7 @@ public class Tree {
         for (int i = 0; i < NUM_TREES; ) {
             int treeX = rand.nextInt(CreateMap.COLUMNS-1);
             int treeY = rand.nextInt(CreateMap.ROWS-1);
-            if (CreateMap.MAS_MAP[treeX][treeY] == 0) {
+            if (CreateMap.MAS_MAP[treeX][treeY] == 0 ) {
                 CreateMap.MAS_MAP[treeX][treeY] = 2;
                 treeList.add(new Tree(treeX, treeY));
                 i++;

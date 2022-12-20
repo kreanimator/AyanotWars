@@ -2,16 +2,20 @@ package com.Interfaces;
 
 import com.CreateMap;
 import com.Units.Player;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.Font;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.Objects;
 import com.Graphics.*;
 
 public class PlayerChoose extends JPanel implements ActionListener {
     JFrame chooseWindow;
+    BufferedImage image;
 
     JButton warrior, warlock, mage;
 
@@ -145,7 +149,13 @@ public class PlayerChoose extends JPanel implements ActionListener {
 
     JFrame window = new JFrame();
 
+
     public void initWindow() {
+        try {
+            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/tiles/sea.png")));
+        }catch(IOException e){
+            e.printStackTrace();
+        }
         window.setSize(900, 700);
         window.pack();
         window.setLocationRelativeTo(null);
@@ -154,6 +164,7 @@ public class PlayerChoose extends JPanel implements ActionListener {
         //window.setExtendedState(JFrame.MAXIMIZED_BOTH);
         window.setResizable(false);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 
 
         window.getMaximizedBounds();
@@ -181,7 +192,6 @@ public class PlayerChoose extends JPanel implements ActionListener {
             window.addKeyListener(createMap);
             window.setUndecorated(true);
             SwingUtilities.invokeLater(this::initWindow);
-
             chooseWindow.dispose();
         }
         if (e.getSource() == warlock) {

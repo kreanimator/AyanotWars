@@ -48,7 +48,6 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
     private final ArrayList<Boss> bosses;
     private final ArrayList<Skull> skulls;
     private final ArrayList<House> houses;
-    private final ArrayList<Sea> seas;
     private final ArrayList<Road> roads;
     private final ArrayList<Item> items;
 
@@ -65,28 +64,39 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         setBackground(Color.blue);
 
 
-        MAS_MAP[0][0] = 1;
-        MAS_MAP[1][0] = 1;
-        MAS_MAP[0][1] = 1;
-        MAS_MAP[ROWS-1][COLUMNS-1] =1;
-        MAS_MAP[ROWS-2][COLUMNS-1] =1;
-        MAS_MAP[ROWS-1][COLUMNS-2] =1;
+//        MAS_MAP[0][0] = 1;
+//        MAS_MAP[1][0] = 1;
+//        MAS_MAP[0][1] = 1;
+//        MAS_MAP[ROWS-1][COLUMNS-1] =1;
+//        MAS_MAP[ROWS-2][COLUMNS-1] =1;
+//        MAS_MAP[ROWS-1][COLUMNS-2] =1;
         for (int i = 0; i<ROWS;i++) {
             for (int j = 0; j < COLUMNS; j++) {
-                if (MAS_MAP[i][j] == MAS_MAP [1][1]){
-                    MAS_MAP[i][i]=1;
-                    MAS_MAP[j][j]=1;
+                    MAS_MAP[i][j]=0;
+                    MAS_MAP[j][i]=0;
                 }
             }
-        }
-        for (int i = ROWS-2; i>0;i--) {
-            for (int j = COLUMNS-2; j >0 ; j--) {
-                if (MAS_MAP[i][j] == MAS_MAP [ROWS-1][COLUMNS-1] ){
-                    MAS_MAP[i][i]=1;
-                    MAS_MAP[j][j]=1;
-                }
+        for (int i = 0; i<ROWS;i++) {
+            for (int j = 0; j < COLUMNS; j++) {
+                MAS_MAP[i][i]=5;
+                MAS_MAP[j][j]=5;
             }
         }
+//        for (int x = ROWS -(ROWS-1); x > ROWS; x--){
+//            for(int y =COLUMNS - (COLUMNS-1); y>COLUMNS; y--){
+//                MAS_MAP[x][y]=0;
+//                MAS_MAP[y][x]=0;
+//            }
+//        }
+
+//        for (int i = ROWS-2; i>0;i--) {
+//            for (int j = COLUMNS-2; j >0 ; j--) {
+//                if (MAS_MAP[i][j] == MAS_MAP [ROWS-1][COLUMNS-1] ){
+//                    MAS_MAP[i-1][j-1]=1;
+//                    MAS_MAP[j-1][i-1]=1;
+//                }
+//            }
+//        }
         System.out.println(Arrays.deepToString(MAS_MAP).replace("], ", "]\n"));
 
         skulls = Skull.fillSkulls();
@@ -97,7 +107,6 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         grasses = Grass.fillGrass();
         houses = House.fillHouses();
         roads = Road.fillRoad();
-        seas = Sea.fillSea();
         items = Item.fillItems();
         player = new Player(50,50);
         npc = new Npc(MAS_MAP);
@@ -142,9 +151,6 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         }
         for(Road road:roads){
             road.draw(g,this);
-        }
-        for (Sea sea : seas) {
-            sea.draw(g, this);
         }
         for (Skull skull: skulls){
             skull.draw(g,this);

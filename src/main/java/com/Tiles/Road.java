@@ -27,7 +27,7 @@ public class Road {
         ArrayList<Road> roadList = new ArrayList<>();
         for (int i = 0; i < CreateMap.COLUMNS; i++) {
             for (int j = 0; j < CreateMap.ROWS; j++) {
-                if (CreateMap.MAS_MAP[i][j] == 1) {
+                if (CreateMap.MAS_MAP[i][j] == 5) {
                     roadList.add(new Road(i, j));
                 }
             }
