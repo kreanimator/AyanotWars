@@ -226,7 +226,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         for (Item item : items) {
             if (player.getPos().equals(item.getPos())) {
                 collectedItems.add(item);
-                inventory.setItemId(item.getName());
+                Inventory.setItemId(item.getName());
                 System.out.println("Item collected " + item.getName());
                 System.out.println(" itemId " + inventory.setItemId(item.getName()));
             }

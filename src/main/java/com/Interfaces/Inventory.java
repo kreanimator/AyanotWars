@@ -24,8 +24,9 @@ public class Inventory extends JPanel implements ActionListener,KeyListener {
 
 
 
-    static String itemId = "";
-    static ArrayList<Item> items;
+
+    String itemId = "";
+    Item item;
     public Inventory() {
 
         new Dimension(TILE_SIZE * COLUMNS, TILE_SIZE * ROWS);
@@ -40,7 +41,6 @@ public class Inventory extends JPanel implements ActionListener,KeyListener {
         slot = new JButton[inventorySize];
         for (int i = 0; i < inventorySize; i++) {
             slot[i] = new JButton();
-            //slot[i].setIcon((new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/images/items/healthpotion.png")))));
             slot[i].setBackground(new Color(0,0,0,0));
             slot[i].setFocusable(false);
             slot[i].setSize(TILE_SIZE,TILE_SIZE);
@@ -55,6 +55,9 @@ public class Inventory extends JPanel implements ActionListener,KeyListener {
 
     public static String setItemId(String itemId) {
        return itemId;
+    }
+    public String getItemId() {
+        return itemId;
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -81,25 +84,28 @@ public class Inventory extends JPanel implements ActionListener,KeyListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String yourChoice = e.getActionCommand();
-        ImageIcon iconhp = new ImageIcon("/images/items/healthpotion.png");
-        ImageIcon iconmp = new ImageIcon("/images/items/manapotion.png");
-        ImageIcon gh = new ImageIcon("/images/items/goblinhead.png");
-        ImageIcon coin = new ImageIcon("/images/items/coin.png");
-
-        for (JButton jButton : slot) {
-            switch (itemId) {
-                case ("healthbar") -> slot[0].setIcon((new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/images/items/healthpotion.png")))));
-                case ("manapotion") -> slot[1].setIcon((new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/images/items/manapotion.png")))));
-                case ("goblinhead") -> slot[2].setIcon((new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/images/items/goblinhead.png")))));
-                case ("coin") -> slot[3].setIcon((new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/images/items/coin.png")))));
+        for (int i = 0; i < inventorySize; i++) {
+            if(Objects.equals(itemId, "healthbar")) {
+                slot[i].setIcon((new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/images/items/healthpotion.png")))));
             }
-            break;
+            if(Objects.equals(itemId, "manapotion")) {
+                slot[i].setIcon((new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/images/items/manapotion.png")))));
+            }
+            if(Objects.equals(itemId, "goblinhead")) {
+                slot[i].setIcon((new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/images/items/goblinhead.png")))));
+            }
+            if(Objects.equals(itemId, "coin")) {
+                slot[i].setIcon((new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/images/items/coin.png")))));
+            }
+
         }
-            if(Objects.equals(yourChoice, "Item0")){
-                System.out.println(itemId);
+
+            if (Objects.equals(yourChoice, "Item0")) {
+                System.out.println("ItemId in inventory: "+ getItemId());
 
             }
         }
+
 
 
     @Override
