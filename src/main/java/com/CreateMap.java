@@ -50,26 +50,14 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
     private final ArrayList<House> houses;
     private final ArrayList<Road> roads;
     private final ArrayList<Item> items;
-
-
-
     static ArrayList<Item> collectedItems;
     Inventory inventory;
-
-
 
     public CreateMap() {
         // set the game board size
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
         setBackground(new Color(3, 60, 178, 221));
 
-
-//        MAS_MAP[0][0] = 1;
-//        MAS_MAP[1][0] = 1;
-//        MAS_MAP[0][1] = 1;
-//        MAS_MAP[ROWS-1][COLUMNS-1] =1;
-//        MAS_MAP[ROWS-2][COLUMNS-1] =1;
-//        MAS_MAP[ROWS-1][COLUMNS-2] =1;
         for (int i = 0; i<ROWS;i++) {
             for (int j = 0; j < COLUMNS; j++) {
                     MAS_MAP[i][j]=0;
@@ -270,8 +258,6 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
 //        for (Enemy enemy : enemies) {
 //            Rectangle r2 = enemy.getBounds();
 //            if (r3.intersects(r2)) {
-//
-//
 //            }
 //        }
 //    }

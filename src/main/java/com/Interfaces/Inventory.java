@@ -60,17 +60,6 @@ public class Inventory extends JPanel implements ActionListener, KeyListener {
         Toolkit.getDefaultToolkit().sync();
     }
 
-
-//    public void draw(Graphics g, ImageObserver observer) {
-//        g.drawImage(
-//
-//                image,
-//                (pos.x * CreateMap.TILE_SIZE - (CreateMap.TILE_SIZE/2)) + CreateMap.xOffset,
-//                (pos.y * CreateMap.TILE_SIZE - (CreateMap.TILE_SIZE/2)) + CreateMap.yOffset,
-//                observer
-//        );
-//    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         String yourChoice = e.getActionCommand();

@@ -327,30 +327,19 @@ public class Player {
     public void initWindow() {
 
         inventoryWindow.setSize(Inventory.ROWS * Inventory.TILE_SIZE + 14, Inventory.COLUMNS * Inventory.TILE_SIZE + 35);
-        //inventoryWindow.setUndecorated(true);
         inventoryWindow.setLocationRelativeTo(null);
-
-
         inventoryWindow.setVisible(true);
         inventoryWindow.setResizable(false);
         inventoryWindow.setForeground(new Color(0,0,0,0));
-
-        //inventoryWindow.setTitle("Inventory");
         inventoryWindow.add(inventory);
         inventoryWindow.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-
-
     }
-
 
     public int[][] keyPressed(KeyEvent e, int[][] obstacles, ArrayList<Enemy> enemies, ArrayList<Boss> bosses) {
 
         int key = e.getKeyCode();
-
         if (key == KeyEvent.VK_UP && obstacles[pos.x][pos.y - 1] != 2) {
             facingDirection = FORWARD;
-
-
             CreateMap.yOffset += CreateMap.TILE_SIZE;
             //screenY -= CreateMap.TILE_SIZE;
             pos.translate(0, -1);
@@ -437,7 +426,6 @@ public class Player {
             obstacles[pos.x + 1][pos.y] = 0;
             obstacles[pos.x][pos.y] = 2;
 
-
         } else if (key == KeyEvent.VK_LEFT && obstacles[pos.x - 1][pos.y] == 2) {
             facingDirection = LEFT;
         }
@@ -456,10 +444,8 @@ public class Player {
 
 
             inventoryWindow.setUndecorated(true);
-
             inventoryWindow.setVisible(true);
             inventoryWindow.setBackground(new Color(0,0,0,100));
-
             inventoryWindow.addKeyListener(new KeyListener() {
                 @Override
                 public void keyTyped(KeyEvent e) {
@@ -470,18 +456,13 @@ public class Player {
                     int key = e.getKeyCode();
                     try {
                         if (key == KeyEvent.VK_I) {
-
                             inventoryWindow.dispose();
-                            //inventoryWindow.setUndecorated(true);
-
                         }
                     } catch (Exception ignored) {
                     }
                 }
-
                 @Override
                 public void keyReleased(KeyEvent e) {
-
                 }
             });
 
@@ -492,10 +473,7 @@ public class Player {
         }
         if (key == KeyEvent.VK_S) {
             Skill skill = new Skill();
-
         }
-
-
 
         if (key == KeyEvent.VK_E) {
             if (facingDirection == FORWARD && pos.x == Npc.getPos().x && pos.y == Npc.getPos().y + 1 ||
@@ -517,8 +495,6 @@ public class Player {
                         System.out.println("Attack up");
                         enemy.getDamage(playerDamage());
                         enemy.getCurrentHP();
-
-
                     }
 
                     if (facingDirection == BACKWARD && pos.x == enemy.getPos().x && pos.y == enemy.getPos().y - 1) {
@@ -552,13 +528,10 @@ public class Player {
                         System.out.println("Attack up");
                         boss.getDamage(playerDamage());
                         boss.getCurrentHP();
-
-
                     }
                     if (facingDirection == BACKWARD && pos.x == boss.getPos().x && pos.y == boss.getPos().y - 1) {
 
                         System.out.println("Attack down");
-
                         boss.getDamage(playerDamage());
                         boss.getCurrentHP();
 

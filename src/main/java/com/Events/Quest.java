@@ -5,12 +5,9 @@ import com.Items.Item;
 
 public class Quest {
 
-
     GoblinHead goblinHead;
-
     boolean isTaken;
     boolean isDone;
-
     public Quest(){
 
     }

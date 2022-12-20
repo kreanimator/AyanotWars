@@ -15,7 +15,6 @@ import java.util.Random;
 public class Enemy extends Unit {
 
     private BufferedImage image;
-
     private final Point pos;
     private int hp = 45;
     int height;
@@ -25,12 +24,9 @@ public class Enemy extends Unit {
     private final static int LEFT = 2;
     private final static int RIGHT = 3;
     private int facingDirection;
-    public static final int NUM_ENEMIES =  ((CreateMap.ROWS*CreateMap.COLUMNS)/30);
-
+    public static final int NUM_ENEMIES = ((CreateMap.ROWS * CreateMap.COLUMNS) / 30);
     Enemy enemy;
-
     private static int quantityKilled;
-
 
     //Enemy initialisation.
     public Enemy(int x, int y, int height, int width) {
@@ -63,90 +59,86 @@ public class Enemy extends Unit {
     //Algorithm for enemy chasing player
     public void chase(Player player) {
 
-            if (pos.y >= player.getPos().y + 1 && pos.y >= enemy.getPos().y + 1) {
-                facingDirection = FORWARD;
-                enemy.pos.x += (enemy.pos.y - player.getPos().y) * 0.25;
-            }
-
-            if (pos.y <= player.getPos().y - 1 && pos.y >= enemy.getPos().y - 1) {
-                facingDirection = BACKWARD;
-                enemy.pos.x += (enemy.pos.y - player.getPos().y) * 0.25;
-            }
-            if (pos.x >= player.getPos().x + 1 && pos.y >= enemy.getPos().x + 1) {
-                facingDirection = LEFT;
-                enemy.pos.x += (enemy.pos.x - player.getPos().x) * 0.25;
-
-            }
-            if (pos.x < player.getPos().x - 1 && pos.y > enemy.getPos().x - 1) {
-                facingDirection = RIGHT;
-                enemy.pos.x += (enemy.pos.x - player.getPos().x) * 0.25;
-            }
+        if (pos.y >= player.getPos().y + 1 && pos.y >= enemy.getPos().y + 1) {
+            facingDirection = FORWARD;
+            enemy.pos.x += (enemy.pos.y - player.getPos().y) * 0.25;
         }
 
+        if (pos.y <= player.getPos().y - 1 && pos.y >= enemy.getPos().y - 1) {
+            facingDirection = BACKWARD;
+            enemy.pos.x += (enemy.pos.y - player.getPos().y) * 0.25;
+        }
+        if (pos.x >= player.getPos().x + 1 && pos.y >= enemy.getPos().x + 1) {
+            facingDirection = LEFT;
+            enemy.pos.x += (enemy.pos.x - player.getPos().x) * 0.25;
+
+        }
+        if (pos.x < player.getPos().x - 1 && pos.y > enemy.getPos().x - 1) {
+            facingDirection = RIGHT;
+            enemy.pos.x += (enemy.pos.x - player.getPos().x) * 0.25;
+        }
+    }
 
     public static void addQuantityKilled(int amount) {
-            quantityKilled+=amount;
+        quantityKilled += amount;
     }
+
     public static int getQuantityKilled() {
         return quantityKilled;
 
     }
+
     public void chaseEnemies() {
 
 
-            if (pos.y >= enemy.getPos().y + 1 && pos.y >= enemy.getPos().y + 1) {
-                facingDirection = FORWARD;
-                enemy.pos.x += (enemy.pos.y - enemy.getPos().y) * 0.25;
-            }
-
-            if (pos.y <= enemy.getPos().y - 1 && pos.y >= enemy.getPos().y - 1) {
-                facingDirection = BACKWARD;
-                enemy.pos.x += (enemy.pos.y - enemy.getPos().y) * 0.25;
-            }
-
-
-            if (pos.x >= enemy.getPos().x + 1 && pos.y >= enemy.getPos().x + 1) {
-                facingDirection = LEFT;
-                enemy.pos.x += (enemy.pos.x - enemy.getPos().x) * 0.25;
-
-            }
-            if (pos.x < enemy.getPos().x - 1 && pos.y > enemy.getPos().x - 1) {
-                facingDirection = RIGHT;
-                enemy.pos.x += (enemy.pos.x - enemy.getPos().x) * 0.25;
-            }
+        if (pos.y >= enemy.getPos().y + 1 && pos.y >= enemy.getPos().y + 1) {
+            facingDirection = FORWARD;
+            enemy.pos.x += (enemy.pos.y - enemy.getPos().y) * 0.25;
         }
 
-
+        if (pos.y <= enemy.getPos().y - 1 && pos.y >= enemy.getPos().y - 1) {
+            facingDirection = BACKWARD;
+            enemy.pos.x += (enemy.pos.y - enemy.getPos().y) * 0.25;
+        }
+        if (pos.x >= enemy.getPos().x + 1 && pos.y >= enemy.getPos().x + 1) {
+            facingDirection = LEFT;
+            enemy.pos.x += (enemy.pos.x - enemy.getPos().x) * 0.25;
+        }
+        if (pos.x < enemy.getPos().x - 1 && pos.y > enemy.getPos().x - 1) {
+            facingDirection = RIGHT;
+            enemy.pos.x += (enemy.pos.x - enemy.getPos().x) * 0.25;
+        }
+    }
 
 
     //Enemies attacking method
     public void attackEnemies() {
-            if (facingDirection == FORWARD && pos.x == enemy.getPos().x && pos.y == enemy.getPos().y + 1) {
+        if (facingDirection == FORWARD && pos.x == enemy.getPos().x && pos.y == enemy.getPos().y + 1) {
 
-                enemy.getDamage(5);
-                System.out.println("Enemy was hitted front");
-                getCurrentHP();
-            }
-            if (facingDirection == RIGHT && pos.x == enemy.getPos().x - 1 && pos.y == enemy.getPos().y) {
-
-                enemy.getDamage(5);
-                System.out.println("Enemy was hitted right");
-                getCurrentHP();
-            }
-            if (facingDirection == BACKWARD && pos.x == enemy.getPos().x && pos.y == enemy.getPos().y - 1) {
-
-                enemy.getDamage(5);
-                System.out.println("Enemy was hitted backw");
-                getCurrentHP();
-            }
-            if (facingDirection == LEFT && pos.x == enemy.getPos().x + 1 && pos.y == enemy.getPos().y) {
-
-                enemy.getDamage(5);
-                System.out.println("Enemy was hitted left");
-                getCurrentHP();
-            }
-
+            enemy.getDamage(5);
+            System.out.println("Enemy was hitted front");
+            getCurrentHP();
         }
+        if (facingDirection == RIGHT && pos.x == enemy.getPos().x - 1 && pos.y == enemy.getPos().y) {
+
+            enemy.getDamage(5);
+            System.out.println("Enemy was hitted right");
+            getCurrentHP();
+        }
+        if (facingDirection == BACKWARD && pos.x == enemy.getPos().x && pos.y == enemy.getPos().y - 1) {
+
+            enemy.getDamage(5);
+            System.out.println("Enemy was hitted backw");
+            getCurrentHP();
+        }
+        if (facingDirection == LEFT && pos.x == enemy.getPos().x + 1 && pos.y == enemy.getPos().y) {
+
+            enemy.getDamage(5);
+            System.out.println("Enemy was hitted left");
+            getCurrentHP();
+        }
+
+    }
 
 
     //Method for getting bounds for rectangle - rectangle collision. Not realised.
@@ -158,10 +150,12 @@ public class Enemy extends Unit {
     public void getDamage(int value) {
         this.hp -= value;
     }
+
     //Current HP status.
     public void getCurrentHP() {
         System.out.println(hp);
     }
+
     //Method for loading images.
     private void loadImage() {
         try {
@@ -173,6 +167,7 @@ public class Enemy extends Unit {
             System.out.println("Error opening image file: " + exc.getMessage());
         }
     }
+
     //Prevent enemy for getting out of bounds.
     public void tick() {
 
@@ -189,6 +184,7 @@ public class Enemy extends Unit {
         }
 
     }
+
     //Move initialisation.
     public void move(int[][] obstacles) {
 
@@ -224,13 +220,14 @@ public class Enemy extends Unit {
     public boolean isKilled() {
         return hp <= 0;
     }
+
     //Java2d graphics rendering
     public void draw(Graphics g, ImageObserver observer) {
 
         g.drawImage(
                 image,
-                (pos.x * CreateMap.TILE_SIZE -(CreateMap.TILE_SIZE/2)) + CreateMap.xOffset,
-                (pos.y * CreateMap.TILE_SIZE-(CreateMap.TILE_SIZE/2)) + CreateMap.yOffset,
+                (pos.x * CreateMap.TILE_SIZE - (CreateMap.TILE_SIZE / 2)) + CreateMap.xOffset,
+                (pos.y * CreateMap.TILE_SIZE - (CreateMap.TILE_SIZE / 2)) + CreateMap.yOffset,
                 observer
         );
     }
@@ -249,7 +246,7 @@ public class Enemy extends Unit {
                 RenderingHints.VALUE_FRACTIONALMETRICS_ON);
         int x = (pos.x * CreateMap.TILE_SIZE) + CreateMap.xOffset;
         int width = hp;
-        g2.fillRect(x-CreateMap.TILE_SIZE/2, (pos.y * CreateMap.TILE_SIZE - (CreateMap.TILE_SIZE/2)-10) + CreateMap.yOffset, width, 5);
+        g2.fillRect(x - CreateMap.TILE_SIZE / 2, (pos.y * CreateMap.TILE_SIZE - (CreateMap.TILE_SIZE / 2) - 10) + CreateMap.yOffset, width, 5);
     }
 
     public Point getPos() {

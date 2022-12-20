@@ -8,15 +8,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
-
 import com.Items.Item;
-import com.PlayerType.Warrior;
-import com.Skills.PowerUp;
 import com.Skills.Skill;
 import com.Units.*;
 import com.CreateMap;
-
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -88,7 +83,6 @@ public class GameInterface {
 
                 myFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
 
-
             } catch (FontFormatException | IOException e) {
                 e.printStackTrace();
             }
@@ -137,8 +131,7 @@ public class GameInterface {
             g2d.drawString(textLvl, pos.x + CreateMap.WIDTH/3, (pos.y + CreateMap.TILE_SIZE/2));
             // determine the y coordinate for the text
             // (note we add the ascent, as in java 2d 0 is top of the screen)
-            g2d.drawString(hplvl,  pos.x, (pos.y+ CreateMap.TILE_SIZE)- CreateMap.TILE_SIZE);
-
+            g2d.drawString(hplvl,  pos.x + 10, (pos.y+ CreateMap.TILE_SIZE)- CreateMap.TILE_SIZE);
             g2d.drawString(killed, pos.x+50, pos.y-615);
             g2d.drawString(collected, pos.x+50, pos.y-565);
             //Getting a changeble width for HP bar
@@ -151,21 +144,19 @@ public class GameInterface {
             g2.drawLine(pos.x + 49, pos.y + 9 , pos.x + 49, pos.y + 30);
             g2.drawLine(pos.x + (widthmp+50), pos.y + 9, pos.x + (widthmp+50), pos.y + 30);
             //Drawing a frame for EXP bar.
-
             g2.drawLine(pos.x + (CreateMap.WIDTH/2 + 50), pos.y +9, pos.x + (CreateMap.WIDTH/2 + 150), pos.y +9);
             g2.drawLine(pos.x + (CreateMap.WIDTH/2 + 50), pos.y+ 30, pos.x + (CreateMap.WIDTH/2 + 150), pos.y+ 30);
             g2.drawLine(pos.x + (CreateMap.WIDTH/2 + 49), pos.y + 9 , pos.x + (CreateMap.WIDTH/2 + 49), pos.y + 30);
             g2.drawLine(pos.x + (CreateMap.WIDTH/2 + 150), pos.y + 9, pos.x + (CreateMap.WIDTH/2 + 150), pos.y + 30);
 
             //Drawing a frame for HP bar
-
             g2.drawLine(pos.x + 49, pos.y +3, pos.x + widthhp+50, pos.y+3 );
             g2.drawLine(pos.x + 50, pos.y-18, pos.x + widthhp+50, pos.y-18);
             g2.drawLine(pos.x + 49, pos.y + 3 , pos.x + 49, pos.y -18);
             g2.drawLine(pos.x + (widthhp+50), pos.y + 3, pos.x + (widthhp+50), pos.y -18);
 
             g2d.drawString(inv, pos.x + (CreateMap.WIDTH-(CreateMap.WIDTH/3)), pos.y + CreateMap.TILE_SIZE/2);
-            g2d.drawString(mplvl, pos.x, (pos.y+ CreateMap.TILE_SIZE/2) + 2);
+            g2d.drawString(mplvl, pos.x + 10, (pos.y+ CreateMap.TILE_SIZE/2) + 2);
 
             //Drawing health bar
             g2.setColor(java.awt.Color.RED);
@@ -209,9 +200,6 @@ public class GameInterface {
 
             int width = Player.getExperience() / 10;
             g2.fillRect((pos.x + CreateMap.WIDTH/2) +50, pos.y +10, width, 20);
-
-
-
         }
 
     public void tick() {
@@ -227,9 +215,7 @@ public class GameInterface {
         } else if (pos.y >= CreateMap.HEIGHT) {
             pos.y = (CreateMap.HEIGHT);
         }
-
     }
-
 }
 
 
