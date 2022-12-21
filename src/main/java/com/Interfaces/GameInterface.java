@@ -48,9 +48,7 @@ public class GameInterface {
             }
         }
     public static void draw(Graphics g, ImageObserver observer) {
-
-        g.drawImage(gh, pos.x, pos.y - 650, observer);
-        g.drawImage(bag, pos.x, pos.y - 600, observer);
+            
         g.drawImage(spellicon, pos.x + (CreateMap.TILE_SIZE * 7), pos.y - (CreateMap.TILE_SIZE / 6), observer);
         g.setColor(new Color(0, 0, 0, 200));
         int height = Skill.getCooldown();
@@ -77,8 +75,7 @@ public class GameInterface {
             String hplvl = "HP: ";
             String mplvl = "MP: ";
             String inv = "For inventory press 'i'";
-            String killed = " = " + Enemy.getQuantityKilled();
-            String collected = " = " + Item.getQuantityCollected();
+
 
             // we need to cast the Graphics to Graphics2D to draw nicer text
             Graphics2D g2 = (Graphics2D) g;
@@ -108,8 +105,7 @@ public class GameInterface {
             // determine the y coordinate for the text
             // (note we add the ascent, as in java 2d 0 is top of the screen)
             g2d.drawString(hplvl,  pos.x + 10, (pos.y+ CreateMap.TILE_SIZE)- CreateMap.TILE_SIZE);
-            g2d.drawString(killed, pos.x+50, pos.y-615);
-            g2d.drawString(collected, pos.x+50, pos.y-565);
+
             //Getting a changeble width for HP bar
             int widthhp = Player.getHP();
             //Getting a changeble width for MP bar

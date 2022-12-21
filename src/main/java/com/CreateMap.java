@@ -13,6 +13,7 @@ import java.awt.event.*;
 import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 
 public class CreateMap extends JPanel implements ActionListener, KeyListener {
@@ -171,6 +172,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         player.setPlayerName(g);
         GameInterface.drawActionPanel(g);
         GameInterface.draw(g,this);
+        //Inventory.draw(g,this);
 
         QuestDialog.draw(g);
         // this smooths out animations on some systems
@@ -222,7 +224,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
                 item.addQuantityCollected(1);
                 for (int i =0; i < Inventory.ROWS*Inventory.COLUMNS; i++){
 
-                        if (Inventory.INVENTORY[i/Inventory.COLUMNS][i%Inventory.ROWS] == null) {
+                        if (Inventory.INVENTORY[i/Inventory.COLUMNS][i%Inventory.ROWS] == null && !Objects.equals(item.getName(), "coin")) {
                             Inventory.INVENTORY[i/Inventory.COLUMNS][i%Inventory.ROWS] = item.getName();
                             Inventory.fillInventory();
                             break;
