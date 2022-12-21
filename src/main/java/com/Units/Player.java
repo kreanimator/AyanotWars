@@ -167,6 +167,14 @@ public class Player {
         hp -= value;
 
     }
+    public static void addHP(int value) {
+        hp += value;
+
+    }
+    public static void addMP(int value) {
+        hp += value;
+
+    }
 
     public Rectangle getBounds() {
         return new Rectangle(pos.x, pos.y, width, height);

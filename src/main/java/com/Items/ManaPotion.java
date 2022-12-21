@@ -1,6 +1,7 @@
 package com.Items;
 
 import com.CreateMap;
+import com.Units.Player;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -14,6 +15,7 @@ public class ManaPotion extends Item {
 
         String name = "manapotion";
         public int quantity;
+        public static boolean isUsed;
         private final Point pos;
 
         public ManaPotion(int x, int y){
@@ -22,6 +24,11 @@ public class ManaPotion extends Item {
             pos = new Point(x, y);
 
         }
+    public static void effect(){
+        if(isUsed){
+            Player.addMP(50);
+        }
+    }
 
 
 

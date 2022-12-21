@@ -18,6 +18,7 @@ public class Item {
     private final Point pos;
     public static int quantity;
     boolean isCollected;
+    boolean isUsed;
 
     public Item(int x, int y) {
         loadImage();
@@ -48,11 +49,12 @@ public class Item {
             int x = rand.nextInt(CreateMap.COLUMNS);
             int y = rand.nextInt(CreateMap.ROWS);
             Random rand = new Random();
-            int tmp = rand.nextInt(2);
+            int tmp = rand.nextInt(3);
             if (CreateMap.MAS_MAP[x][y] == 0) {
                 switch (tmp) {
                     case 0 -> itemList.add(new HealthPotion(x, y));
                     case 1 -> itemList.add(new Coin(x, y));
+                    case 2 ->itemList.add(new ManaPotion(x, y));
                 }
             }
         }

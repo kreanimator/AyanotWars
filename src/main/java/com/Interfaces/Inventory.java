@@ -2,7 +2,9 @@ package com.Interfaces;
 
 import com.CreateMap;
 import com.Items.Coin;
+import com.Items.HealthPotion;
 import com.Items.Item;
+import com.Items.ManaPotion;
 import com.Skills.Skill;
 import com.Units.Enemy;
 import com.Units.Player;
@@ -149,29 +151,17 @@ public class Inventory extends JPanel implements ActionListener, KeyListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String yourChoice = e.getActionCommand();
-//        for (int i =0; i < ROWS*COLUMNS; i++){
-//            if (Objects.equals(INVENTORY[i / COLUMNS][i % ROWS], "healthbar")) {
-//                slot[i].setIcon((new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/images/items/healthpotion.png")))));
-//            }
-//            if (Objects.equals(INVENTORY[i / COLUMNS][i % ROWS],"manapotion")) {
-//                slot[i].setIcon((new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/images/items/manapotion.png")))));
-//            }
-//            if (Objects.equals(INVENTORY[i / COLUMNS][i % ROWS], "goblinhead")) {
-//                slot[i].setIcon((new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/images/items/goblinhead.png")))));
-//            }
-//            if (Objects.equals(INVENTORY[i / COLUMNS][i % ROWS], "coin")) {
-//                slot[i].setIcon((new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/images/items/coin.png")))));
-//            }
-//        }
         for (int i = 0; i < inventorySize; i++) {
             if (Objects.equals(yourChoice, "Item" + i)) {
                 System.out.println(Arrays.deepToString(INVENTORY).replace("], ", "]\n"));
-                //System.out.println("ItemId in inventory: " + getItemId());
+
                 if (yourChoice.equals("healthpotion")) {
-                    //playerHp +50
+                    HealthPotion.isUsed = true;
+                    HealthPotion.effect();
                 }
                 if (yourChoice.equals("manapotion")) {
-                    //playerMana +50
+                    ManaPotion.isUsed = true;
+                    ManaPotion.effect();
                 }
             }
         }
