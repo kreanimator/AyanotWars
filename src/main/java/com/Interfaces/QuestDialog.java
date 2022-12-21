@@ -2,6 +2,7 @@ package com.Interfaces;
 
 import com.CreateMap;
 import com.Events.Quest;
+import com.Units.Enemy;
 import com.Units.Npc;
 
 import javax.swing.*;
@@ -75,7 +76,7 @@ public class QuestDialog implements ActionListener {
         area.setText("              Well stranger! I see you didn't solve all tasks\n\n             I've gave you..." +
                 "Ok lazy bastard, as you ve might\n\n " +
                 "             seen, there are a lot of goblins are sneaking\n\n " +
-                "              around,bring me their heads and I'll treat you\n\n              like a king!");
+                "              around,bring me their heads and I'll treat you\n\n              like a king!" );
         assert myFont!= null;
         area.setFont(myFont.deriveFont(BOLD,10f));
         back.setBounds(0, 0, 50, 50);

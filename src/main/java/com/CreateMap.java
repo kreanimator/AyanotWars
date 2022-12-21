@@ -236,6 +236,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
                 //itemsInInventory.add(item);
                 System.out.println("Item collected " + item.getName());
                 System.out.println(" itemId " + Inventory.setItemId(item.getName()));
+                System.out.println(Coin.getQuantityCollected());
             }
         }
 

@@ -44,7 +44,7 @@ public class Coin extends Item {
     }
     @Override
     public int getQuantity() {
-        return quantity;
+        return this.quantity;
     }
 
     public String getName() {

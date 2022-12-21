@@ -45,7 +45,7 @@ public class Inventory extends JPanel implements ActionListener, KeyListener {
     public Inventory() {
 
         new Dimension(TILE_SIZE * COLUMNS, TILE_SIZE * (ROWS+1));
-
+        setBackground(new Color(0, 0, 0, 0));
 
         setLayout(new GridLayout(8, 7, 2, 2));
         addKeyListener(this);
@@ -79,7 +79,6 @@ public class Inventory extends JPanel implements ActionListener, KeyListener {
         gh.setVisible(true);
         gh.setBounds(0,0,TILE_SIZE,TILE_SIZE);
         gh.setIcon((new ImageIcon(Objects.requireNonNull(Inventory.class.getResource("/images/items/goblinhead.png")))));
-        add(gh);
 
         ghA.setBounds(TILE_SIZE,0,120 ,TILE_SIZE);
         ghA.setBackground(new Color(0, 0, 0, 0));
@@ -89,8 +88,8 @@ public class Inventory extends JPanel implements ActionListener, KeyListener {
         ghA.setEditable(false);
         assert myFont != null;
         ghA.setFont(myFont.deriveFont(BOLD,15f));
-        ghA.setVisible(true);
-        add(ghA);
+        //ghA.setVisible(true);
+
 
         coin= new JButton();
         coin.setBackground(new Color(0, 0, 0, 0));
@@ -98,7 +97,6 @@ public class Inventory extends JPanel implements ActionListener, KeyListener {
         coin.setVisible(true);
         coin.setBounds(400,0,TILE_SIZE,TILE_SIZE);
         coin.setIcon((new ImageIcon(Objects.requireNonNull(Inventory.class.getResource("/images/inventoryicons/coin.png")))));
-        add(coin);
 
         coinA.setBounds(460,0,120 ,TILE_SIZE);
         coinA.setBackground(new Color(0, 0, 0, 0));
@@ -107,10 +105,13 @@ public class Inventory extends JPanel implements ActionListener, KeyListener {
         coinA.setText("\n = " + Item.getQuantityCollected());
         coinA.setEditable(false);
         coinA.setFont(myFont.deriveFont(BOLD,15f));
-        coinA.setVisible(true);
+       // coinA.setVisible(true);
+        add(gh);
+        add(ghA);
+        add(coin);
         add(coinA);
 
-        setBackground(new Color(0, 0, 0, 0));
+
     }
 
 
