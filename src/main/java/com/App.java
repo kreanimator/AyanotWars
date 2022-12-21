@@ -12,7 +12,7 @@ public class App {
     //TODO: 15.12.2022 Enemies attack method. Attacking player and each other.
     //TODO: 15.12.2022 Inheritance of playerclass to player generation.
     //TODO: 15.12.2022 Realize enemy player chasing method.
-    //TODO: 15.12.2022 Realize drop & inventory. 20.12 Partly done
+    //TODO: 15.12.2022 Realize drop & inventory. 20.12 Partly done. 21.12 Inventory fully completed.
     //TODO: 15.12.2022 Realize spells. 20.12 Partly done
     // TODO: 15.12.2022 AttackEnemy does not work.(For enemy attacking player or other enemies)
     //TODO: 17.12.2022 Realize grass border algorithm.

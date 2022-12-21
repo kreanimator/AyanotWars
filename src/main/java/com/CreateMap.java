@@ -83,7 +83,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
 //                }
 //            }
 //        }
-        System.out.println(Arrays.deepToString(MAS_MAP).replace("], ", "]\n"));
+
 
         skulls = Skull.fillSkulls();
         stone = Stone.fillStones();
@@ -96,6 +96,7 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
         items = Item.fillItems();
         player = new Player(50,50);
         npc = new Npc(MAS_MAP);
+        System.out.println(Arrays.deepToString(MAS_MAP).replace("], ", "]\n"));
 
 
 
@@ -219,7 +220,17 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
             if (player.getPos().equals(item.getPos())) {
                 collectedItems.add(item);
                 item.addQuantityCollected(1);
-                Inventory.setItemId(item.getName());
+                for (int i =0; i < Inventory.ROWS*Inventory.COLUMNS; i++){
+
+                        if (Inventory.INVENTORY[i/Inventory.COLUMNS][i%Inventory.ROWS] == null) {
+                            Inventory.INVENTORY[i/Inventory.COLUMNS][i%Inventory.ROWS] = item.getName();
+                            Inventory.fillInventory();
+                            break;
+                        }
+                    }
+
+
+
                 //itemsInInventory.add(item);
                 System.out.println("Item collected " + item.getName());
                 System.out.println(" itemId " + Inventory.setItemId(item.getName()));
