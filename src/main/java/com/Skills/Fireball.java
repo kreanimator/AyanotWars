@@ -16,7 +16,6 @@ public class Fireball extends Skill {
             this.duration -= duration;
         }
     }
-
     public int getHp() {
         return hp;
     }

@@ -156,12 +156,16 @@ public class Inventory extends JPanel implements ActionListener, KeyListener {
                 System.out.println(Arrays.deepToString(INVENTORY).replace("], ", "]\n"));
 
                 if (yourChoice.equals("healthpotion")) {
+
                     HealthPotion.isUsed = true;
                     HealthPotion.effect();
+
                 }
                 if (yourChoice.equals("manapotion")) {
+
                     ManaPotion.isUsed = true;
                     ManaPotion.effect();
+
                 }
             }
         }

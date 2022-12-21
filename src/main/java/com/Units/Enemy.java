@@ -80,8 +80,8 @@ public class Enemy extends Unit {
     public static int getQuantityKilled() {
         return quantityKilled;
     }
-    public void chaseEnemies() {
 
+    public void chaseEnemies() {
 
         if (pos.y >= enemy.getPos().y + 1 && pos.y >= enemy.getPos().y + 1) {
             facingDirection = FORWARD;

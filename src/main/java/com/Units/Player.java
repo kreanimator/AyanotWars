@@ -168,11 +168,11 @@ public class Player {
 
     }
     public static void addHP(int value) {
-        hp += value;
+        Player.hp += value;
 
     }
     public static void addMP(int value) {
-        hp += value;
+        Player.mp += value;
 
     }
 
@@ -239,7 +239,6 @@ public class Player {
                 if (spriteNumber == 3) {
                     image = right3;
                 }
-
             }
         }
 
@@ -482,7 +481,7 @@ public class Player {
                     facingDirection == BACKWARD && pos.x == Npc.getPos().x && pos.y == Npc.getPos().y - 1 ||
                     facingDirection == RIGHT && pos.x == Npc.getPos().x - 1 && pos.y == Npc.getPos().y ||
                     facingDirection == LEFT && pos.x == Npc.getPos().x + 1 && pos.y == Npc.getPos().y) {
-                QuestDialog questDialog = new QuestDialog();
+                    QuestDialog questDialog = new QuestDialog();
             }
         }
 
