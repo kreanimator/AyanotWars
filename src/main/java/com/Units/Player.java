@@ -25,8 +25,8 @@ public class Player {
 
     private static String nameClass = "";
     private BufferedImage up1, up2, up3, down1, down2, down3, right1, right2, right3, left1, left2, left3;
-    //    private BufferedImage atkup1, atkup2, atkup3, atkup4, atkdown1, atkdown2, atkdown3,atkdown4,
-//            atckleft1, atckleft2, atckleft3, atckleft4, atkright1,atkright2,atkright3,atkright4;
+        private BufferedImage atkup1, atkup2, atkup3, atkup4, atkdown1, atkdown2, atkdown3,atkdown4,
+            atckleft1, atckleft2, atckleft3, atckleft4, atkright1,atkright2,atkright3,atkright4;
     private final Point pos;
     private final static int FORWARD = 0;
     private final static int BACKWARD = 1;
@@ -61,6 +61,7 @@ public class Player {
     public int facingDirection;
     ArrayList<Enemy> enemies;
     Inventory inventory = new Inventory();
+    boolean isAtacking;
 
     public static String getNameClass() {
         return nameClass;
@@ -111,22 +112,18 @@ public class Player {
             right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/" + nameClass + "/right1.png")));
             right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/" + nameClass + "/right2.png")));
             right3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/" + nameClass + "/right3.png")));
-//            atkup1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/attack/up1.png")));
-//            atkup2= ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/attack/up2.png")));
-//            atkup3= ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/attack/up3.png")));
-//            atkup4= ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/attack/up4.png")));
-//            atkdown1= ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/attack/down1.png")));
-//            atkdown2= ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/attack/down2.png")));
-//            atkdown3= ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/attack/down3.png")));
-//            atkdown4= ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/attack/down4.png")));
-//            atckleft1= ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/attack/left1.png")));
-//            atckleft2= ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/attack/left2.png")));
-//            atckleft3= ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/attack/left3.png")));
-//            atckleft4= ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/attack/left4.png")));
-//            atkright1= ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/attack/right1.png")));
-//            atkright2= ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/attack/right2.png")));
-//            atkright3= ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/attack/right3.png")));
-//            atkright4= ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/attack/right4.png")));
+            atkup1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/attack/"+ nameClass +"/up1.png")));
+            atkup2= ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/attack/"+ nameClass +"/up2.png")));
+            atkup3= ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/attack/"+ nameClass +"/up3.png")));
+            atkdown1= ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/attack/"+ nameClass +"/down1.png")));
+            atkdown2= ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/attack/"+ nameClass +"/down2.png")));
+            atkdown3= ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/attack/"+ nameClass +"/down3.png")));
+            atckleft1= ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/attack/"+ nameClass +"/left1.png")));
+            atckleft2= ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/attack/"+ nameClass +"/left2.png")));
+            atckleft3= ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/attack/"+ nameClass +"/left3.png")));
+            atkright1= ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/attack/"+ nameClass +"/right1.png")));
+            atkright2= ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/attack/"+ nameClass +"/right2.png")));
+            atkright3= ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/images/player/attack/"+ nameClass +"/right3.png")));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -198,46 +195,71 @@ public class Player {
             case FORWARD -> {
                 if (spriteNumber == 1) {
                     image = up1;
+                } else if (isAtacking) {
+                    image = atkup1;
                 }
                 if (spriteNumber == 2) {
                     image = up2;
+                } else if (isAtacking) {
+                    image = atkup2;
                 }
                 if (spriteNumber == 3) {
                     image = up3;
+                } else if (isAtacking) {
+                    image = atkup3;
                 }
             }
             case BACKWARD -> {
                 if (spriteNumber == 1) {
                     image = down1;
+                } else if (isAtacking) {
+                    image = atkdown1;
                 }
                 if (spriteNumber == 2) {
                     image = down2;
+                } else if (isAtacking) {
+                    image = atkdown2;
                 }
                 if (spriteNumber == 3) {
                     image = down3;
+                } else if (isAtacking) {
+                    image = atkdown3;
                 }
             }
             case LEFT -> {
                 if (spriteNumber == 1) {
                     image = left1;
+                } else if (isAtacking) {
+                    image = atckleft1;
                 }
                 if (spriteNumber == 2) {
                     image = left2;
+                } else if (isAtacking) {
+                    image = atckleft2;
                 }
                 if (spriteNumber == 3) {
                     image = left3;
+                } else if (isAtacking) {
+                    image = atckleft3;
                 }
             }
 
             case RIGHT -> {
                 if (spriteNumber == 1) {
                     image = right1;
+                } else if (isAtacking) {
+                    image = atkright1;
                 }
                 if (spriteNumber == 2) {
                     image = right2;
+                } else if (isAtacking) {
+                    image = atkright2;
+                    break;
                 }
                 if (spriteNumber == 3) {
                     image = right3;
+                } else if (isAtacking) {
+                    image = atkright3;
                 }
             }
         }
@@ -251,75 +273,6 @@ public class Player {
 
     }
 
-//    public void drawatk(Graphics g, ImageObserver observer) {
-//
-//        BufferedImage imageatk = null;
-//
-//                if (facingDirection==FORWARD){
-//                    if (spriteNumber == 1) {
-//                        imageatk = atkup1;
-//                    }
-//                    if (spriteNumber == 2) {
-//                        imageatk = atkup2;
-//                    }
-//                    if (spriteNumber == 3) {
-//                        imageatk = atkup3;
-//                    }
-//                    if (spriteNumber == 4) {
-//                        imageatk = atkup4;
-//                    }
-//
-//                }
-//                if (facingDirection==BACKWARD){
-//                    if (spriteNumber == 1) {
-//                        imageatk = atkdown1;
-//                    }
-//                    if (spriteNumber == 2) {
-//                        imageatk = atkdown2;
-//                    }
-//                    if (spriteNumber == 3) {
-//                        imageatk= atkdown3;
-//                    }
-//                    if (spriteNumber == 4) {
-//                        imageatk = atkdown4;
-//                    }
-//
-//                }         if (facingDirection==LEFT){
-//                    if (spriteNumber == 1) {
-//                        imageatk = atckleft1;
-//                    }
-//                    if (spriteNumber == 2) {
-//                        imageatk = atckleft2;
-//                    }
-//                    if (spriteNumber == 3) {
-//                        imageatk = atckleft3;
-//                    }
-//                    if (spriteNumber == 4) {
-//                        imageatk = atckleft4;
-//                    }
-//
-//                }
-//                if (facingDirection==RIGHT){
-//                    if (spriteNumber == 1) {
-//                        imageatk = atkright1;
-//                    }
-//                    if (spriteNumber == 2) {
-//                        imageatk = atkright2;
-//                    }
-//                    if (spriteNumber == 3) {
-//                        imageatk = atkright3;
-//                    }
-//                    if (spriteNumber == 4) {
-//                        imageatk = atkright4;
-//                    }
-//
-//
-//            }
-//        }
-//
-//        g.drawImage(imageatk, (((pos.x  * CreateMap.TILE_SIZE))+CreateMap.TILE_SIZE) + CreateMap.xOffset,
-//                ((pos.y * CreateMap.TILE_SIZE)+CreateMap.TILE_SIZE) + CreateMap.yOffset, observer);
-//    }
 
     static JDialog inventoryWindow = new JDialog();
 
@@ -487,37 +440,42 @@ public class Player {
 
         try {
             if (key == KeyEvent.VK_SPACE) {
+
                 for (Enemy enemy : enemies) {
                     obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
                     enemy.move(obstacles);
                     obstacles[enemy.getPos().x][enemy.getPos().y] = 2;
                     if (facingDirection == FORWARD && pos.x == enemy.getPos().x && pos.y == enemy.getPos().y + 1) {
-
+                        isAtacking =true;
                         System.out.println("Attack up");
                         enemy.getDamage(playerDamage());
                         enemy.getCurrentHP();
+
                     }
 
                     if (facingDirection == BACKWARD && pos.x == enemy.getPos().x && pos.y == enemy.getPos().y - 1) {
-
+                        isAtacking =true;
                         System.out.println("Attack down");
                         enemy.getDamage(playerDamage());
                         enemy.getCurrentHP();
+
                     }
 
                     if (facingDirection == LEFT && pos.x == enemy.getPos().x + 1 && pos.y == enemy.getPos().y) {
-
+                        isAtacking =true;
                         System.out.println("Attack Left");
                         enemy.getDamage(playerDamage());
                         enemy.getCurrentHP();
 
+
                     }
 
                     if (facingDirection == RIGHT && pos.x == enemy.getPos().x - 1 && pos.y == enemy.getPos().y) {
-
+                        isAtacking =true;
                         System.out.println("Attack Right");
                         enemy.getDamage(playerDamage());
                         enemy.getCurrentHP();
+
                     }
                 }
                 for (Boss boss : bosses) {

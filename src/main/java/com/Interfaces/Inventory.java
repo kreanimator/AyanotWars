@@ -1,15 +1,14 @@
 package com.Interfaces;
 
-import com.CreateMap;
-import com.Items.Coin;
+
 import com.Items.HealthPotion;
 import com.Items.Item;
 import com.Items.ManaPotion;
-import com.Skills.Skill;
+import com.*;
 import com.Units.Enemy;
-import com.Units.Player;
 
-import javax.imageio.ImageIO;
+
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
