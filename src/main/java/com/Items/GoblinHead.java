@@ -1,7 +1,7 @@
 package com.Items;
 
 import com.CreateMap;
-import com.Units.Enemy;
+import com.Units.Enemies.Enemy;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

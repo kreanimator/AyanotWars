@@ -187,6 +187,7 @@ public class PlayerChoose extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == warrior) {
             Player.setPlayerClass("warrior");
+            window.getContentPane().removeAll();
             CreateMap createMap = new CreateMap();
             window.add(createMap);
             window.addKeyListener(createMap);
@@ -197,6 +198,7 @@ public class PlayerChoose extends JPanel implements ActionListener {
         if (e.getSource() == warlock) {
 
             Player.setPlayerClass("warlock");
+            window.getContentPane().removeAll();
             CreateMap createMap = new CreateMap();
             window.add(createMap);
             window.addKeyListener(createMap);
@@ -206,6 +208,7 @@ public class PlayerChoose extends JPanel implements ActionListener {
         if (e.getSource() == mage) {
 
             Player.setPlayerClass("mage");
+            window.getContentPane().removeAll();
             CreateMap createMap = new CreateMap();
             window.add(createMap);
             window.addKeyListener(createMap);

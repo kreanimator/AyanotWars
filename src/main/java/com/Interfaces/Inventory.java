@@ -4,8 +4,7 @@ package com.Interfaces;
 import com.Items.HealthPotion;
 import com.Items.Item;
 import com.Items.ManaPotion;
-import com.*;
-import com.Units.Enemy;
+import com.Units.Enemies.Enemy;
 
 
 
@@ -15,8 +14,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -37,11 +34,7 @@ public class Inventory extends JPanel implements ActionListener, KeyListener {
     JTextArea ghA = new JTextArea();
     JTextArea coinA = new JTextArea();
     static JButton gh, coin;
-    String yourChoice;
-    String itemId = "";
 
-
-    Item item;
 
     public Inventory() {
 
@@ -121,9 +114,6 @@ public class Inventory extends JPanel implements ActionListener, KeyListener {
     }
 
 
-    public String getItemId() {
-        return itemId;
-    }
     public static void fillInventory(){
             for (int i =0; i < ROWS*COLUMNS; i++){
                 if (Objects.equals(INVENTORY[i / COLUMNS][i % ROWS],"manapotion")) {

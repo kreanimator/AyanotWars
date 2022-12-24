@@ -2,8 +2,8 @@ package com;
 
 import com.Items.*;
 import com.Tiles.*;
-import com.Units.Boss;
-import com.Units.Enemy;
+import com.Units.Enemies.Boss;
+import com.Units.Enemies.Enemy;
 import com.Units.Npc;
 import com.Units.Player;
 import com.Interfaces.*;
@@ -215,7 +215,6 @@ public class CreateMap extends JPanel implements ActionListener, KeyListener {
     }
 
     private void collectItems() {
-        //ArrayList<Object> itemsInInventory = new ArrayList<>();
         ArrayList<Item> collectedItems = new ArrayList<>();
 
         for (Item item : items) {

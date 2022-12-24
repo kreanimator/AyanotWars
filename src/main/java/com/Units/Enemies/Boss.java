@@ -1,4 +1,4 @@
-package com.Units;
+package com.Units.Enemies;
 
 import com.CreateMap;
 

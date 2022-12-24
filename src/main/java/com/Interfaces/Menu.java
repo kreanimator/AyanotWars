@@ -67,8 +67,10 @@ public class Menu implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == startButton) {
-            new PlayerChoose();
+            window.getContentPane().removeAll();
+            window.add(new PlayerChoose());
             window.dispose();
+
 
         }
     }

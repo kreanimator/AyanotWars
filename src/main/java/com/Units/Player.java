@@ -5,6 +5,8 @@ import com.Interfaces.Inventory;
 import com.Interfaces.PlayerChoose;
 import com.Interfaces.QuestDialog;
 import com.Skills.Skill;
+import com.Units.Enemies.Boss;
+import com.Units.Enemies.Enemy;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -298,7 +300,7 @@ public class Player {
             pos.translate(0, -1);
             for (Enemy enemy : enemies) {
                 obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
-                enemy.move(obstacles);
+                enemy.chaseEnemies(obstacles);
                 obstacles[enemy.getPos().x][enemy.getPos().y] = 2;
             }
             for (Boss boss : bosses) {
@@ -322,7 +324,7 @@ public class Player {
 
             for (Enemy enemy : enemies) {
                 obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
-                enemy.move(obstacles);
+                enemy.chaseEnemies(obstacles);
                 obstacles[enemy.getPos().x][enemy.getPos().y] = 2;
             }
             for (Boss boss : bosses) {
@@ -345,7 +347,7 @@ public class Player {
             pos.translate(0, 1);
             for (Enemy enemy : enemies) {
                 obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
-                enemy.move(obstacles);
+                enemy.chaseEnemies(obstacles);
                 obstacles[enemy.getPos().x][enemy.getPos().y] = 2;
             }
             for (Boss boss : bosses) {
@@ -368,7 +370,7 @@ public class Player {
 
             for (Enemy enemy : enemies) {
                 obstacles[enemy.getPos().x][enemy.getPos().y] = 0;
-                enemy.move(obstacles);
+                enemy.chaseEnemies(obstacles);
                 obstacles[enemy.getPos().x][enemy.getPos().y] = 2;
             }
             for (Boss boss : bosses) {

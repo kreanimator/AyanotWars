@@ -1,15 +1,11 @@
 package com.Interfaces;
 
-import com.CreateMap;
 import com.Events.Quest;
-import com.Units.Enemy;
-import com.Units.Npc;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.ImageObserver;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
